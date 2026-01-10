@@ -3,7 +3,7 @@ import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../../firebase.js";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -153,7 +153,7 @@ export const Desktop = () => {
           playsInline
         >
           <source
-            src="/src/assets/updated midnight carnival.mp4"
+            src="/videos/updated-midnight-carnival.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
@@ -365,7 +365,7 @@ export const Desktop = () => {
                   className="transition-transform hover:scale-110"
                 >
                   <img
-                    src="/src/assets/Insta.svg"
+                    src="/images/Insta.svg"
                     alt="Instagram"
                     className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-[85px] lg:h-[85px]"
                   />
@@ -377,7 +377,7 @@ export const Desktop = () => {
                   className="transition-transform hover:scale-110"
                 >
                   <img
-                    src="/src/assets/fb.svg"
+                    src="/images/fb.svg"
                     alt="Facebook"
                     className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-[85px] lg:h-[85px]"
                   />
@@ -389,7 +389,7 @@ export const Desktop = () => {
                   className="transition-transform hover:scale-110"
                 >
                   <img
-                    src="/src/assets/yt.svg"
+                    src="/images/yt.svg"
                     alt="YouTube"
                     className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-[85px] lg:h-[85px]"
                   />
