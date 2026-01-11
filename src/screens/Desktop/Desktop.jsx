@@ -220,15 +220,25 @@ export const Desktop = () => {
 
         <div className="flex flex-col w-full max-w-[1442px] mx-auto items-center gap-8 sm:gap-12 md:gap-[63px] px-4 py-6 sm:py-8 md:py-[46px] absolute top-4 sm:top-8 md:top-11 left-1/2 -translate-x-1/2">
           <div className="flex flex-col w-full max-w-[1327px] items-center justify-center gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-[42px] py-0 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
-            <h1 className="flex flex-col items-center justify-center w-fit [font-family:'Cinzel',Helvetica] font-normal text-transparent text-center">
-              <span className="font-spicy font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.1em] sm:tracking-[0.12em] md:tracking-[3.69px] leading-tight mb-6 sm:mb-10 md:mb-16 animate-color-cycle-blue">
+            <h1 className="flex flex-col items-center justify-center w-fit text-center">
+              
+              <span className="font-rye font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl
+                              tracking-[0.1em] sm:tracking-[0.12em] md:tracking-[3.69px]
+                              leading-tight mb-2 sm:mb-3 md:mb-4
+                              text-blue-300">
                 Midnight
               </span>
-              <span className="font-spicy font-bold text-6xl sm:text-7xl md:text-8xl lg:text-[150px] tracking-[0.15em] sm:tracking-[0.18em] md:tracking-[9.00px] leading-tight animate-color-cycle-pink">
+
+              <span className="font-carnival font-bold text-6xl sm:text-7xl md:text-8xl lg:text-[150px]
+                              tracking-[0.15em] sm:tracking-[0.18em] md:tracking-[9px]
+                              leading-tight
+                              text-purple-400">
                 Carnival
               </span>
+
             </h1>
           </div>
+
 
           <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
             <div className="flex h-auto items-center justify-center gap-2 sm:gap-[13px] px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-3.5 rounded-[36px] border-[none] bg-[linear-gradient(90deg,rgba(73,123,245,1)_0%,rgba(90,72,230,1)_100%)] before:content-[''] before:absolute before:inset-0 before:p-px before:rounded-[36px] before:[background:linear-gradient(119deg,rgba(255,255,255,1)_0%,rgba(102,102,102,0.1)_100%)] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[-webkit-mask-composite:xor] before:[mask-composite:exclude] before:z-[1] before:pointer-events-none animate-fast-pulse">
