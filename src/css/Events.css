@@ -1,0 +1,54 @@
+.cultural {
+  width: 100vw;
+  height: 100vh;
+}
+
+.cultural-bg {
+  position: relative;   
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.cultural-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cult {
+  position: absolute;   
+  top: 25%;
+  right: 12%;
+  z-index: 5;
+}
+
+.cult-image {
+  width: 35vw;         
+  height: auto;
+}
+
+.left-decoration {
+  position: absolute;   
+  top: -10%;
+  left: 0;
+  z-index: 10;
+}
+
+.left-decor-image{
+    width: 55vw;         
+    height: auto;
+}
+
+.right-decoration {
+  position: absolute;   
+  top: -5%;
+  right: 0;
+  z-index: 5;
+}
+
+.right-decor-image{
+    width: 70vw;         
+    height: auto;
+}
