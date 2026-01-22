@@ -67,7 +67,7 @@ export default function Profile() {
           </div>
           <div className="events-list">
             {eventsRegistered.map((event, index) => (
-              <div key={index} className="event-item">
+              <div key={index} className="event-item-profile">
                 {event}
               </div>
             ))}
