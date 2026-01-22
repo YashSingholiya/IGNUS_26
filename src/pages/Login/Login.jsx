@@ -105,7 +105,7 @@ export default function Auth() {
         </div>
         
         {/* Main sliding container */}
-        <div className="auth-container relative z-10">
+        <div className="auth-container relative z-4">
           
           {/* Mascot Panel - slides left/right */}
           <div
@@ -127,7 +127,7 @@ export default function Auth() {
             {/* Login Form */}
             <div className={`form-container ${currentView === 'login' ? 'form-active' : 'form-inactive'}`}>
               <div className="form-content rounded-left-form">
-                <h2 className="text-2xl font-bold text-white text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 text-center mb-8 font-rosiana">
                   Login to Account
                 </h2>
 
@@ -176,11 +176,11 @@ export default function Auth() {
                   </button>
                 </div>
 
-                <p className="mt-6 text-center text-white/80">
+                <p className="mt-6 text-center text-gray-800 text-base font-medium">
                   Don't have an account?{" "}
                   <button
                     onClick={() => transitionTo("signup")}
-                    className="text-white font-semibold hover:underline"
+                    className="text-gray-900 font-bold hover:underline"
                   >
                     Sign Up
                   </button>
@@ -191,7 +191,7 @@ export default function Auth() {
             {/* Signup Form */}
             <div className={`form-container ${currentView === 'signup' ? 'form-active' : 'form-inactive'}`}>
               <div className="form-content rounded-right-form">
-                <h2 className="text-2xl font-bold text-white text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
                   Create Account
                 </h2>
 
@@ -270,11 +270,11 @@ export default function Auth() {
                   </button>
                 </div>
 
-                <p className="mt-6 text-center text-white/80">
+                <p className="mt-6 text-center text-gray-800 text-base font-medium">
                   Already have an account?{" "}
                   <button
                     onClick={() => transitionTo("login")}
-                    className="text-white font-semibold hover:underline"
+                    className="text-gray-900 font-bold hover:underline"
                   >
                     Sign In
                   </button>
@@ -285,7 +285,7 @@ export default function Auth() {
             {/* Complete Profile Form */}
             <div className={`form-container ${currentView === 'complete-profile' ? 'form-active' : 'form-inactive'}`}>
               <div className="form-content rounded-right-form">
-                <h2 className="text-2xl font-bold text-white text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
                   Complete Profile
                 </h2>
 
@@ -400,7 +400,7 @@ export default function Auth() {
         <img
           src={cloud_2}
           alt=""
-          className="absolute bottom-0 left-0 w-full h-auto object-cover pointer-events-none z-10"
+          className="absolute bottom-0 left-0 w-full h-auto object-cover pointer-events-none z-50 opacity-20"
         />
       </main>
     </>

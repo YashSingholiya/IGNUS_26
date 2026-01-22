@@ -25,7 +25,7 @@ export default function Profile() {
         {/* Profile Card */}
         <div className="profile-card">
           <h1 className="profile-title">PROFILE</h1>
-          <div className="profile-fields">
+          <div className="profile-fields font-rosiana">
             {/* Left Column */}
             <div className="profile-field">
               <span className="field-label">Name</span>
