@@ -16,6 +16,7 @@ export default function Auth() {
   // Views: 'login', 'signup', 'complete-profile'
   const [currentView, setCurrentView] = useState("login");
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   // Form states
   const [loginData, setLoginData] = useState({
@@ -63,8 +64,14 @@ export default function Auth() {
 
   const handleCompleteProfile = (e) => {
     e.preventDefault();
+    // Show confirmation modal instead of directly navigating
+    setShowModal(true);
+  };
+
+  const handleConfirmAndSave = () => {
     // TODO: Implement profile completion logic
     console.log("Profile:", profileData);
+    setShowModal(false);
     navigate("/profile");
   };
 
@@ -402,6 +409,34 @@ export default function Auth() {
           alt=""
           className="absolute bottom-0 left-0 w-full h-auto object-cover pointer-events-none z-50 opacity-20"
         />
+
+        {/* Confirmation Modal */}
+        {showModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl p-8 max-w-md mx-4 shadow-2xl">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+                Important Notice
+              </h3>
+              <p className="text-gray-700 text-center mb-6 leading-relaxed">
+                While coming to campus, please carry a physical copy of your government document as well as college ID, otherwise you won't be granted entry into the college.
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="flex-1 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-full transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleConfirmAndSave}
+                  className="flex-1 py-3 bg-purple-700 hover:bg-purple-800 text-white font-semibold rounded-full transition-colors"
+                >
+                  Confirm and Save
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </>
   );
