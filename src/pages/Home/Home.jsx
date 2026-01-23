@@ -1,12 +1,12 @@
 import React from "react";
 import AboutUs from "./sections/AboutUs";
 import Hero from "./sections/Hero";
-import Stats from "./sections/Stats";
 import Footer from "../../components/ui/Footer";
 import InitiativePrakriti from "./sections/InitiativePrakriti";
 import MascotSection from "./sections/MascotSection";
 import MidnightCarnival from "./sections/MidnightCarnival";
 import ContactUs from "./sections/ContactUs";
+import Stats from "./sections/Stats";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
       {/* Page Content */}
       <main>
         {/* First gradient zone: Hero to MidnightCarnival */}
-        <div 
+        <div
           className="relative"
           style={{
             background: 'linear-gradient(to bottom, #000120 0%, #12043a 20%, #311C7B 60%, #7F56D3 100%)'
@@ -27,10 +27,10 @@ export default function Home() {
         </div>
 
         {/* Second gradient zone: InitiativePrakriti to Footer */}
-        <div 
+        <div
           className="relative"
           style={{
-            background: 'linear-gradient(to bottom, #7F56D3 0%, #FFE0A8 25%, #FFFFFF 40%, #FFFFFF 75%, #1E0752 100%)'
+            background: 'linear-gradient(to bottom, #370068 0%, #FFE0A8 25%, #FFFFFF 40%, #FFFFFF 75%, #1E0752 100%)'
           }}
         >
           <InitiativePrakriti />
@@ -42,4 +42,3 @@ export default function Home() {
     </>
   );
 }
-

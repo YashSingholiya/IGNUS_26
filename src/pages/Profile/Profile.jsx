@@ -84,7 +84,7 @@ export default function Profile() {
 
               {/* Front of Card */}
               <div className="pass-card-front">
-                <div className="glass-card pass-card">
+                <div className="glass-card profile-pass-card">
                   <h2>Digital Pass</h2>
                   <div className="digital-pass">
                     <div className="pass-info">
