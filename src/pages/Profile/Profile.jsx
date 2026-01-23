@@ -126,7 +126,7 @@ export default function Profile() {
 
           {/* Bottom Row: Journey / Events */}
           <div className="glass-card journey-card animate-slide-up delay-400">
-            <h2>Your Events</h2>
+            <h2>Your Events ({eventsRegistered.length})</h2>
             {eventsRegistered.length > 0 ? (
               <div className="events-grid">
                 {eventsRegistered.map((event, index) => (
