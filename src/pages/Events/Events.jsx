@@ -1,4 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
+import nritya from "./images/dance.jpeg";
+import music from "./images/music.jpg";
+import art from "./images/art.jpg";
+import lit from "./images/lit.jpg";
+import LifeStyle from "./images/LifeStyle.jpg";
+import drama from "./images/drama.jpg";
+import antarang from "./images/antarang.jpeg";
+import dance from "./images/nritya.jpeg";
+import clash from "./images/clash.jpeg";
+import aayam from "./images/aayam.jpeg";
+import tshirt from "./images/tshirt.jpg";
+import pottery from "./images/pottery.jpg";
 import "./Events.css";
 
 function Events() {
@@ -12,49 +24,49 @@ function Events() {
     name: "DANCE",
     venue: "TBA",
     date: "TBA",
-    image: "/images/cultural/dance.jpg",
+    image: dance,
   },
   {
     name: "MUSIC",
     venue: "TBA",
     date: "TBA",
-    image: "/images/cultural/music.jpg",
+    image: music,
   },
   {
     name: "QUIZ",
     venue: "TBA",
     date: "TBA",
-    image: "/images/cultural/quiz.jpg",
+    image: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
   },
   {
     name: "ART",
     venue: "TBA",
     date: "TBA",
-    image: "/images/cultural/quiz.jpg",
+    image: art,
   },
   {
     name: "LITERATURE",
     venue: "TBA",
     date: "TBA",
-    image: "/images/cultural/quiz.jpg",
+    image: lit,
   },
   {
     name: "FILM MAKING",
     venue: "TBA",
     date: "TBA",
-    image: "/images/cultural/quiz.jpg",
+    image: "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
   },
   {
     name: "LIFESTYLE",
     venue: "TBA",
     date: "TBA",
-    image: "/images/cultural/quiz.jpg",
+    image: LifeStyle,
   },
   {
     name: "DRAMA",
     venue: "TBA",
     date: "TBA",
-    image: "/images/cultural/quiz.jpg",
+    image: drama,
   }
 ];
 
@@ -63,25 +75,25 @@ function Events() {
     name: "ANTARANG",
     venue: "TBA",
     date: "TBA",
-    image: "/images/flagship/antarang.jpg",
+    image: antarang,
   },
   {
     name: "NRITYANSH",
     venue: "TBA",
     date: "TBA",
-    image: "/images/flagship/nrityansh.jpg",
+    image: nritya,
   },
   {
-    name: "THUNDERBEATS",
+    name: "CLASH OF BANDS",
     venue: "TBA",
     date: "TBA",
-    image: "/images/flagship/thunderbeats.jpg",
+    image: clash,
   },
   {
     name: "AAYYAM",
     venue: "TBA",
     date: "TBA",
-    image: "/images/flagship/aayyam.jpg",
+    image: aayam,
   },
 ];
 
@@ -90,37 +102,37 @@ function Events() {
       name: "PROM NIGHT",
       venue: "TBA",
       date: "TBA",
-      image: "https://media-hosting.imagekit.io//178c297152454617/prom%20night.jpg?Expires=1832074175&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=svRNxyrW~LXIoHX6rPY29ua7hsIwOBXSjbNVBn4DToRT4BN2L9de5CkNsRqQu90JJlHDScGbxxpCVO~O7tdFFHTLvNQ5JXvIe0tfm42IFCMgSp35RuMxRJvIPOYhulcJMeuEJF3UgxHdPMBWQczE-BhFxOf68GlGgL6GTyzKLk7O-1hzxfYMTkXdcEeDQe3hkZIqV-e8z2YGxWv-htezrtwSjwOT~WAKsOJ5M~RJ3o3ZQZW8-UA7dl2sM6vMyuYupTSR6thf3KX2LEGdnsIcjpMNc86UfeP~OtQOOh-nA-1jqLeNxXij~8g4S~bUUdeQHjq9iqPYydaRILon2qHhjA__",
+      image: "https://ilead.net.in/wp-content/uploads/2023/02/prom_night_2023_16.jpg",
     },
     {
       name: "CUSTOMIZED T-SHIRT",
       venue: "TBA",
       date: "TBA",
-      image: "https://media-hosting.imagekit.io//518e550e33a747d4/customized%20tshirt.jpg?Expires=1832074175&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=sRgJZD7kU6ilHtsmcjY6JJlb1P9BGC2lvd4wXDIA7leTHXtC3yyuHDIVTrGEA15gkGNeQEa1pOT1HBx1VNymBbzpQeekRoDoE-HX2bA379IF4XeM1CKQvanUZnaCad9gvLnDAjUwLJQvhrACXkh8mdoQuFhX6-PlHeE7nzXcvoZKEDHWTNj-OsJi~Ff2WCZ3SETHgbgYPY4wCYrOCMrKAKWW~vbOYs4FAgEOTsRg5W2JQiYU5~9QppTtcKM1WM6FhnL4wrZ8w6Cry8m3yUVZsNAz51mME0Byk1Hg2vXRuTM78MgRSA9Pqy8KkwiahkhEtrV7P1VNfAnpFhsjkeDhkQ__"
+      image: tshirt,
     },
     {
       name: "CARICATURE",
       venue: "TBA",
       date: "TBA",
-      image: "https://media-hosting.imagekit.io//a9ed22cfa03947f1/caricature.jpg?Expires=1832074175&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=WEgOmLMl~NYy-XQE5-KvhpkJ2Lvr00JP65HLarEv51Fg8zvcCAtzfDYjo6dTStR852Z6yMgJe5C~N65GqkkhWwz0L8CzC2unyZJtJE7tTo2h8~Kh284Uvx0jCnws6vMyBmCp8c0JcS78RZ77EYX7cC6AhWyK~WcL~pvnpz4M2AlwQ5ZDkVBvci57BxtgsehnpmVh50NuUrJPWk7pxYcRxfEGQIvoXH4Frmr5vwoycQGgnOm1RK2WQI63rObxj-jwr3VLN9n~DbSR9hfhj1L1dyG4u~n3gTzduqz9z2yVGZhgQ5M4wUS60xHWtkTmVapO6xeF5EO99z0CS9oDhJamCQ__"
+      image: "https://www.shutterstock.com/image-photo/firenze-italy-09-july-2024-600nw-2496659593.jpg"
     },
     {
       name: "BONFIRE & MOVIE NIGHT",
       venue: "TBA",
       date: "TBA",
-      image: "https://media-hosting.imagekit.io//efa3e58efbcd439d/bonfire.jpg?Expires=1832074175&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=R0ezil7JV6rIml2J7cNSEXWtv5MN3DeHQfimPkmiJrxzHoKpiDniTBPOChytz0W5mCwstjnGVoYob8gKUrqlGMmkg6xIG4Ku0KkolGvKFP3MVYjx4em8hil6ZdLAA1JnXid~-5E1pro8j46IZhnqFvWhpdVyW9s8IGOpzEPkoEiJsJJSixiHz0Vv479jJ-mV6qOu5mATJOEPJD0gVAW1QdttQzTx4DwFW7gOxeb6Muaogk8rjx9sDbM~13UValDD~8zngnN0FKBe1pq1OOMeHMp6K37relJVzFsSjvfjBUpliU~v2gOQvCszqAOvY7-O8TtazoIycdIJqn1SGe6k-A__"
+      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCWAn03mhVoHwm-hkdnMQ_-KO2crJhyySbdoNBAyaHDvX96HjIT4WQqAylVmnrbwun-XluCVQedPxddbwjonLpd68PjJdfKih86Fo-1v9Y3At7EMF2M7NCfPvpTAPlombGIrk-kSWqLpcN/s1600/20170303_214950-1612x1209.jpg"
     },
     {
       name: "POTTERY",
       venue: "TBA",
       date: "TBA",
-      image: "https://media-hosting.imagekit.io//7f3e0d95f4f44956/pottery.jpg?Expires=1832074175&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=T1Wxm60WeSazTZI8sEb-cKKA2qVpf0g4hDxdXbzdl9kScRB8MT2ihHGsVaC6~hvTumM3KNsgr0C4JNNjvj2hP9r~kot2Du83b59x5epZpx1UX3x1fTn3vlz7aXKcRuGWhQJisF5u5ZQ05NzmrcRrrUyoz~0kNnmPVAChlJAqvVC4E2sNQPkrgFvYJxKNTWfjJbuzLVWz78VFe3kTskmhtf2v3pRyaXPpkFhnau8pjzE4jsnPItDgFbP73piZWer7waq1Oa85As93eBnZBR8MKPmGhljXSJ~Qcan2WLgSOnVyhaX9RJfApoIvYlEjSJ29eC1rFHi6K-4Mujgw5mFvgg__",
+      image: pottery,
     },
     {
       name: "TAROT CARD",
       venue: "TBA",
       date: "TBA",
-      image: "https://media-hosting.imagekit.io//b9cf6e7081da413b/tarot-card.jpg?Expires=1832074175&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=JK5~NxBWK3j9O7w~oUW7LwI1ZthOTUEz9JmI0cmExziad8EMjjtRf40afUvm6qS-r~dHC-6dCLeezMrxfJFh0Y1ZAY2jMoMviLbY6z3WuI-LuewfMsE1SVYctT0OP~e3FBZHigosVjtBQRfYYnhJyBOZE13hgIWE-SsVLGx5gJrfCxVmhQjEvXbxPW1mwSqysKijw6WdItQJ-H6anYgfcE4lV0jmhNQ11N~mD~HFb0Zq0GafZkAuYX0DumpUJSEpo4PEbyYPlpWdqOX0uMK5W5ZOe5zEYuIEOPf28agSmbuuAM5oZEcIz3WF~RcatQ~QLb8wREa0a0OQbmKjGw1J3A__",
+      image: "https://miro.medium.com/v2/resize:fit:1400/0*kZnuhdKFV1IbSP_3",
     },
     {
       name: "KARAOKE",
@@ -144,7 +156,7 @@ function Events() {
       name: "OPEN MIC (KAVI SAMMELAN)",
       venue: "TBA",
       date: "TBA",
-      image: "https://www.writespacehouston.org/uploads/2/2/6/9/22691492/open-mics_orig.png"
+      image: "https://devizine.com/wp-content/uploads/2024/09/openmic.jpg"
     }
   ];
 
@@ -390,7 +402,7 @@ function Events() {
         </div>
 
         <div className="flagship-events">
-          {["ANTARANG", "NRITYANSH", "THUNDERBEATS", "AAYYAM"].map((event) => (
+          {["ANTARANG", "NRITYANSH", "CLASH OF BANDS", "AAYYAM"].map((event) => (
             <button
               key={event}
               className="event-item"
