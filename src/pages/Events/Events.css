@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -11,7 +12,7 @@ div.cultural {
 }
 
 .cultural-bg {
-  position: relative;   
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -26,39 +27,39 @@ div.cultural {
 }
 
 .cult {
-  position: absolute;   
+  position: absolute;
   top: 25%;
   right: 12%;
   z-index: 5;
 }
 
 .cult-image {
-  width: 35vw;         
+  width: 35vw;
   height: auto;
 }
 
 .left-decoration {
-  position: absolute;   
+  position: absolute;
   top: -7%;
   left: 0;
   z-index: 10;
 }
 
-.left-decor-image{
-    width: 55vw;         
-    height: auto;
+.left-decor-image {
+  width: 55vw;
+  height: auto;
 }
 
 .right-decoration {
-  position: absolute;   
+  position: absolute;
   top: -7%;
   right: 0;
   z-index: 5;
 }
 
-.right-decor-image{
-    width: 70vw;         
-    height: auto;
+.right-decor-image {
+  width: 70vw;
+  height: auto;
 }
 
 .cult-wrapper {
@@ -71,8 +72,8 @@ div.cultural {
 
 .cult-heading {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 5vw; 
-  letter-spacing: 0.18em;             
+  font-size: 5vw;
+  letter-spacing: 0.18em;
   font-weight: 700;
   line-height: 1;
 }
@@ -91,7 +92,7 @@ div.cultural {
 }
 
 .line {
-  width: 7vw;   
+  width: 7vw;
   height: 1.5px;
   background-color: white;
   opacity: 0.85;
@@ -114,19 +115,14 @@ div.cultural {
   background: #FABB1E;
   color: #FFFFFF;
   font-family: 'Caudex', serif;
-
-  /* ⬇ reduce event button size */
   font-size: 1.3vw;
   height: 3.2vw;
   padding: 0 2vw;
-
   letter-spacing: 0.12em;
   border-radius: 999px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   border: none;
@@ -160,14 +156,14 @@ div.informal {
 }
 
 .informal-mask {
-  position: absolute;   
+  position: absolute;
   top: 14%;
   left: 7%;
   z-index: 5;
 }
 
 .informal-mask img {
-  width: 35vw;         
+  width: 35vw;
   height: auto;
 }
 
@@ -182,13 +178,13 @@ div.informal {
 
 .informal-heading {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 5vw; 
-  letter-spacing: 0.18em;             
+  font-size: 5vw;
+  letter-spacing: 0.18em;
   font-weight: 700;
   line-height: 1;
 }
 
-.informal-subheading-wrapper {  
+.informal-subheading-wrapper {
   display: flex;
   align-items: center;
   margin-top: 0.6rem;
@@ -196,7 +192,7 @@ div.informal {
 
 .informal-subheading {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 2.5vw; 
+  font-size: 2.5vw;
   letter-spacing: 0.3em;
   margin: 0 2.5vw;
 }
@@ -249,8 +245,8 @@ div.pronite {
 
 .pronite-heading {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 5vw; 
-  letter-spacing: 0.18em;             
+  font-size: 5vw;
+  letter-spacing: 0.18em;
   font-weight: 700;
   line-height: 1;
   margin-left: 4%;
@@ -275,7 +271,7 @@ div.pronite {
   left: 10%;
   font-size: 3vw;
   margin-left: 6%;
-  color:white;
+  color: white;
   margin-top: 2vw;
   z-index: 10;
 }
@@ -306,14 +302,14 @@ div.flagship {
 }
 
 .flagship-mask {
-  position: absolute;   
+  position: absolute;
   top: 23%;
   left: 12%;
   z-index: 5;
 }
 
 .flagship-mask img {
-  width: 30vw;         
+  width: 30vw;
   height: auto;
 }
 
@@ -327,13 +323,13 @@ div.flagship {
 
 .flagship-heading {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 5vw; 
-  letter-spacing: 0.18em;             
+  font-size: 5vw;
+  letter-spacing: 0.18em;
   font-weight: 700;
   line-height: 1;
 }
 
-.flagship-subheading-wrapper {  
+.flagship-subheading-wrapper {
   display: flex;
   align-items: center;
   margin-top: 0.6rem;
@@ -341,7 +337,7 @@ div.flagship {
 
 .flagship-subheading {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 2.5vw; 
+  font-size: 2.5vw;
   letter-spacing: 0.3em;
   margin: 0 1vw;
 }
@@ -392,14 +388,14 @@ div.online {
 }
 
 .online-mask {
-  position: absolute;   
+  position: absolute;
   top: 3%;
   right: 12%;
   z-index: 5;
 }
 
 .online-mask img {
-  width: 35vw;         
+  width: 35vw;
   height: auto;
 }
 
@@ -413,8 +409,8 @@ div.online {
 
 .online-heading {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 5vw; 
-  letter-spacing: 0.18em;             
+  font-size: 5vw;
+  letter-spacing: 0.18em;
   font-weight: 700;
   line-height: 1;
   margin-left: 12%;
@@ -454,7 +450,6 @@ div.online {
   left: 50%;
   top: 87%;
   transform: translateX(-50%);
-
   display: flex;
   gap: 50px;
   background: transparent;
@@ -469,19 +464,15 @@ div.online {
   min-width: 190px;
   height: 62px;
   padding: 0 32px;
-
   border-radius: 999px;
   border: none;
-
   font-family: 'Caudex', serif;
   font-size: 1.15rem;
   letter-spacing: 0.18em;
-
   color: white;
   cursor: pointer;
-
   transition: all 0.25s ease;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
   white-space: nowrap;
 }
 
@@ -511,23 +502,18 @@ div.online {
 .footer-btn.active {
   background: white !important;
   color: #222;
-  box-shadow: 0 10px 26px rgba(255,255,255,0.45);
+  box-shadow: 0 10px 26px rgba(255, 255, 255, 0.45);
 }
 
 /* ---------- Hover (non-active only) ---------- */
 .footer-btn:not(.active):hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.45);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
 }
 
 /* ================================================= */
 /* ================= EVENT MODAL =================== */
 /* ================================================= */
-
-/* Dark blurred overlay */
-/* ================= EVENT MODAL (GLASS STYLE) ================= */
-
-/* ================= INFORMAL MODAL SPLIT LAYOUT ================= */
 
 .modal-content {
   display: flex;
@@ -608,23 +594,17 @@ div.online {
 .event-modal {
   width: 75%;
   height: 75%;
-
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(16.5px);
   -webkit-backdrop-filter: blur(16.5px);
-
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-
   padding: 32px;
   overflow-y: auto;
-
   position: fixed;
   top: 10%;
   left: 12.5%;
-
   color: #ffffff;
   animation: modalFadeUp 0.35s ease;
 }
@@ -633,6 +613,7 @@ div.online {
 .event-modal::-webkit-scrollbar {
   width: 6px;
 }
+
 .event-modal::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
@@ -657,7 +638,7 @@ div.online {
   letter-spacing: 0.15em;
   margin-bottom: 14px;
   text-align: center;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 /* Text */
@@ -676,16 +657,13 @@ div.online {
   border: none;
   border-radius: 999px;
   padding: 14px 36px;
-
   font-family: 'Caudex', serif;
   font-size: 1rem;
   letter-spacing: 0.15em;
   cursor: pointer;
-
   display: block;
   margin-left: auto;
   margin-right: auto;
-
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -700,6 +678,7 @@ div.online {
     transform: translateY(30px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -756,11 +735,11 @@ div.online {
 }
 
 
-.events-page > .cultural,
-.events-page > .informal,
-.events-page > .pronite,
-.events-page > .flagship,
-.events-page > .online {
+.events-page>.cultural,
+.events-page>.informal,
+.events-page>.pronite,
+.events-page>.flagship,
+.events-page>.online {
   min-height: 100vh;
   position: relative;
   padding-bottom: 150px;
@@ -799,6 +778,7 @@ div.online {
 
 /* ---------- TABLET (Medium Devices: 768px - 1024px) ---------- */
 @media (max-width: 1024px) {
+
   .cult-heading,
   .informal-heading,
   .pronite-heading,
@@ -868,6 +848,7 @@ div.online {
 
 /* ---------- MOBILE (Small Devices: up to 767px) ---------- */
 @media (max-width: 767px) {
+
   /* Hide bottom tabs on mobile */
   .events-footer {
     display: none;
@@ -883,49 +864,132 @@ div.online {
     display: none;
   }
 
-  /* Center all headings */
+  /* ========================================= */
+  /* ========== FLEXBOX LAYOUT FIX =========== */
+  /* ========================================= */
+
+  /* 0. CRITICAL FIX: Make background containers truly background layers */
+  .cultural-bg,
+  .informal-bg,
+  .pronite-bg,
+  .flagship-bg,
+  .online-bg {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible !important;
+    z-index: 0;
+    display: block !important;
+    pointer-events: none;
+  }
+
+  .cultural-bg img,
+  .informal-bg img,
+  .pronite-bg img,
+  .flagship-bg img,
+  .online-bg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  /* 1. Make main containers flex columns */
+  div.cultural,
+  div.informal,
+  div.pronite,
+  div.flagship,
+  div.online {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    height: auto;
+    padding-top: 100px;
+    padding-bottom: 80px;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  /* 2. Reset absolute positioning for wrappers (Headings) */
   .cult-wrapper,
   .informal-wrapper,
   .pronite-wrapper,
   .flagship-wrapper,
   .online-wrapper {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    text-align: center;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+
     width: 90%;
+    text-align: center;
+    margin: 0 auto 2rem auto !important;
+    z-index: 10;
   }
 
-  .cult-wrapper {
-    top: 10%;
+  /* 3. Reset absolute positioning for Event Lists */
+  .cult-events,
+  .informal-events,
+  .pronite-events,
+  .flagship-events,
+  .online-events {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+
+    margin-top: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 85%;
+    max-width: 400px;
+    gap: 1.5rem;
+    z-index: 10;
   }
 
-  .informal-wrapper {
-    top: 10%;
+  /* Specific adjustments for Pronite text */
+  .pronite-events {
+    text-align: center;
   }
 
-  .pronite-wrapper {
-    top: 10%;
-    left: 50%;
+  /* SPECIFIC FIX: Override right positioning for informal section */
+  div.informal .informal-wrapper,
+  div.informal .informal-events {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    margin: 0 auto !important;
+    width: 90% !important;
+    max-width: 400px !important;
+    text-align: center !important;
   }
 
-  .flagship-wrapper {
-    top: 10%;
-  }
-
-  .online-wrapper {
-    top: 10%;
-    left: 50%;
-  }
-
-  /* Headings */
+  /* Headings Typography */
   .cult-heading,
   .informal-heading,
   .pronite-heading,
   .flagship-heading,
   .online-heading {
-    font-size: 10vw;
-    letter-spacing: 0.12em;
+    font-size: 12vw;
+    letter-spacing: 0.1em;
+    line-height: 1.1;
   }
 
   .pronite-heading,
@@ -938,7 +1002,7 @@ div.online {
   .pronite-subheading,
   .flagship-subheading,
   .online-subheading {
-    font-size: 5.5vw;
+    font-size: 5vw;
     letter-spacing: 0.2em;
   }
 
@@ -948,89 +1012,64 @@ div.online {
   .flagship-subheading-wrapper,
   .online-subheading-wrapper {
     justify-content: center;
+    margin-top: 0.5rem;
   }
 
   .line {
-    width: 10vw;
+    width: 15vw;
   }
 
-  /* Events - Single column, centered */
-  .cult-events,
-  .informal-events,
-  .flagship-events,
-  .online-events {
-    grid-template-columns: 1fr;
-    width: 80%;
-    max-width: 400px;
-    gap: 1.2rem;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-  }
-
-  .cult-events {
-    top: 30%;
-  }
-
-  .informal-events {
-    top: 30%;
-  }
-
-  .pronite-events {
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-left: 0;
-    text-align: center;
-  }
-
-  .flagship-events {
-    top: 30%;
-  }
-
-  .online-events {
-    top: 30%;
-  }
-
+  /* Event Buttons */
   .event-item {
     font-size: 4.5vw;
-    height: 12vw;
-    padding: 0 6vw;
-    min-height: 50px;
-  }
-
-  /* Remove bottom padding since tabs are hidden */
-  div.cultural,
-  div.informal,
-  div.pronite,
-  div.flagship,
-  div.online {
-    padding-bottom: 20px;
+    height: 14vw;
+    padding: 0 4vw;
+    min-height: 60px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   /* Modal adjustments */
   .event-modal {
-    width: 95%;
-    max-width: 350px;
-    padding: 24px 20px;
+    width: 90%;
+    height: auto;
+    max-height: 85vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 24px;
+    animation: modalFadeUpMobile 0.35s ease;
+  }
+
+  @keyframes modalFadeUpMobile {
+    from {
+      transform: translate(-50%, -40%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
   }
 
   .event-modal h2 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 
   .event-modal p {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
 
   .modal-action-btn {
-    padding: 10px 22px;
-    font-size: 0.9rem;
+    padding: 12px 28px;
+    font-size: 1rem;
   }
 }
 
 /* ---------- SMALL MOBILE (up to 480px) ---------- */
 @media (max-width: 480px) {
+
   .cult-heading,
   .informal-heading,
   .pronite-heading,
