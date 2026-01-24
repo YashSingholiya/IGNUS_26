@@ -456,7 +456,7 @@ div.online {
   transform: translateX(-50%);
 
   display: flex;
-  gap: 40px;
+  gap: 50px;
   background: transparent;
   backdrop-filter: none;
   padding: 10px 40px;
@@ -525,34 +525,179 @@ div.online {
 /* ================================================= */
 
 /* Dark blurred overlay */
+/* ================= EVENT MODAL (GLASS STYLE) ================= */
+
+/* ================= INFORMAL MODAL SPLIT LAYOUT ================= */
+
+.modal-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 24px;
+}
+
+/* LEFT IMAGE */
+.modal-left {
+  width: 50%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* RIGHT TEXT */
+.modal-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-right h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 16px;
+}
+
+.modal-right p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+/* ---------- MOBILE STACK ---------- */
+@media (max-width: 768px) {
+  .modal-content {
+    flex-direction: column;
+  }
+
+  .modal-left,
+  .modal-right {
+    width: 100%;
+  }
+
+  .modal-left {
+    height: 220px;
+  }
+
+  .modal-right {
+    text-align: center;
+  }
+}
+
 .event-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16.5px);
+  -webkit-backdrop-filter: blur(16.5px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10000;
 }
 
-/* Modal box */
+/* Glassmorphism modal */
 .event-modal {
-  background: #ffffff;
-  width: 90%;
-  max-width: 420px;
-  padding: 32px 28px;
-  border-radius: 22px;
-  text-align: center;
-  position: relative;
-  animation: modalFadeUp 0.3s ease;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  width: 75%;
+  height: 75%;
+
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16.5px);
+  -webkit-backdrop-filter: blur(16.5px);
+
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+  padding: 32px;
+  overflow-y: auto;
+
+  position: fixed;
+  top: 10%;
+  left: 12.5%;
+
+  color: #ffffff;
+  animation: modalFadeUp 0.35s ease;
 }
 
-/* Smooth entry animation */
+/* Scrollbar styling (optional but clean) */
+.event-modal::-webkit-scrollbar {
+  width: 6px;
+}
+.event-modal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Headings */
+.event-modal h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3.5rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 14px;
+  text-align: center;
+  font-weight:bold;
+}
+
+/* Text */
+.event-modal p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* Action button */
+.modal-action-btn {
+  margin-top: 20px;
+  background: #ffc529;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 36px;
+
+  font-family: 'Caudex', serif;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* Animation */
 @keyframes modalFadeUp {
   from {
-    transform: translateY(24px);
+    transform: translateY(30px);
     opacity: 0;
   }
   to {
@@ -561,51 +706,6 @@ div.online {
   }
 }
 
-/* Close button */
-.modal-close {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-  color: #444;
-}
-
-/* Title */
-.event-modal h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.12em;
-  margin-bottom: 8px;
-}
-
-/* Subtitle / text */
-.event-modal p {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 14px;
-}
-
-/* Action button */
-.modal-action-btn {
-  margin-top: 10px;
-  background: #ffc529;
-  border: none;
-  border-radius: 999px;
-  padding: 12px 28px;
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 0.15em;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.modal-action-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
-}
 
 /* ================================================= */
 /* ============ EVENTS PAGE FOOTER BAR ============= */
