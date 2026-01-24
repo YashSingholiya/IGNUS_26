@@ -8,15 +8,25 @@ import wheel_stand from "./assets/wheel_stand.svg";
 import cloud_2 from "./assets/cloud_2.png";
 import devicon_google from "./assets/devicon_google.svg";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./Login.css";
 
 export default function Auth() {
   const navigate = useNavigate();
-  
+
   // Views: 'login', 'signup', 'complete-profile'
   const [currentView, setCurrentView] = useState("login");
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const getCookie = (name) => {
+    return document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(name + "="))
+      ?.split("=")[1];
+  };
 
   // Form states
   const [loginData, setLoginData] = useState({
@@ -33,14 +43,69 @@ export default function Auth() {
   });
 
   const [profileData, setProfileData] = useState({
-    phoneNo: "",
-    gender: "",
+    phone: "",
+    gender: "M",
     college: "",
-    currentYear: "",
-    referralCode: "",
+    currentYear: "1",
+    state: "",
     govId: null,
     collegeId: null,
+    referralCode: null,
   });
+
+  const GENDER_OPTIONS = [
+    { value: "M", label: "Male" },
+    { value: "F", label: "Female" },
+    { value: "T", label: "Other" },
+  ];
+
+  const YEAR_OPTIONS = [
+    { value: "1", label: "First Year" },
+    { value: "2", label: "Second Year" },
+    { value: "3", label: "Third Year" },
+    { value: "4", label: "Fourth Year" },
+    { value: "5", label: "Fifth Year" },
+    { value: "6", label: "Other" },
+  ];
+
+  const STATE_OPTIONS = [
+    { value: "1", label: "Andhra Pradesh" },
+    { value: "2", label: "Arunachal Pradesh" },
+    { value: "3", label: "Assam" },
+    { value: "4", label: "Bihar" },
+    { value: "5", label: "Chhattisgarh" },
+    { value: "6", label: "Goa" },
+    { value: "7", label: "Gujarat" },
+    { value: "8", label: "Haryana" },
+    { value: "9", label: "Himachal Pradesh" },
+    { value: "10", label: "Jammu & Kashmir" },
+    { value: "11", label: "Jharkhand" },
+    { value: "12", label: "Karnataka" },
+    { value: "13", label: "Kerala" },
+    { value: "14", label: "Madhya Pradesh" },
+    { value: "15", label: "Maharashtra" },
+    { value: "16", label: "Manipur" },
+    { value: "17", label: "Meghalaya" },
+    { value: "18", label: "Mizoram" },
+    { value: "19", label: "Nagaland" },
+    { value: "20", label: "Odisha" },
+    { value: "21", label: "Punjab" },
+    { value: "22", label: "Rajasthan" },
+    { value: "23", label: "Sikkim" },
+    { value: "24", label: "Tamil Nadu" },
+    { value: "25", label: "Telangana" },
+    { value: "26", label: "Tripura" },
+    { value: "27", label: "Uttarakhand" },
+    { value: "28", label: "Uttar Pradesh" },
+    { value: "29", label: "West Bengal" },
+    { value: "30", label: "Andaman & Nicobar Islands" },
+    { value: "31", label: "Delhi" },
+    { value: "32", label: "Chandigarh" },
+    { value: "33", label: "Dadra & Nagar Haveli" },
+    { value: "34", label: "Daman & Diu" },
+    { value: "35", label: "Lakshadweep" },
+    { value: "36", label: "Puducherry" },
+  ];
 
   // Smooth transition handler
   const transitionTo = (view) => {
@@ -48,18 +113,76 @@ export default function Auth() {
   };
 
   // Form handlers
-  const handleLogin = (e) => {
+   const handleLogin = async (e) => {
     e.preventDefault();
-    // TODO: Implement login logic
-    console.log("Login:", loginData);
-    navigate("/profile");
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/accounts/login/`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            username: loginData.email,
+            password: loginData.password,
+          }),
+        }
+      );
+
+      if (!res.ok) {
+        toast.error("Invalid credentials");
+        return;
+      }
+
+      const isProfileComplete = getCookie("isProfileComplete");
+      if (isProfileComplete === "false") {
+        transitionTo("complete-profile");
+      } else {
+        navigate("/profile");
+      }
+    } catch {
+      toast.error("Something went wrong");
+    }
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    // TODO: Implement signup logic
-    console.log("Signup:", signupData);
-    transitionTo("complete-profile");
+    if (signupData.password !== signupData.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/accounts/register/`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            first_name: signupData.firstName,
+            last_name: signupData.lastName,
+            email: signupData.email,
+            password: signupData.password,
+          }),
+        }
+      );
+
+      if (res.status === 409) {
+        toast.info("Account already exists. Please sign in.");
+        setLoginData({ email: signupData.email, password: "" });
+        transitionTo("login");
+        return;
+      }
+
+      if (!res.ok) {
+        toast.error("Signup failed");
+        return;
+      }
+
+      transitionTo("complete-profile");
+    } catch {
+      toast.error("Signup failed");
+    }
   };
 
   const handleCompleteProfile = (e) => {
@@ -68,16 +191,67 @@ export default function Auth() {
     setShowModal(true);
   };
 
-  const handleConfirmAndSave = () => {
-    // TODO: Implement profile completion logic
-    console.log("Profile:", profileData);
-    setShowModal(false);
-    navigate("/profile");
+  const handleConfirmAndSave = async () => {
+    try {
+      const formData = new FormData();
+
+      formData.append("phone", profileData.phone);
+      formData.append("gender", profileData.gender);
+      formData.append("college", profileData.college);
+      formData.append("current_year", profileData.currentYear);
+      formData.append("state", profileData.state);
+      formData.append("referral_code", profileData.referralCode ?? "");
+
+      if (profileData.govId) {
+        formData.append("govt_id", profileData.govId);
+      }
+
+      if (profileData.collegeId) {
+        formData.append("clg_id", profileData.collegeId);
+      }
+
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/accounts/user-profile/`,
+        {
+          method: "POST",
+          credentials: "include",
+          body: formData,
+        },
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error(data);
+        alert(data?.detail || "Profile update failed");
+        return;
+      }
+
+      console.log("Profile saved:", data);
+
+      setShowModal(false);
+      navigate("/profile");
+    } catch (err) {
+      console.error("Profile error:", err);
+      alert("Something went wrong while saving profile");
+    }
   };
 
-  const handleGoogleSignIn = () => {
-    // TODO: Implement Google Sign-in
-    console.log("Google Sign-in clicked");
+  const handleGoogleLogin = () => {
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/accounts/login/google/`;
+  };
+
+  const handleGoogleSignup = () => {
+    const params = new URLSearchParams({
+      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+      redirect_uri: `${import.meta.env.VITE_BACKEND_URL}/api/accounts/register/google/`,
+      response_type: "code",
+      scope: "openid email profile",
+      access_type: "online",
+      prompt: "select_account",
+    });
+    console.log(params.toString());
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
   };
 
   const handleFileUpload = (field, e) => {
@@ -88,51 +262,46 @@ export default function Auth() {
   };
 
   // Determine if mascot should be on the left (signup or complete-profile)
-  const isMascotLeft = currentView === "signup" || currentView === "complete-profile";
+  const isMascotLeft =
+    currentView === "signup" || currentView === "complete-profile";
 
   return (
     <>
       <Navbar />
-      <main 
+      <ToastContainer position="top-right" autoClose={4000} />
+      <main
         className="pt-16 min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden"
-        style={{ background: 'linear-gradient(to bottom, #4B2BFF 0%, #FFF0E3 100%)' }}
+        style={{
+          background: "linear-gradient(to bottom, #4B2BFF 0%, #FFF0E3 100%)",
+        }}
       >
         {/* Background Wheel */}
         <div className="wheel-container">
-          <img
-            src={wheel_stand}
-            alt=""
-            className="wheel-stand"
-          />
-          <img
-            src={wheel_circle}
-            alt=""
-            className="wheel-circle"
-          />
+          <img src={wheel_stand} alt="" className="wheel-stand" />
+          <img src={wheel_circle} alt="" className="wheel-circle" />
         </div>
-        
+
         {/* Main sliding container */}
         <div className="auth-container relative z-4">
-          
           {/* Mascot Panel - slides left/right */}
           <div
-            className={`mascot-panel ${isMascotLeft ? 'mascot-left' : 'mascot-right'}`}
+            className={`mascot-panel ${isMascotLeft ? "mascot-left" : "mascot-right"}`}
           >
-            <div className={`mascot-wrapper ${isMascotLeft ? 'rounded-left' : 'rounded-right'}`}>
-              <img
-                src={mascot}
-                alt="Mascot"
-                className="mascot-image"
-              />
+            <div
+              className={`mascot-wrapper ${isMascotLeft ? "rounded-left" : "rounded-right"}`}
+            >
+              <img src={mascot} alt="Mascot" className="mascot-image" />
             </div>
           </div>
 
           {/* Forms Panel - slides opposite to mascot */}
           <div
-            className={`forms-panel ${isMascotLeft ? 'forms-right' : 'forms-left'}`}
+            className={`forms-panel ${isMascotLeft ? "forms-right" : "forms-left"}`}
           >
             {/* Login Form */}
-            <div className={`form-container ${currentView === 'login' ? 'form-active' : 'form-inactive'}`}>
+            <div
+              className={`form-container ${currentView === "login" ? "form-active" : "form-inactive"}`}
+            >
               <div className="form-content rounded-left-form">
                 <h2 className="text-2xl font-bold text-gray-900 text-center mb-8 font-rosiana">
                   Login to Account
@@ -171,7 +340,7 @@ export default function Auth() {
                 <div className="mt-6 text-center">
                   <p className="text-white/60 mb-4">Or</p>
                   <button
-                    onClick={handleGoogleSignIn}
+                    onClick={handleGoogleLogin}
                     className="w-full py-3 bg-white hover:bg-gray-100 text-gray-700 font-medium rounded-full flex items-center justify-center gap-3 transition-colors"
                   >
                     <img
@@ -196,7 +365,9 @@ export default function Auth() {
             </div>
 
             {/* Signup Form */}
-            <div className={`form-container ${currentView === 'signup' ? 'form-active' : 'form-inactive'}`}>
+            <div
+              className={`form-container ${currentView === "signup" ? "form-active" : "form-inactive"}`}
+            >
               <div className="form-content rounded-right-form">
                 <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
                   Create Account
@@ -208,7 +379,10 @@ export default function Auth() {
                     placeholder="First Name"
                     value={signupData.firstName}
                     onChange={(e) =>
-                      setSignupData({ ...signupData, firstName: e.target.value })
+                      setSignupData({
+                        ...signupData,
+                        firstName: e.target.value,
+                      })
                     }
                     className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
                   />
@@ -265,7 +439,7 @@ export default function Auth() {
                 <div className="mt-6 text-center">
                   <p className="text-white/60 mb-4">Or</p>
                   <button
-                    onClick={handleGoogleSignIn}
+                    onClick={handleGoogleSignup}
                     className="w-full py-3 bg-white hover:bg-gray-100 text-gray-700 font-medium rounded-full flex items-center justify-center gap-3 transition-colors"
                   >
                     <img
@@ -273,7 +447,7 @@ export default function Auth() {
                       alt="Google"
                       className="w-5 h-5"
                     />
-                    Sign in with Google
+                    Sign up with Google
                   </button>
                 </div>
 
@@ -290,7 +464,9 @@ export default function Auth() {
             </div>
 
             {/* Complete Profile Form */}
-            <div className={`form-container ${currentView === 'complete-profile' ? 'form-active' : 'form-inactive'}`}>
+            <div
+              className={`form-container ${currentView === "complete-profile" ? "form-active" : "form-inactive"}`}
+            >
               <div className="form-content rounded-right-form">
                 <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
                   Complete Profile
@@ -299,34 +475,50 @@ export default function Auth() {
                 <form onSubmit={handleCompleteProfile} className="space-y-4">
                   <input
                     type="tel"
-                    placeholder="Phone No"
-                    value={profileData.phoneNo}
+                    inputMode="numeric"
+                    pattern="[0-9]{10}"
+                    maxLength={10}
+                    placeholder="Phone Number"
+                    value={profileData.phone}
                     onChange={(e) =>
-                      setProfileData({ ...profileData, phoneNo: e.target.value })
+                      setProfileData({
+                        ...profileData,
+                        phone: e.target.value.replace(/\D/g, ""),
+                      })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    required
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
                   />
-                  <input
-                    type="text"
-                    placeholder="Gender"
+
+                  <select
                     value={profileData.gender}
                     onChange={(e) =>
                       setProfileData({ ...profileData, gender: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
-                  />
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
+                  >
+                    {GENDER_OPTIONS.map((g) => (
+                      <option key={g.value} value={g.value}>
+                        {g.label}
+                      </option>
+                    ))}
+                  </select>
+
                   <input
                     type="text"
-                    placeholder="College"
+                    placeholder="College Name"
                     value={profileData.college}
                     onChange={(e) =>
-                      setProfileData({ ...profileData, college: e.target.value })
+                      setProfileData({
+                        ...profileData,
+                        college: e.target.value,
+                      })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    required
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
                   />
-                  <input
-                    type="text"
-                    placeholder="Current Year"
+
+                  <select
                     value={profileData.currentYear}
                     onChange={(e) =>
                       setProfileData({
@@ -334,16 +526,41 @@ export default function Auth() {
                         currentYear: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
-                  />
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
+                  >
+                    {YEAR_OPTIONS.map((y) => (
+                      <option key={y.value} value={y.value}>
+                        {y.label}
+                      </option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={profileData.state}
+                    onChange={(e) =>
+                      setProfileData({ ...profileData, state: e.target.value })
+                    }
+                    required
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
+                  >
+                    <option value="" disabled>
+                      Select State
+                    </option>
+                    {STATE_OPTIONS.map((s) => (
+                      <option key={s.value} value={s.value}>
+                        {s.label}
+                      </option>
+                    ))}
+                  </select>
+
                   <input
                     type="text"
-                    placeholder="Referral Code"
-                    value={profileData.referralCode}
+                    placeholder="Referral Code (optional)"
+                    value={profileData.referralCode || ""}
                     onChange={(e) =>
                       setProfileData({
                         ...profileData,
-                        referralCode: e.target.value,
+                        referralCode: e.target.value || null,
                       })
                     }
                     className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
@@ -402,7 +619,7 @@ export default function Auth() {
             </div>
           </div>
         </div>
-        
+
         {/* Cloud image at the bottom */}
         <img
           src={cloud_2}
@@ -418,7 +635,9 @@ export default function Auth() {
                 Important Notice
               </h3>
               <p className="text-gray-700 text-center mb-6 leading-relaxed">
-                While coming to campus, please carry a physical copy of your government document as well as college ID, otherwise you won't be granted entry into the college.
+                While coming to campus, please carry a physical copy of your
+                government document as well as college ID, otherwise you won't
+                be granted entry into the college.
               </p>
               <div className="flex gap-3">
                 <button
