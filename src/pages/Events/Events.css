@@ -20,6 +20,7 @@ div.cultural {
 .cultural-image {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   object-fit: cover;
   display: block;
 }
@@ -38,7 +39,7 @@ div.cultural {
 
 .left-decoration {
   position: absolute;   
-  top: -10%;
+  top: -7%;
   left: 0;
   z-index: 10;
 }
@@ -50,7 +51,7 @@ div.cultural {
 
 .right-decoration {
   position: absolute;   
-  top: -5%;
+  top: -7%;
   right: 0;
   z-index: 5;
 }
@@ -62,14 +63,14 @@ div.cultural {
 
 .cult-wrapper {
   position: absolute;
-  top: 32%;
+  top: 28%;
   left: 12%;
   color: white;
   z-index: 10;
 }
 
 .cult-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cinzel Decorative', serif;
   font-size: 5vw; 
   letter-spacing: 0.18em;             
   font-weight: 700;
@@ -83,14 +84,14 @@ div.cultural {
 }
 
 .cult-subheading {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3vw;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.5vw;
   letter-spacing: 0.3em;
-  margin: 0 1vw;
+  margin: 0 2.5vw;
 }
 
 .line {
-  width: 6vw;   
+  width: 7vw;   
   height: 1.5px;
   background-color: white;
   opacity: 0.85;
@@ -98,27 +99,28 @@ div.cultural {
 
 .cult-events {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 12%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.8rem 2.2rem;
-  width: 36vw;
+  gap: 1.2rem 1.5rem;
+  width: 38vw;
   z-index: 10;
   margin-top: 2vw;
+  padding-bottom: 30px;
 }
 
 .event-item {
-  background: #ffc529;
-  color: white;
-  font-family: 'Playfair Display', serif;
+  background: #FABB1E;
+  color: #FFFFFF;
+  font-family: 'Caudex', serif;
 
   /* ⬇ reduce event button size */
-  font-size: 1.6vw;
-  height: 3.4vw;
-  padding: 0 2.4vw;
+  font-size: 1.3vw;
+  height: 3.2vw;
+  padding: 0 2vw;
 
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   border-radius: 999px;
 
   display: flex;
@@ -134,13 +136,16 @@ div.cultural {
 
 div.informal {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
+  padding-bottom: 150px;
 }
 
 
 .informal-bg {
-  position: relative;   
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -149,14 +154,15 @@ div.informal {
 .informal-bg img {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   object-fit: cover;
   display: block;
 }
 
 .informal-mask {
   position: absolute;   
-  top: 20%;
-  left: 12%;
+  top: 14%;
+  left: 7%;
   z-index: 5;
 }
 
@@ -168,14 +174,14 @@ div.informal {
 
 .informal-wrapper {
   position: absolute;
-  top: 25%;
+  top: 15%;
   right: 12%;
   color: white;
   z-index: 10;
 }
 
 .informal-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cinzel Decorative', serif;
   font-size: 5vw; 
   letter-spacing: 0.18em;             
   font-weight: 700;
@@ -189,33 +195,37 @@ div.informal {
 }
 
 .informal-subheading {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3vw; 
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.5vw; 
   letter-spacing: 0.3em;
-  margin: 0 1vw;
+  margin: 0 2.5vw;
 }
 
 .informal-events {
   position: absolute;
-  top: 45%;
+  top: 34%;
   right: 12%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.8rem 2.2rem;
-  width: 36vw;
+  gap: 1.2rem 1.5rem;
+  width: 45vw;
   z-index: 10;
   margin-top: 2vw;
+  padding-bottom: 30px;
 }
 
 div.pronite {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
+  padding-bottom: 150px;
 }
 
 
 .pronite-bg {
-  position: relative;   
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -224,25 +234,26 @@ div.pronite {
 .pronite-bg img {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   object-fit: cover;
   display: block;
 }
 
 .pronite-wrapper {
   position: absolute;
-  top: 25%;
+  top: 20%;
   left: 10%;
   color: white;
   z-index: 10;
 }
 
 .pronite-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cinzel Decorative', serif;
   font-size: 5vw; 
   letter-spacing: 0.18em;             
   font-weight: 700;
   line-height: 1;
-  margin-left: 10%;
+  margin-left: 4%;
 }
 
 .pronite-subheading-wrapper {
@@ -252,15 +263,15 @@ div.pronite {
 }
 
 .pronite-subheading {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3vw;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.5vw;
   letter-spacing: 0.3em;
   margin: 0 1vw;
 }
 
 .pronite-events {
   position: absolute;
-  top: 42%;
+  top: 38%;
   left: 10%;
   font-size: 3vw;
   margin-left: 6%;
@@ -271,13 +282,16 @@ div.pronite {
 
 div.flagship {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
+  padding-bottom: 150px;
 }
 
 
 .flagship-bg {
-  position: relative;   
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -286,6 +300,7 @@ div.flagship {
 .flagship-bg img {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   object-fit: cover;
   display: block;
 }
@@ -304,14 +319,14 @@ div.flagship {
 
 .flagship-wrapper {
   position: absolute;
-  top: 30%;
+  top: 20%;
   right: 12%;
   color: white;
   z-index: 10;
 }
 
 .flagship-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cinzel Decorative', serif;
   font-size: 5vw; 
   letter-spacing: 0.18em;             
   font-weight: 700;
@@ -325,33 +340,44 @@ div.flagship {
 }
 
 .flagship-subheading {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3vw; 
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.5vw; 
   letter-spacing: 0.3em;
   margin: 0 1vw;
 }
 
 .flagship-events {
   position: absolute;
-  top: 48%;
-  right: 12%;
+  top: 40%;
+  right: 20%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.8rem 2.2rem;
-  width: 36vw;
+  grid-template-columns: 1fr;
+  gap: 1.2rem 1.5rem;
+  width: 20vw;
   z-index: 10;
   margin-top: 2vw;
+  padding-bottom: 30px;
+}
+
+.flagship-events .event-item {
+  font-size: 1.5vw;
+  height: 3vw;
+  padding: 0 2.5vw;
+  letter-spacing: 0.1em;
 }
 
 div.online {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
+  padding-bottom: 150px;
 }
 
 
 .online-bg {
-  position: relative;   
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -360,6 +386,7 @@ div.online {
 .online-bg img {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   object-fit: cover;
   display: block;
 }
@@ -378,14 +405,14 @@ div.online {
 
 .online-wrapper {
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 12%;
   color: white;
   z-index: 10;
 }
 
 .online-heading {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cinzel Decorative', serif;
   font-size: 5vw; 
   letter-spacing: 0.18em;             
   font-weight: 700;
@@ -400,31 +427,32 @@ div.online {
 }
 
 .online-subheading {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3vw;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.5vw;
   letter-spacing: 0.3em;
   margin: 0 1vw;
 }
 
 .online-events {
   position: absolute;
-  top: 45%;
+  top: 34%;
   left: 12%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.8rem 2.2rem;
-  width: 36vw;
+  gap: 1.2rem 1.5rem;
+  width: 38vw;
   z-index: 10;
   margin-top: 2vw;
-  padding-bottom: 100px;
+  padding-bottom: 30px;
 }
 
 /* =============== EVENT FOOTER TABS =============== */
 
 .events-footer {
   position: fixed;
-  bottom: 3px;
+  bottom: 35px;
   left: 50%;
+  top: 87%;
   transform: translateX(-50%);
 
   display: flex;
@@ -445,7 +473,7 @@ div.online {
   border-radius: 999px;
   border: none;
 
-  font-family: 'Playfair Display', serif;
+  font-family: 'Caudex', serif;
   font-size: 1.15rem;
   letter-spacing: 0.18em;
 
@@ -491,6 +519,10 @@ div.online {
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(0,0,0,0.45);
 }
+
+/* ================================================= */
+/* ================= EVENT MODAL =================== */
+/* ================================================= */
 
 /* Dark blurred overlay */
 .event-modal-overlay {
@@ -575,6 +607,10 @@ div.online {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* ================================================= */
+/* ============ EVENTS PAGE FOOTER BAR ============= */
+/* ================================================= */
+
 .events-page-footer {
   width: 100%;
   background: linear-gradient(90deg, #1b003a, #2b0066);
@@ -590,6 +626,10 @@ div.online {
   letter-spacing: 0.05em;
   line-height: 1.4;
 }
+
+/* ============================================ */
+/* ========== ONLINE SECTION FOOTER ============ */
+/* ============================================ */
 
 .online {
   position: relative;
@@ -623,9 +663,9 @@ div.online {
 .events-page > .online {
   min-height: 100vh;
   position: relative;
-  padding-bottom: 120px;
-  width: 100vw; 
-  overflow-x: hidden;
+  padding-bottom: 150px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .cultural-bg,
@@ -633,7 +673,10 @@ div.online {
 .pronite-bg,
 .flagship-bg,
 .online-bg {
-  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   overflow: hidden;
 }
@@ -643,11 +686,16 @@ div.online {
 .pronite-image,
 .flagship-image,
 .online-image {
-  width: 100vw;
+  width: 100%;
   height: 100%;
+  min-height: 100vh;
   object-fit: cover;
   display: block;
 }
+
+/* ================================================= */
+/* =============== RESPONSIVE DESIGN =============== */
+/* ================================================= */
 
 /* ---------- TABLET (Medium Devices: 768px - 1024px) ---------- */
 @media (max-width: 1024px) {

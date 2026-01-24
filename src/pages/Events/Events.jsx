@@ -6,6 +6,31 @@ function Events() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
+  // ---------- GOOGLE FORM LINKS (ONLINE ONLY) ----------
+  const onlineEventLinks = {
+    "Mr & Miss IGNUS":
+      "https://docs.google.com/forms/d/e/1FAIpQLScXnEU0fUd3esXfza4N1jvVoxFZ_SfWHOsewS61r7ywZURYJQ/viewform?usp=sharing",
+    "DIGITAL ART":
+      "https://docs.google.com/forms/d/e/1FAIpQLSfLbvYluONmCZ__EoUuv0Nc_1USXH5QSte-5TyGOYchBrsKeQ/viewform",
+    "DUBSMASH":
+      "https://docs.google.com/forms/d/e/1FAIpQLSeqF1_Zmpn7JSblNgCAfmSYySp4Vf7tSJJSysR0hxgEirVRbg/viewform",
+    "PHOTOGRAPHY":
+      "https://docs.google.com/forms/d/e/1FAIpQLSfzLbnGBnPWv3bkYQCug_09v_0AiKf3qch7VL-JUTVZjmgqCg/viewform",
+    "SHORT MOVIE":
+      "https://docs.google.com/forms/d/e/1FAIpQLSezdNUGZcXi9wXeXGMLNPJsSZ_4zy7ABBvevB8kk-7VWsLW2Q/viewform",
+    "MEME MAKING":
+      "https://docs.google.com/forms/d/e/1FAIpQLSdyfPp2n4az6gJp1AaDlfHWmF_exMeC0G0Njz6KK12ujSSx8A/viewform",
+    "PHOTOSHOP BATTLE":
+      "https://docs.google.com/forms/d/e/1FAIpQLScNJ3pMvjVLSMD6lDYATTMFtJc_Hx4sIr6Mk6aG9hVOWBDe7w/viewform",
+    "CREATIVE WRITING":
+      "https://docs.google.com/forms/d/e/1FAIpQLSc4t6YGLGDQtUKXznmAj5v8jW4iH7kqkb0FPVnak2MaK3_Lvw/viewform",
+    "REEL MAKING":
+      "https://docs.google.com/forms/d/e/1FAIpQLSfJ_ZPtMYeDVouqL2WHU4Sz2BLKcgtujCrgOKSzXK4wR2r8Yg/viewform",
+    "PHOTOGRAPHY at IITJ":
+      "https://docs.google.com/forms/d/e/1FAIpQLSfzLbnGBnPWv3bkYQCug_09v_0AiKf3qch7VL-JUTVZjmgqCg/viewform",
+  };
+
+  // ---------- MODAL FUNCTIONS ----------
   function openModal(eventName, category) {
     setSelectedEvent({ eventName, category });
     setIsModalOpen(true);
@@ -16,6 +41,19 @@ function Events() {
     setSelectedEvent(null);
   }
 
+  // ---------- EVENT CLICK HANDLER ----------
+  function handleEventClick(eventName, category) {
+    // ONLINE → open Google Form directly
+    // if (category === "ONLINE" && onlineEventLinks[eventName]) {
+    //   window.open(onlineEventLinks[eventName], "_blank");
+    //   return;
+    // }
+
+    // Others → open modal
+    openModal(eventName, category);
+  }
+
+  // ---------- ACTIVE TAB ----------
   const [activeTab, setActiveTab] = useState("CULTURAL");
 
   // ---------- SCROLL REFS ----------
@@ -45,8 +83,7 @@ function Events() {
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section.ref.current) {
-          const { offsetTop } = section.ref.current;
-          if (scrollPosition >= offsetTop) {
+          if (scrollPosition >= section.ref.current.offsetTop) {
             setActiveTab(section.name);
             break;
           }
@@ -55,7 +92,7 @@ function Events() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -89,17 +126,24 @@ function Events() {
           </div>
 
           <div className="cult-events">
-            {["Dance", "Music", "Drama", "Literary Arts", "Fine Arts", "Fashion"].map(
-              (event) => (
-                <button
-                  key={event}
-                  className="event-item"
-                  onClick={() => openModal(event, "CULTURAL")}
-                >
-                  {event}
-                </button>
-              )
-            )}
+            {[
+              "DANCE",
+              "MUSIC",
+              "QUIZ",
+              "ART",
+              "LITERATURE",
+              "FILM MAKING",
+              "LIFESTYLE",
+              "DRAMA",
+            ].map((event) => (
+              <button
+                key={event}
+                className="event-item"
+                onClick={() => handleEventClick(event, "CULTURAL")}
+              >
+                {event}
+              </button>
+            ))}
           </div>
         </div>
       </div>
@@ -124,11 +168,22 @@ function Events() {
         </div>
 
         <div className="informal-events">
-          {["Fun Games", "Open Mic", "Jam Night"].map((event) => (
+          {[
+            "PROM NIGHT",
+            "CUSTOMIZED T-SHIRT",
+            "CARICATURE",
+            "BONFIRE & MOVIE NIGHT",
+            "POTTERY",
+            "TAROT CARD",
+            "KARAOKE",
+            "DANCE WORKSHOP",
+            "FOOD EATING COMPETITION",
+            "OPEN MIC (KAVI SAMMELAN)",
+          ].map((event) => (
             <button
               key={event}
               className="event-item"
-              onClick={() => openModal(event, "INFORMAL")}
+              onClick={() => handleEventClick(event, "INFORMAL")}
             >
               {event}
             </button>
@@ -154,7 +209,7 @@ function Events() {
         <div className="pronite-events">
           <button
             className="event-item"
-            onClick={() => openModal("Pronite", "PRONITE")}
+            onClick={() => handleEventClick("Pronite", "PRONITE")}
           >
             Coming Soon...
           </button>
@@ -181,17 +236,15 @@ function Events() {
         </div>
 
         <div className="flagship-events">
-          {["Bands Battle", "DJ Night", "Fashion Show", "Street Dance"].map(
-            (event) => (
-              <button
-                key={event}
-                className="event-item"
-                onClick={() => openModal(event, "FLAGSHIP")}
-              >
-                {event}
-              </button>
-            )
-          )}
+          {["ANTARANG", "NRITYANSH", "THUNDERBEATS", "AAYYAM"].map((event) => (
+            <button
+              key={event}
+              className="event-item"
+              onClick={() => handleEventClick(event, "FLAGSHIP")}
+            >
+              {event}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -215,17 +268,15 @@ function Events() {
         </div>
 
         <div className="online-events">
-          {["E-Sports", "Quizzes", "Treasure Hunt", "Coding", "Workshops"].map(
-            (event) => (
-              <button
-                key={event}
-                className="event-item"
-                onClick={() => openModal(event, "ONLINE")}
-              >
-                {event}
-              </button>
-            )
-          )}
+          {Object.keys(onlineEventLinks).map((event) => (
+            <button
+              key={event}
+              className="event-item"
+              onClick={() => handleEventClick(event, "ONLINE")}
+            >
+              {event}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -239,7 +290,6 @@ function Events() {
             }`}
             onClick={() => {
               setActiveTab(tab);
-
               if (tab === "CULTURAL") scrollTo(culturalRef);
               else if (tab === "INFORMAL") scrollTo(informalRef);
               else if (tab === "PRONITE") scrollTo(proniteRef);
@@ -255,10 +305,7 @@ function Events() {
       {/* ================= MODAL ================= */}
       {isModalOpen && (
         <div className="event-modal-overlay" onClick={closeModal}>
-          <div
-            className="event-modal"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="event-modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={closeModal}>
               ✕
             </button>
@@ -279,4 +326,4 @@ function Events() {
   );
 }
 
-export default Events; 
+export default Events;
