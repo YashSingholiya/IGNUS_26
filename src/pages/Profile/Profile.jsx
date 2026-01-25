@@ -78,7 +78,6 @@ export default function Profile() {
   if (loading) {
     return (
       <div className="profile-container">
-        <Navbar />
         <div style={{ color: "#fff", textAlign: "center", marginTop: 120 }}>
           Loading profile…
         </div>
@@ -89,7 +88,7 @@ export default function Profile() {
   if (!profileData) {
     return (
       <div className="profile-container">
-        <Navbar />
+        
         <div style={{ color: "#fff", textAlign: "center", marginTop: 120 }}>
           Unable to load profile.
         </div>
