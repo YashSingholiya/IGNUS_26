@@ -7,7 +7,7 @@ import Profile from "./pages/Profile/Profile";
 import Passes from "./pages/Passes/Passes";
 import Login from "./pages/Login/Login";
 import Prakrit from "./pages/Prakriti/Prakrit";
-import { Desktop }  from "./screens/Desktop/Desktop";
+// import { Desktop }  from "./screens/Desktop/Desktop";
 
 import Navbar from "./components/navbar/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";

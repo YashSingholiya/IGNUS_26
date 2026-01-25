@@ -109,6 +109,47 @@ const CA = () => {
           </div>
         )}
       </div>
+
+      <div id="about-body">
+        <div className="about-main-cont">
+          <div className="about-text">
+            <h1>ABOUT MAP</h1>
+            <p>
+              This nationwide programme is well-known for shaping and exposing budding leaders from various colleges as efficient managers and creative beacons. Once successfully becoming a part of this elite team, the members gain an experience of a lifetime, on various fronts; be it entrepreneurial or character development. We officially call upon for ambassador registrations to build up a team of powerful professionals who'll help spread the word
+            </p>
+          </div>
+
+          <div className="about-responsibilities">
+            <h2>Your Responsibilites:</h2>
+            <ul>
+              <li>
+                <div className="responsibility-header">REPRESENT</div>
+                <div className="responsibility-content">
+                  Be the representative of IGNUS in your college
+                </div>
+              </li>
+              <li>
+                <div className="responsibility-header">PUBLICIZE</div>
+                <div className="responsibility-content">
+                  Use social media like instagram, facebook to publicize IGNUS
+                </div>
+              </li>
+              <li>
+                <div className="responsibility-header">ORGANIZE</div>
+                <div className="responsibility-content">
+                  Events and activities to engage audience and peers
+                </div>
+              </li>
+              <li>
+                <div className="responsibility-header">PROMOTE</div>
+                <div className="responsibility-content">
+                  IGNUS through posters, banners, emails
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
