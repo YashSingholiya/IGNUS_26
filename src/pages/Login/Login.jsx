@@ -396,7 +396,7 @@ export default function Auth() {
                     onChange={(e) =>
                       setLoginData({ ...loginData, email: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
                   <input
                     type="password"
@@ -405,7 +405,7 @@ export default function Auth() {
                     onChange={(e) =>
                       setLoginData({ ...loginData, password: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
 
                   <div className="pt-4">
@@ -465,7 +465,7 @@ export default function Auth() {
                         firstName: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
                   <input
                     type="text"
@@ -474,7 +474,7 @@ export default function Auth() {
                     onChange={(e) =>
                       setSignupData({ ...signupData, lastName: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
                   <input
                     type="text"
@@ -483,7 +483,7 @@ export default function Auth() {
                     onChange={(e) =>
                       setSignupData({ ...signupData, email: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
                   <input
                     type="password"
@@ -492,7 +492,7 @@ export default function Auth() {
                     onChange={(e) =>
                       setSignupData({ ...signupData, password: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
                   <input
                     type="password"
@@ -504,7 +504,7 @@ export default function Auth() {
                         confirmPassword: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
 
                   <div className="pt-4">
@@ -568,7 +568,7 @@ export default function Auth() {
                       })
                     }
                     required
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
 
                   <select
@@ -576,7 +576,7 @@ export default function Auth() {
                     onChange={(e) =>
                       setProfileData({ ...profileData, gender: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   >
                     {GENDER_OPTIONS.map((g) => (
                       <option key={g.value} value={g.value} className="bg-purple-900 text-white">
@@ -596,7 +596,7 @@ export default function Auth() {
                       })
                     }
                     required
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
 
                   <select
@@ -607,7 +607,7 @@ export default function Auth() {
                         currentYear: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   >
                     {YEAR_OPTIONS.map((y) => (
                       <option key={y.value} value={y.value} className="bg-purple-900 text-white">
@@ -622,7 +622,7 @@ export default function Auth() {
                       setProfileData({ ...profileData, state: e.target.value })
                     }
                     required
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   >
                     <option value="" disabled className="bg-purple-900 text-white">
                       Select State
@@ -644,7 +644,7 @@ export default function Auth() {
                         referralCode: e.target.value || null,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   />
 
                   {/* Gov. ID Upload */}
@@ -654,7 +654,7 @@ export default function Auth() {
                       placeholder="Gov. ID"
                       readOnly
                       value={profileData.govId?.name || ""}
-                      className="flex-1 px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30"
+                      className="flex-1 px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30"
                     />
                     <label className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-full cursor-pointer transition-colors">
                       Upload
@@ -674,7 +674,7 @@ export default function Auth() {
                       placeholder="College ID"
                       readOnly
                       value={profileData.collegeId?.name || ""}
-                      className="flex-1 px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30"
+                      className="flex-1 px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30"
                     />
                     <label className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-full cursor-pointer transition-colors">
                       Upload
