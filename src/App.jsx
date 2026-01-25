@@ -19,15 +19,15 @@ function App() {
     <>
       <SEO />
       <BrowserRouter>
-        {/* <Navbar /> */}
+        <Navbar />
 
         <Routes>
-          <Route path="/" element={<Desktop />} />
-          {/* <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<Desktop />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
           <Route path="/passes" element={<Passes />} />
           
-          <Route path="/prakriti" element={<Prakrit />} /> */}
+          <Route path="/prakriti" element={<Prakrit />} />
           <Route path="/login" element={<Login />} />
 
           🔐 PROTECTED ROUTE
@@ -39,10 +39,10 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/oauth/callback" element={<OAuthCallback />} />
+          {/* <Route path="/oauth/callback" element={<OAuthCallback />} /> */}
 
           {/* Fallback */}
-          {/* <Route path="*" element={<Home />} /> */}
+          <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </>
