@@ -13,30 +13,42 @@ export default function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+        const accessToken = localStorage.getItem("access");
+
+        if (!accessToken) {
+          throw new Error("No access token found");
+        }
+
         const res = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/api/accounts/user-profile-details/`,
-          { credentials: "include" }
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          },
         );
 
-        if (!res.ok) throw new Error("Failed to fetch profile");
+        if (!res.ok) {
+          throw new Error(`Failed to fetch profile (${res.status})`);
+        }
 
         const data = await res.json();
-
-        console.log("Profile data:", data);
         const { user, userprofile } = data;
 
         setProfileData({
-          name: `${user.first_name ?? ""} ${user.last_name ?? ""}`.trim() || "N/A",
+          name:
+            `${user.first_name ?? ""} ${user.last_name ?? ""}`.trim() || "N/A",
           email: user.email ?? "N/A",
           phone: userprofile.phone ?? "N/A",
           gender:
             userprofile.gender === "M"
               ? "Male"
               : userprofile.gender === "F"
-              ? "Female"
-              : userprofile.gender === "T"
-              ? "Other"
-              : "N/A",
+                ? "Female"
+                : userprofile.gender === "T"
+                  ? "Other"
+                  : "N/A",
           college: userprofile.college || "N/A",
           year: userprofile.current_year ?? "N/A",
           passType: userprofile.pass_type_details?.name ?? "None",
@@ -49,6 +61,10 @@ export default function Profile() {
         setEventsRegistered(userprofile.events || []);
       } catch (err) {
         console.error("Profile error:", err);
+
+        // optional: force logout on auth failure
+        localStorage.clear();
+        window.location.href = "/login";
       } finally {
         setLoading(false);
       }
@@ -135,9 +151,7 @@ export default function Profile() {
                   <div className="digital-pass">
                     <div className="pass-info">
                       <span className="pass-type">{profileData.passType}</span>
-                      <span className="pass-id">
-                        ID: {profileData.passId}
-                      </span>
+                      <span className="pass-id">ID: {profileData.passId}</span>
                     </div>
                     <div
                       className="qr-placeholder"
