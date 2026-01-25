@@ -324,16 +324,7 @@ export default function Auth() {
   };
 
   const handleGoogleSignup = () => {
-    const params = new URLSearchParams({
-      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-      redirect_uri: `${import.meta.env.VITE_BACKEND_URL}/api/accounts/register/google/`,
-      response_type: "code",
-      scope: "openid email profile",
-      access_type: "online",
-      prompt: "select_account",
-    });
-    console.log(params.toString());
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/accounts/register/google/`;
   };
 
   const handleFileUpload = (field, e) => {
