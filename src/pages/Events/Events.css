@@ -3,7 +3,8 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: black; /* Fix for white bars */
+  background-color: black;
+  /* Fix for white bars */
 }
 
 .events-page {
@@ -277,13 +278,15 @@ div.pronite {
 
 .pronite-events {
   position: absolute;
-  top: 38%;
+  top: 44%;
   left: 10%;
-  font-size: 3vw;
-  margin-left: 6%;
-  color: white;
-  margin-top: 2vw;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem 1.5rem;
+  width: 35vw;
   z-index: 10;
+  margin-top: 2vw;
+  padding-bottom: 30px;
 }
 
 div.flagship {
@@ -665,12 +668,12 @@ div.online {
 .modal-register-btn {
   margin-top: 24px;
   padding: 0 2vw;
-  height:3.2vw;
+  height: 3.2vw;
   background: #FABB1E;
   color: #fff;
 
   border: none;
-  border-radius: 999px;        
+  border-radius: 999px;
   font-size: 1.3vw;
   letter-spacing: 0.12em;
   font-family: 'Caudex', serif;
@@ -678,9 +681,9 @@ div.online {
 
   cursor: pointer;
 
-  width: auto;              
+  width: auto;
   display: block;
-  margin-left: auto;          
+  margin-left: auto;
   margin-right: auto;
 
   box-shadow: 0 10px 20px rgba(245, 197, 66, 0.35);
@@ -796,12 +799,12 @@ div.online {
 /* ================= MEDIA QUERIES ================= */
 /* ================================================= */
 
-@media screen and (max-width: 1024px) and (min-width: 769px) {
+@media screen and (max-width: 1024px) and (min-width: 850px) {
   /* Tablet Layout (iPad / iPad Pro) - Hybrid Flow */
 
   /* --- Global & Layout --- */
   /* CRITICAL: Exclude modal overlay from section flow styles */
-  .events-page > div:not(.event-modal-overlay) {
+  .events-page>div:not(.event-modal-overlay) {
     height: auto !important;
     min-height: 100vh;
     padding-bottom: 0;
@@ -814,7 +817,11 @@ div.online {
   }
 
   /* Backgrounds - FORCE STRETCH */
-  .cultural-bg, .informal-bg, .pronite-bg, .flagship-bg, .online-bg {
+  .cultural-bg,
+  .informal-bg,
+  .pronite-bg,
+  .flagship-bg,
+  .online-bg {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -822,7 +829,11 @@ div.online {
     z-index: 0;
   }
 
-  .cultural-image, .informal-bg img, .pronite-bg img, .flagship-bg img, .online-bg img {
+  .cultural-image,
+  .informal-bg img,
+  .pronite-bg img,
+  .flagship-bg img,
+  .online-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -834,6 +845,7 @@ div.online {
     inset: 0;
     z-index: 0;
   }
+
   .cultural-image {
     position: absolute;
     inset: 0;
@@ -841,7 +853,11 @@ div.online {
   }
 
   /* --- Wrappers --- */
-  .cult-wrapper, .informal-wrapper, .pronite-wrapper, .flagship-wrapper, .online-wrapper {
+  .cult-wrapper,
+  .informal-wrapper,
+  .pronite-wrapper,
+  .flagship-wrapper,
+  .online-wrapper {
     position: relative;
     top: auto;
     left: auto;
@@ -855,7 +871,11 @@ div.online {
   }
 
   /* --- Grids (2 Columns) --- */
-  .cult-events, .informal-events, .pronite-events, .flagship-events, .online-events {
+  .cult-events,
+  .informal-events,
+  .pronite-events,
+  .flagship-events,
+  .online-events {
     position: relative;
     top: auto;
     left: auto;
@@ -875,23 +895,47 @@ div.online {
   }
 
   /* --- Masks --- */
-  .cult, .informal-mask, .flagship-mask, .online-mask {
+  .cult,
+  .informal-mask,
+  .flagship-mask,
+  .online-mask {
     position: absolute;
     top: 30px;
     opacity: 0.6;
     z-index: 5;
     pointer-events: none;
   }
-  .cult { right: -5%; }
-  .informal-mask { left: -5%; }
-  .flagship-mask { left: -5%; }
-  .online-mask { right: -5%; }
+
+  .cult {
+    right: -5%;
+  }
+
+  .informal-mask {
+    left: -5%;
+  }
+
+  .flagship-mask {
+    left: -5%;
+  }
+
+  .online-mask {
+    right: -5%;
+  }
 
   /* --- Typography --- */
-  .cult-heading, .informal-heading, .pronite-heading, .flagship-heading, .online-heading {
+  .cult-heading,
+  .informal-heading,
+  .pronite-heading,
+  .flagship-heading,
+  .online-heading {
     font-size: 8vw;
   }
-  .cult-subheading, .informal-subheading, .pronite-subheading, .flagship-subheading, .online-subheading {
+
+  .cult-subheading,
+  .informal-subheading,
+  .pronite-subheading,
+  .flagship-subheading,
+  .online-subheading {
     font-size: 3.5vw;
   }
 
@@ -922,7 +966,8 @@ div.online {
 
   /* --- Modal --- */
   .event-modal-overlay {
-    position: fixed !important; /* Ensure it stays fixed */
+    position: fixed !important;
+    /* Ensure it stays fixed */
     z-index: 10000 !important;
     display: flex !important;
   }
@@ -967,7 +1012,7 @@ div.online {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
 
   /* ===== FIX FLAGSHIP BUTTONS ===== */
   .flagship-events {
@@ -986,7 +1031,7 @@ div.online {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
 
   /* ================= HARD RESET: CULTURAL ================= */
 
@@ -1050,7 +1095,7 @@ div.online {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
 
   /* ================= GLOBAL ================= */
 
@@ -1098,6 +1143,14 @@ div.online {
     font-size: clamp(1.1rem, 5vw, 1.6rem);
   }
 
+  .cult-subheading-wrapper,
+  .informal-subheading-wrapper,
+  .pronite-subheading-wrapper,
+  .flagship-subheading-wrapper,
+  .online-subheading-wrapper {
+    justify-content: center;
+  }
+
   /* ================= EVENTS GRID ================= */
   .cult-events,
   .informal-events,
@@ -1109,16 +1162,29 @@ div.online {
     right: auto;
     transform: none;
     width: 85%;
+    display: grid;
     grid-template-columns: 1fr;
     gap: 14px;
+    margin: 0 auto;
   }
 
   .pronite-events {
     position: relative;
     top: auto;
     left: auto;
+    right: auto;
     transform: none;
     width: 85%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 200px auto;
+  }
+
+  .pronite-events .event-item {
+    height: 80px;
+    /* Increased height for mobile */
+    font-size: 1.8rem;
   }
 
   /* ================= BUTTONS ================= */
@@ -1133,14 +1199,14 @@ div.online {
   .informal-mask,
   .flagship-mask,
   .online-mask {
-    opacity: 0.4;
-    pointer-events: none;
+    display: none !important;
   }
 
   /* ================= FOOTER TABS ================= */
-    /* --- Footer --- */
+  /* --- Footer --- */
   .events-footer {
-    display: none !important; /* FORCE HIDE */
+    display: none !important;
+    /* FORCE HIDE */
   }
 
   /* --- Flagship Buttons Fix --- */
@@ -1148,9 +1214,11 @@ div.online {
     height: auto;
     min-height: 60px;
     padding: 12px 20px;
-    font-size: 1.2rem; /* Fixed readable size */
+    font-size: 1.2rem;
+    /* Fixed readable size */
     line-height: 1.2;
-    white-space: normal; /* Allow text wrap if needed */
+    white-space: normal;
+    /* Allow text wrap if needed */
     text-align: center;
   }
 
@@ -1200,7 +1268,7 @@ div.online {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
 
   /* ================= CULTURAL MOBILE CLEANUP ================= */
 
@@ -1213,7 +1281,8 @@ div.online {
 
   /* 2️⃣ SAFE SPACING BELOW NAVBAR */
   .cultural {
-    padding-top: 700px;     /* navbar offset */
+    padding-top: 700px;
+    /* navbar offset */
     padding-bottom: 140px;
     min-height: 100vh;
   }
@@ -1222,10 +1291,11 @@ div.online {
   .cult-wrapper {
     position: relative;
     z-index: 5;
-    margin: 0 auto 120px;   /* spacing controlled by margin */
+    margin: 0 auto 120px;
+    /* spacing controlled by margin */
     width: 90%;
     text-align: center;
-    top:11%;
+    top: 11%;
   }
 
   /* 4️⃣ EVENTS LIST */
@@ -1244,27 +1314,33 @@ div.online {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
 
   .modal-register-btn {
-    height: 48px;              /* proper tap target */
-    padding: 0 32px;           /* horizontal size */
-    font-size: 1rem;           /* readable text */
+    height: 48px;
+    /* proper tap target */
+    padding: 0 32px;
+    /* horizontal size */
+    font-size: 1rem;
+    /* readable text */
     letter-spacing: 0.08em;
 
-    min-width: 160px;          /* keeps it visible */
+    min-width: 160px;
+    /* keeps it visible */
     max-width: 220px;
 
     margin-top: 20px;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
 
   .modal-right {
     width: 100%;
-    align-items: center;      /* centers children horizontally */
-    text-align: center;       /* centers text */
+    align-items: center;
+    /* centers children horizontally */
+    text-align: center;
+    /* centers text */
   }
 
   .modal-right h2 {
@@ -1277,14 +1353,7 @@ div.online {
 
   .modal-register-btn {
     margin-left: auto;
-    margin-right: auto;       /* ensures button is centered */
+    margin-right: auto;
+    /* ensures button is centered */
   }
 }
-
-
-
-
-
-
-
-
