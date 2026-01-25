@@ -99,7 +99,6 @@ export default function Profile() {
   return (
     <div className="profile-container">
       <img src={profileBg} alt="Profile Background" className="profile-bg" />
-      <Navbar />
 
       <div className="profile-content">
         {/* Hero */}

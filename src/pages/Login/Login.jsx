@@ -349,7 +349,6 @@ export default function Auth() {
 
   return (
     <>
-      <Navbar />
       <ToastContainer position="top-right" autoClose={4000} />
       <main
         className="pt-16 min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden"
