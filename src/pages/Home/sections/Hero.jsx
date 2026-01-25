@@ -20,7 +20,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full min-h-screen overflow-hidden flex justify-center"
+      className="relative w-full overflow-hidden flex justify-center"
     >
       <Navbar />
       

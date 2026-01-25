@@ -576,10 +576,10 @@ export default function Auth() {
                     onChange={(e) =>
                       setProfileData({ ...profileData, gender: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
                   >
                     {GENDER_OPTIONS.map((g) => (
-                      <option key={g.value} value={g.value}>
+                      <option key={g.value} value={g.value} className="bg-purple-900 text-white">
                         {g.label}
                       </option>
                     ))}
@@ -607,10 +607,10 @@ export default function Auth() {
                         currentYear: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
                   >
                     {YEAR_OPTIONS.map((y) => (
-                      <option key={y.value} value={y.value}>
+                      <option key={y.value} value={y.value} className="bg-purple-900 text-white">
                         {y.label}
                       </option>
                     ))}
@@ -622,13 +622,13 @@ export default function Auth() {
                       setProfileData({ ...profileData, state: e.target.value })
                     }
                     required
-                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white"
+                    className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white"
                   >
-                    <option value="" disabled>
+                    <option value="" disabled className="bg-purple-900 text-white">
                       Select State
                     </option>
                     {STATE_OPTIONS.map((s) => (
-                      <option key={s.value} value={s.value}>
+                      <option key={s.value} value={s.value} className="bg-purple-900 text-white">
                         {s.label}
                       </option>
                     ))}
