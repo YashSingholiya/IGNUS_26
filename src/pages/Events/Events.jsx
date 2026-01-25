@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import nritya from "./images/dance.jpeg";
 import music from "./images/music.jpg";
 import art from "./images/art.jpg";
-import lit from "./images/lit.jpg";
+import lit from "./images/Lit.jpg";
 import LifeStyle from "./images/LifeStyle.jpg";
 import drama from "./images/drama.jpg";
 import antarang from "./images/antarang.jpeg";
