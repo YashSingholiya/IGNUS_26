@@ -1,18 +1,19 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
-
-/* -------- helper to read cookie -------- */
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-  return null;
-}
+import { Navigate, useLocation } from "react-router-dom";
 
 export default function ProtectedRoute({ children }) {
-  const isLoggedIn = getCookie("LoggedIn") === "true";
+  const location = useLocation();
+
+  const isLoggedIn = !!localStorage.getItem("access");
+  const isProfileComplete =
+    localStorage.getItem("isProfileComplete") === "true";
 
   if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // Allow user to stay on login page if profile incomplete
+  if (!isProfileComplete && location.pathname !== "/login") {
     return <Navigate to="/login" replace />;
   }
 

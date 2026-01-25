@@ -181,25 +181,34 @@ export default function Auth() {
         },
       );
 
+      const text = await res.text();
+
       if (!res.ok) {
-        toast.error("Invalid credentials");
+        if (text.toLowerCase().includes("google")) {
+          toast.info(
+            "This account was created using Google. Please sign in with Google.",
+          );
+        } else {
+          toast.error(text || "Invalid credentials");
+        }
         return;
       }
 
-      const data = await res.json();
+      const data = JSON.parse(text);
 
-      // 🔥 STORE JWT
+      // 🔥 STORE AUTH STATE
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
+      localStorage.setItem("isProfileComplete", String(data.profile_complete));
+      localStorage.setItem("isGoogle", String(data.is_google));
 
-      // Decide where to go
-      if (data.profile_complete === false) {
+      if (!data.profile_complete) {
         transitionTo("complete-profile");
       } else {
         navigate("/profile");
       }
     } catch {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
@@ -241,6 +250,11 @@ export default function Auth() {
 
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
+      localStorage.setItem("isProfileComplete", "false");
+      localStorage.setItem("isGoogle", "false");
+
+      transitionTo("complete-profile");
+
       transitionTo("complete-profile");
     } catch {
       toast.error("Signup failed");
@@ -295,6 +309,7 @@ export default function Auth() {
       }
 
       console.log("Profile saved:", data);
+      localStorage.setItem("isProfileComplete", "true");
 
       setShowModal(false);
       navigate("/profile");
