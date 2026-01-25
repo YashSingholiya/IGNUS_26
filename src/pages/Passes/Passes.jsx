@@ -53,7 +53,7 @@ const passesData = [
 ];
 
 export default function Passes() {
-  const isLoggedIn = getCookie("LoggedIn") === "true";
+  const isLoggedIn = !! localStorage.getItem("access") || getCookie("LoggedIn") === "true";
 
   return (
     <>
