@@ -382,7 +382,7 @@
   width: 120px;
   height: 120px;
   background: white;
-  padding: 8px;
+  /* padding: 8px; */
   border-radius: 8px;
   z-index: 2;
   transition: transform 0.3s ease;
