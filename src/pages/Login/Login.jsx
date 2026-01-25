@@ -419,7 +419,7 @@ export default function Auth() {
                   </div>
                 </form>
 
-                <div className="mt-6 text-center">
+                {/* <div className="mt-6 text-center">
                   <p className="text-white/60 mb-4">Or</p>
                   <button
                     onClick={handleGoogleLogin}
@@ -432,7 +432,7 @@ export default function Auth() {
                     />
                     Sign in with Google
                   </button>
-                </div>
+                </div> */}
 
                 <p className="mt-6 text-center text-gray-800 text-base font-medium">
                   Don't have an account?{" "}
@@ -518,7 +518,7 @@ export default function Auth() {
                   </div>
                 </form>
 
-                <div className="mt-6 text-center">
+                {/* <div className="mt-6 text-center">
                   <p className="text-white/60 mb-4">Or</p>
                   <button
                     onClick={handleGoogleSignup}
@@ -531,7 +531,7 @@ export default function Auth() {
                     />
                     Sign up with Google
                   </button>
-                </div>
+                </div> */}
 
                 <p className="mt-6 text-center text-gray-800 text-base font-medium">
                   Already have an account?{" "}
