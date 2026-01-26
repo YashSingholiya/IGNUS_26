@@ -357,7 +357,7 @@ function Events() {
 
           <div className="cult-events">
             {backendEvents
-              .filter((type) => type.event_type === "1")
+              .filter((type) => String(type.event_type) === "1")
               .map((type) => (
                 <button
                   key={type.id}
@@ -455,7 +455,7 @@ function Events() {
 
         <div className="flagship-events">
           {backendEvents
-            .filter((type) => type.event_type === "4")
+            .filter((type) => String(type.event_type) === "4")
             .map((type) => (
               <button
                 key={type.id}
