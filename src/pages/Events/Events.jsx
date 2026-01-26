@@ -15,8 +15,6 @@ import "./Events.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const [selectedCategoryImage, setSelectedCategoryImage] = useState(null);
-
 
 const getAccessToken = () => {
   return localStorage.getItem("access");
@@ -28,6 +26,7 @@ const isLoggedIn = () => {
 
 function Events() {
   const navigate = useNavigate();
+  const [selectedCategoryImage, setSelectedCategoryImage] = useState(null);
   const CATEGORY_TYPE_MAP = {
     CULTURAL: "1",
     FLAGSHIP: "4",
