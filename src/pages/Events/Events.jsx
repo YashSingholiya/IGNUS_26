@@ -15,13 +15,37 @@ import "./Events.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
 const getAccessToken = () => {
   return localStorage.getItem("access");
 };
 
 const isLoggedIn = () => {
   return !!getAccessToken();
+};
+
+const EVENT_IMAGE_MAP = {
+  // Categories / Main Types
+  DANCE: dance,
+  MUSIC: music,
+  QUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  ART: art,
+  LITERATURE: lit,
+  FILMMAKING: "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
+  LIFESTYLE: LifeStyle,
+  DRAMA: drama,
+
+  // Flagship
+  ANTARANG: antarang,
+  NRITYANSH: nritya,
+  CLASHOFBANDS: clash,
+  THUNDERBEATS: clash,
+  AAYAAM: aayam,
+
+  // Sub-events (Examples)
+  STAGMOVES: dance,
+  ANYBODYCANDUET: dance,
+  RAWWAR: dance,
+  // Add more sub-event mappings here as needed
 };
 
 function Events() {
@@ -54,105 +78,15 @@ function Events() {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const isModalReady =
-  modalCategory === "INFORMAL"
-    ? !!selectedCategoryImage
-    : modalEvents.length > 0 || !!selectedBackendEvent;
+    modalCategory === "INFORMAL"
+      ? !!selectedCategoryImage
+      : modalEvents.length > 0 || !!selectedBackendEvent;
 
   useEffect(() => {
-  if (isModalOpen && !isModalReady) {
-    setIsModalOpen(false);
-  }
-}, [isModalOpen, isModalReady]);
-
-
-
-  // ---------- INFORMAL EVENTS DATA ----------
-  const CulturalArray = [
-    {
-      name: "DANCE",
-      venue: "TBA",
-      date: "TBA",
-      image: dance,
-    },
-    {
-      name: "MUSIC",
-      venue: "TBA",
-      date: "TBA",
-      image: music,
-    },
-    {
-      name: "QUIZ",
-      venue: "TBA",
-      date: "TBA",
-      image:
-        "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-    },
-    {
-      name: "ART",
-      venue: "TBA",
-      date: "TBA",
-      image: art,
-    },
-    {
-      name: "LITERATURE",
-      venue: "TBA",
-      date: "TBA",
-      image: lit,
-    },
-    {
-      name: "FILM MAKING",
-      venue: "TBA",
-      date: "TBA",
-      image:
-        "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
-    },
-    {
-      name: "LIFESTYLE",
-      venue: "TBA",
-      date: "TBA",
-      image: LifeStyle,
-    },
-    {
-      name: "DRAMA",
-      venue: "TBA",
-      date: "TBA",
-      image: drama,
-    },
-  ];
-
-  const CulturalEventImages = {
-    STAGMOVES: dance,
-    ANYBODYCANDUET: dance,
-    RAWWAR: dance,
-};
-
-
-  const FlagshipArray = [
-    {
-      name: "ANTARANG",
-      venue: "TBA",
-      date: "TBA",
-      image: antarang,
-    },
-    {
-      name: "NRITYANSH",
-      venue: "TBA",
-      date: "TBA",
-      image: nritya,
-    },
-    {
-      name: "CLASH OF BANDS",
-      venue: "TBA",
-      date: "TBA",
-      image: clash,
-    },
-    {
-      name: "AAYAAM",
-      venue: "TBA",
-      date: "TBA",
-      image: aayam,
-    },
-  ];
+    if (isModalOpen && !isModalReady) {
+      setIsModalOpen(false);
+    }
+  }, [isModalOpen, isModalReady]);
 
   const InformalsArray = [
     {
@@ -222,7 +156,6 @@ function Events() {
     },
   ];
 
-  // ---------- GOOGLE FORM LINKS (ONLINE ONLY) ----------
   const onlineEventLinks = {
     "Mr & Miss IGNUS":
       "https://docs.google.com/forms/d/e/1FAIpQLScXnEU0fUd3esXfza4N1jvVoxFZ_SfWHOsewS61r7ywZURYJQ/viewform?usp=sharing",
@@ -246,48 +179,43 @@ function Events() {
       "https://docs.google.com/forms/d/e/1FAIpQLSfzLbnGBnPWv3bkYQCug_09v_0AiKf3qch7VL-JUTVZjmgqCg/viewform",
   };
 
-  // ---------- MODAL FUNCTIONS ----------
- function openModal(eventName, category) {
-  if (category === "INFORMAL") {
-    const informalEvent = InformalsArray.find(
-      (e) => e.name === eventName
-    );
+  function openModal(eventName, category) {
+    if (category === "INFORMAL") {
+      const informalEvent = InformalsArray.find((e) => e.name === eventName);
 
-    setSelectedCategoryImage(informalEvent?.image || null);
+      setSelectedCategoryImage(informalEvent?.image || null);
 
-    // Fake a backend-like object so modal + register work
-    setSelectedBackendEvent({
-      name: informalEvent.name,
-      venue: informalEvent.venue,
-      date: informalEvent.date,
-    });
+      setSelectedBackendEvent({
+        name: informalEvent.name,
+        venue: informalEvent.venue,
+        date: informalEvent.date,
+      });
 
-    setModalCategory("INFORMAL");
+      setModalCategory("INFORMAL");
+      setIsModalOpen(true);
+      return;
+    }
+
+    setModalCategory(category);
+    setSelectedEvent({ eventName, category });
     setIsModalOpen(true);
-    return;
   }
-
-  // default behaviour (CULTURAL, FLAGSHIP, etc.)
-  setModalCategory(category);
-  setSelectedEvent({ eventName, category });
-  setIsModalOpen(true);
-}
-
 
   function closeModal() {
     setIsModalOpen(false);
     setSelectedEvent(null);
   }
 
-  // ---------- EVENT CLICK HANDLER ----------
   function handleEventClick(eventName, category) {
     console.log("🟡 CLICKED:", { eventName, category });
 
     if (category === "PRONITE") return;
 
+    // Set modal category early to avoid flicker
+    setModalCategory(category);
+
     const normalize = (str) => str.replace(/\s+/g, "").toLowerCase();
 
-    // Find matching event type
     const matchedType = backendEvents.find((type) => {
       console.log("🔍 CHECKING TYPE:", type.reference_name);
       return normalize(type.reference_name) === normalize(eventName);
@@ -295,20 +223,14 @@ function Events() {
 
     console.log("✅ MATCHED TYPE:", matchedType);
 
-    if (
-    !matchedType ||
-    !matchedType.events ||
-    matchedType.events.length === 0
-  ) {
-    toast.info("Events will be announced soon");
-    setIsModalOpen(false);     // 🔑 force-close safety
-    setModalEvents([]);
-    setSelectedBackendEvent(null);
-    return;
-  }
+    if (!matchedType || !matchedType.events || matchedType.events.length === 0) {
+      toast.info("Events will be announced soon");
+      setIsModalOpen(false);
+      setModalEvents([]);
+      setSelectedBackendEvent(null);
+      return;
+    }
 
-
-    // IMPORTANT: these are the REAL events
     console.log("🎯 EVENTS TO SHOW IN MODAL:", matchedType.events);
 
     setModalEvents(matchedType.events);
@@ -346,7 +268,6 @@ function Events() {
       const data = await response.json();
 
       if (!response.ok) {
-        // Backend sends plain strings sometimes
         if (typeof data === "string") {
           toast.error(data);
         } else if (data.Message) {
@@ -357,7 +278,6 @@ function Events() {
         return;
       }
 
-      // SUCCESS
       toast.success(data.Message || "Event registered successfully 🎉");
       closeModal();
     } catch (error) {
@@ -366,35 +286,8 @@ function Events() {
     }
   };
 
-  // Get event data for modal
-  function getEventData() {
-    if (!selectedEvent) return null;
-
-    if (selectedEvent.category === "INFORMAL") {
-      return InformalsArray.find(
-        (event) => event.name === selectedEvent.eventName,
-      );
-    }
-
-    if (selectedEvent.category === "CULTURAL") {
-      return CulturalArray.find(
-        (event) => event.name === selectedEvent.eventName,
-      );
-    }
-
-    if (selectedEvent.category === "FLAGSHIP") {
-      return FlagshipArray.find(
-        (event) => event.name === selectedEvent.eventName,
-      );
-    }
-
-    return null;
-  }
-
-  // ---------- ACTIVE TAB ----------
   const [activeTab, setActiveTab] = useState("CULTURAL");
 
-  // ---------- SCROLL REFS ----------
   const culturalRef = useRef(null);
   const informalRef = useRef(null);
   const proniteRef = useRef(null);
@@ -405,7 +298,6 @@ function Events() {
     ref.current.scrollIntoView({ behavior: "smooth" });
   }
 
-  // ---------- SCROLL SPY ----------
   useEffect(() => {
     const handleScroll = () => {
       const sections = [
@@ -464,30 +356,23 @@ function Events() {
           </div>
 
           <div className="cult-events">
-            {[
-              "DANCE",
-              "MUSIC",
-              "QUIZ",
-              "ART",
-              "LITERATURE",
-              "FILM MAKING",
-              "LIFESTYLE",
-              "DRAMA",
-            ].map((event) => (
-              <button
-                key={event}
-                className="event-item"
-                onClick={() => {
-                  const categoryEvent = CulturalArray.find(
-                    (e) => e.name === event
-                  );
-                  setSelectedCategoryImage(categoryEvent?.image || null);
-                  handleEventClick(event, "CULTURAL");
-                }}
-              >
-                {event}
-              </button>
-            ))}
+            {backendEvents
+              .filter((type) => type.event_type === "1")
+              .map((type) => (
+                <button
+                  key={type.id}
+                  className="event-item"
+                  onClick={() => {
+                    const normalizedName = normalizeKey(type.reference_name);
+                    setSelectedCategoryImage(
+                      EVENT_IMAGE_MAP[normalizedName] || dance,
+                    );
+                    handleEventClick(type.reference_name, "CULTURAL");
+                  }}
+                >
+                  {type.reference_name}
+                </button>
+              ))}
           </div>
         </div>
       </div>
@@ -569,24 +454,25 @@ function Events() {
         </div>
 
         <div className="flagship-events">
-          {["ANTARANG", "NRITYANSH", "CLASH OF BANDS", "AAYAAM"].map(
-            (event) => (
+          {backendEvents
+            .filter((type) => type.event_type === "4")
+            .map((type) => (
               <button
-                key={event}
+                key={type.id}
                 className="event-item"
                 onClick={() => {
-                  const categoryEvent = FlagshipArray.find(
-                    (e) => e.name === event
+                  const normalizedName = normalizeKey(type.reference_name);
+                  setSelectedCategoryImage(
+                    EVENT_IMAGE_MAP[normalizedName] || antarang,
                   );
-
-                  setSelectedCategoryImage(categoryEvent?.image || null);
-                  handleEventClick(event, "FLAGSHIP");
+                  handleEventClick(type.reference_name, "FLAGSHIP");
                 }}
               >
-                {event}
+                {type.reference_name.toUpperCase() === "THUNDERBEATS"
+                  ? "CLASH OF BANDS"
+                  : type.reference_name}
               </button>
-            ),
-          )}
+            ))}
         </div>
       </div>
 
@@ -628,9 +514,8 @@ function Events() {
           (tab) => (
             <button
               key={tab}
-              className={`footer-btn ${tab.toLowerCase()} ${
-                activeTab === tab ? "active" : ""
-              }`}
+              className={`footer-btn ${tab.toLowerCase()} ${activeTab === tab ? "active" : ""
+                }`}
               onClick={() => {
                 setActiveTab(tab);
                 if (tab === "CULTURAL") scrollTo(culturalRef);
@@ -657,14 +542,14 @@ function Events() {
             <div className="modal-content">
               {/* LEFT SIDE — IMAGE */}
               <div className="modal-left">
-                { selectedCategoryImage && (
+                {selectedCategoryImage && (
                   <img
                     src={
-                      modalCategory === "CULTURAL"
-                        ? CulturalEventImages[
-                            normalizeKey(selectedBackendEvent?.name)
-                          ] || selectedCategoryImage
-                        : selectedBackendEvent?.cover || selectedCategoryImage
+                      EVENT_IMAGE_MAP[
+                      normalizeKey(selectedBackendEvent?.name)
+                      ] ||
+                      selectedBackendEvent?.cover ||
+                      selectedCategoryImage
                     }
                     alt="Event"
                     className="modal-event-image"
@@ -691,10 +576,21 @@ function Events() {
                   </>
                 ) : (
                   <>
-                    <h2>{selectedBackendEvent?.name}</h2>
+                    <h2>
+                      {selectedBackendEvent?.name.toUpperCase() ===
+                        "THUNDERBEATS"
+                        ? "CLASH OF BANDS"
+                        : selectedBackendEvent?.name}
+                    </h2>
 
-                    <p><strong>Venue:</strong> {selectedBackendEvent.venue || "TBA"}</p>
-                    <p><strong>Date:</strong> {selectedBackendEvent.date || "TBA"}</p>
+                    <p>
+                      <strong>Venue:</strong>{" "}
+                      {selectedBackendEvent.venue || "TBA"}
+                    </p>
+                    <p>
+                      <strong>Date:</strong>{" "}
+                      {selectedBackendEvent.date || "TBA"}
+                    </p>
 
                     <button
                       className="modal-register-btn"
@@ -706,8 +602,6 @@ function Events() {
                 )}
               </div>
             </div>
-
-
           </div>
         </div>
       )}
