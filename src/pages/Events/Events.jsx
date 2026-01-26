@@ -38,7 +38,10 @@ function Events() {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/events/list`)
       .then((res) => res.json())
-      .then((data) => setBackendEvents(data))
+      .then((data) => {
+        console.log("✅ EVENTS FROM BACKEND:", data);
+        setBackendEvents(data);
+      })
       .catch(() => toast.error("Failed to load events"));
   }, []);
 
