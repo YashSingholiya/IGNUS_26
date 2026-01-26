@@ -242,7 +242,7 @@ function Events() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_REGISTER_API_URL}/events/register/`,
+        `${import.meta.env.VITE_BACKEND_URL}/events/register/`,
         {
           method: "POST",
           headers: {
