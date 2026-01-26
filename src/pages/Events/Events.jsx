@@ -11,6 +11,18 @@ import clash from "./images/clash.jpeg";
 import aayam from "./images/aayam.jpeg";
 import tshirt from "./images/tshirt.jpg";
 import pottery from "./images/pottery.jpg";
+import stag from "./images/stag.jpg";
+import duet from "./images/duet.jpg";
+import war from "./images/war.jpg";
+import ekalnatya from "./images/ekalnatya.jpg";
+import Stagplay from "./images/Stagplay.jpg";
+import aria from "./images/aria.jpg";
+import duetto from "./images/duetto.jpg";
+import beat from "./images/beat.jpg";
+import dj from "./images/dj.jpg";
+import artees from "./images/artees.jpg";
+import pun from "./images/pun.jpg";
+import stew from "./images/stew.jpg";
 import "./Events.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +42,7 @@ const EVENT_IMAGE_MAP = {
   QUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
   ART: art,
   LITERATURE: lit,
-  FILMMAKING: "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
+  FILM: "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
   LIFESTYLE: LifeStyle,
   DRAMA: drama,
 
@@ -41,36 +53,46 @@ const EVENT_IMAGE_MAP = {
   THUNDERBEATS: clash,
   AAYAAM: aayam,
 
-  // Sub-events (Examples)
-  STAGMOVES: dance,
-  ANYBODYCANDUET: dance,
-  RAWWAR: dance,
+  // Dance Sub-events
+  STAGMOVES: stag,
+  ANYBODYCANDUET: duet,
+  RAWWAR: war,
+
+  // Drama Sub-events
+  EKALNATYA: ekalnatya,
+  STAGEPLAY: Stagplay,
 
   // Art Sub-events
-  FUNKYFACES: art,
-  ARTEES: tshirt,
-  CHARCOALART: art,
-  GRAFFITIWALLS: art,
-  DOODLING: art,
-  RAPIDO: art,
-  DIGITALART: art,
-  PHOTOSHOPBATTLE: art,
-  // New Arts/Music Events
-  ARIA: "https://media-hosting.imagekit.io//f75e9f9d37b34d05/Untitled%20design%20(39).webp?Expires=1831193364&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=vXpbNFGy4P8Ctcr2Xa8g1J8TGkTfJmjmDjZ2UxN8cfra-cA1Z4Jb~hTuu76nACritgvUPWF1SJQNU4MOzFEoAGa4IbCyrEIjpaX~~aQ3pMHjmCaZcEzP1mP15P6S-OddEBusGqs7LxZDLWl5g53JK7MoPjJUxca8WCoyE7djdN8ulmL5PbOQVvbNUyMabE1COQIpfQNnUy43G6AOcHLHHDak1iOHqJe3SAgHQwCrRjzL6Hkf~~E-jRUsQDWiY6TxKekWn69ZhgAFAhH2-TCiV9zK5ocjvSjIhOPDz14deXh9oh~q6gKibMRxXSn2dTpiL8wwk2fkRyM4LQJnKShYYQ__",
-  DUETTO: "https://media-hosting.imagekit.io//ee81e33d04184f1b/Untitled%20design%20(38).webp?Expires=1831193320&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=twGSgjY47AF9jID0hN7NPhrRBeZLW-T5gg8aRE6JrugMRplz4maYjVccnnpRnrxnrupd70LA2qHfiMrg0ABTLZHl9f8codG1vVV22HAoseLGwjPou2iVQ3OK~7hMFM51wbQnSljU-l5d0zGvo4B5cwIBGKUVuuw-Wez~hpmsQNOz9WWJCw2vCkrmQ~LggvLAbKqIV4kb0youlUZdz9lj6iVUlOOM17YSvvJnPtG6N3CNZe7~fZY6CBJvBFc~JT6Aclp~CCFwhOBR7UWJcWbb~2cHbFuF3kow9siN41omZtfPj5W0TJ9euqfMqRsJVnFPZBxFkHzA-A-X1VOQVBuiSw__",
-  BEATNICKS: "https://media-hosting.imagekit.io//4e92af9b2637414b/Untitled%20design%20(41).webp?Expires=1831193714&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=OAZV-1SB2eeBpwKw9Pt6ket9jOg414q9lVBsOAZ~h~WT5lZtPeKZHUSOXVKVsL-G6I2feRCmxafaXtPcueYwged2gAYIbhd8yR4kYR0pCIuPyJxWfW1Iax2VfJWTZrr4uvmuoUbOGS0S0Tx6klZUIdnMMi9GMYspo8A-9H78EV-T8e2h7a30cuwtSFuFujbpO13mrUBYa~qB2ieyIZGHjPt7hFaY0BQvWEf1d9Q3~Fg6uqDR~pzDOb1wCbW9mlk5G~eUD6IH0TiisU~jG372vcpbGlCXOEfbKSDADQ~XiB0t38FD35gx0BLY5ccEtK-WkZtw8W23T5DRkVoSsV6H9Q__",
-  DJBATTLE: "https://media-hosting.imagekit.io//4004f39d48344a60/Untitled%20design%20(40).png?Expires=1831197297&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=YFQINhaVEzhT~qSaarA~Oy0a~pS-MBDEDVu9IOFBNyi9Bpy-iCVdxinXBW6GMkEHlZAN88fzkdyeRHeHSx5BfTLk~x64qLUpuMcM42mPqhZA42Kj~Q6B4JcBIgCj9L3z1I~nKIxqGcj9poMC59nB4bFDRbBZRTwwbYgld8veqvGtTLBnxha5AuOvCgRiaPoAHTGHxX8U~OgybtgJttxjsGUoliZIUS0iSkSX1-HqQIz09DF2ns3-SlvzZF61IF8azZTQtjc9m8ube76qaWwfTX723nGdH6UCzOin~xrrgI7dUL1Uz61vgecAFFDwT~f7fsuvTf4J8K8Q0i1adoYutw__",
+  FUNKYFACES: "https://scontent.fdel27-7.fna.fbcdn.net/v/t39.30808-6/480694281_1145653750351494_9015891246071082618_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EDQkNcproQUQ7kNvwHb7giO&_nc_oc=AdnbHB7kovReB6_eX1q9Yw-0-Vp098C1xVwfaa1PbKos6k-RApZE5bolU5g5RPgdxfA&_nc_zt=23&_nc_ht=scontent.fdel27-7.fna&_nc_gid=fSuB3_rY94F8SZHrnEMVyA&oh=00_Afp6nmIpHezTBcvRKvkxnnm2hWe6NEIGGd82N9UyFSLdgQ&oe=697D7BE3",
+  ARTEES: artees,
+  CHARCOALART: "https://www.cbcity.nsw.gov.au/m/DMbsAblx0XpRPAB5JtjMnzcyviiMDPyPlAFPgmLk7FY/resize:fill:412:412:1:1/g:fp:0.5:0.5/sm:1/dpr:2.625/L3NpdGVzL2RlZmF1bHQvZmlsZXMvMjAyNS0xMi9hZG9iZXN0b2NrXzE0NDA5NzY5MzQuanBn",
+  GRAFFITIWALLS: "https://graffiti-artist.net/wp-content/uploads/2023/07/DSC03800.jpg",
+  DOODLING: "https://www.carandache.com/ch/en/content_images/01_CdA_SEO_Doodling_041.jpg",
+  RAPIDO: "https://primary.jwwb.nl/public/s/z/k/temp-valgczriyakksipnfhlt/6r7ia0/whitehighlighterpens4.webp",
+  DIGITALART: "https://static.skillshare.com/uploads/discussion/tmp/5619e779.jpg",
+  PHOTOSHOPBATTLE: "https://img-c.udemycdn.com/course/480x270/5346430_f677.jpg",
+
+  // Music Events
+  ARIA: aria,
+  DUETTO: duetto,
+  BEATNICKS: beat,
+  DJBATTLE: dj,
 
   // Literature Events
-  WORDZEE: "https://media-hosting.imagekit.io//a6a689921e9742cc/IMG-20250204-WA0002.jpg?Expires=1833267655&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=JAMZ0dofVFn5Zc08cQqsI878hWx9Cv15Xbd6d8jlM20AigdyLLwuSrcdAIxh91Cj6D5h2pQBjS3tEb-UK-CWu3ih9tdT0tpCwEHFKnu5NfJmOFT2DB5EdFvbdkCX7~LXAlSUjt~iAUf363Qjc9VI-mCDiwRhnFZX82ob1TJ0PqjGMnD6sdVScqn3buZwFJxeCgrCWViPBTiLAKKEA8B7Cn6WqYMlmORjPwT1AbQ31qqUqGb~7qjkEqtiv1rgNdx1uIHhnl6Z01wbrETnH6lM75XL9ouEbFhJo0cJl00jjRD1NjQqqOZxQfUWCqYza0zmlZsG4k~Qqm0ay7OGNs5r6Q__",
-  SLAMPOETRY: "https://media-hosting.imagekit.io//49a4ec4abe3f45d7/Untitled%20design%20(61).webp?Expires=1831194357&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=E7h~T813c2UcxEHR5fiUdwCmXZ-SoOgT5C0lLMD7wPLvLGqZQ959Epdvfddbom-Dzl4k3-T2Fz4WjEy~SuTBRip9usvG3dVp1XH9K3CerTZ3k1gt2qnye-4LGDo~8Uloxt2zdMsL1B9Nn3Qh8HlBsOS8kiJDYlL-u0ZJCUiOwdWT1~xzmL4vzIFrmZnr2GKgXyya7zdd~~WR43doflPJiiEnjuwmOVDyg~78FDptky-qCWLmXT7rn5Jg9j4IsMZ3Ns0wjODH4oVPzot5cPgKh7nnCRVztViiVyOlp0z~--DjEPTK0Zo0BQu5dzlN6V8cvqLdEH4qscjXdMCxL8Xysw__",
-  PUNWARS: "https://media-hosting.imagekit.io//0419c69f36484f7b/IMG-20250204-WA0006.jpg?Expires=1833267655&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=EBDbCFqSjXf6AgiOiyggZhOoi2dFcsM2uZLu9S7Au2aZaFnrhwVh2mGsjjuo22VEAyyfoEra2BMCxe71Bv-Bvg2I7eMllgOsWmdxeKEg~4-dRidC1WG3tkYm--VaoueQ8XlNgpfoSQnmaNFkStSgbwF~1PC6th~BxEUx-8cOISBdJZxcEMS1VBb7v03AVoS4SCzl0lWM3LaGHZsCTpV1FpeNjOuPqKmRa2BHupNUGRnxRu-hFF87PLmhqRP5YBN5xN9tv-PwD5rv2HsfHdA8FvixTOU2Yz0snB41DDaa1duw4Ly3vrAAheezzral0xF5xFINRjTyxRlJoKslpTQKuA__",
-  "3VS3DEBATE": "https://media-hosting.imagekit.io//617d424016c64063/Untitled%20design%20(59).webp?Expires=1831194309&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=EAzFqIWdOOYO3R5oYaqtSbtJYzb~FJpAVPhcEG~6HijWj8lgeigEGK-nf7XBbkSF9QhGESvRrnFCgwoQIWxPOQsHATbbS9KDrqkid3FCpQyg0myG9xdXFvq4IaCJ2ty85mnVkrAc01UibEgqb71YkSE5bs4KNWd9lYYOplY~aLKMLoK9v6cr7JdYDFAUUdG0VupHVPILxr2ZImAdOYDYXOBzesu7e8gS-hzOC7bd6fduXLo0yMxLhBsqqYtB4eCpg9ZLsmNxqkjTKmobZZWcsXAW6l~-0cK~14HgRWLS0RZoHBl1H22NYtwH76tpqz-WevpvPu2SY8OrJ8YW8s1m6A__",
-  STEW: "https://media-hosting.imagekit.io//f4191449bac6480b/IMG-20250204-WA0003.jpg?Expires=1833267655&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=WQIB3Wm4~RpNmEKLYkTFLpZjC4D~k7kD~~M0LUue4WuUhzeB~ODx~OpIjatKQcblslheHSGNEDOzvq16YxcSt~UxVWD6bfBda9VyAJ4hCOCjeVeDFLasM9o4O4kIACVY3KWofSNVbc2twUwszpYPKNrt-THi4qbnD0yJdboEzMbz-dJknO9crYj4uReBaFVj2n8rOA4QC1-8imJ7C-ZgZO3Ct0dGcsPtGn4SNEciZiiVEOmHyJOc~mScOcdEl9oZmAkxSFLAA-2Du19YuTvzgR49zmQDoEiS0h4X34qMrUg1TMYGWusjkAW3keyqDwsoX3FnAiguW-duudlLna-xFA__",
+  WORDZEE: "https://mb.cision.com/Public/16579/2943123/8e44b9b5c4968475_800x800ar.png",
+  SCRABBLE: "https://images.hindustantimes.com/img/2022/11/03/550x309/_380b84aa-f042-11e5-ac5f-8ebef762d494_1667457238330_1667457238330.jpg",
+  SLAMPOETRY: "https://www.kulturfabrikkrawatte.de/wp-content/uploads/2022/04/PoetrySlamLogo-e1655074794832.jpeg",
+  PUNWARS: pun,
+  "3VS3DEBATE": "https://observatory.tec.mx/wp-content/uploads/2022/08/debate-escolar.jpg",
+  STEW: stew,
+  JAM: "https://static.wixstatic.com/media/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg/v1/fill/w_850,h_750,fp_0.50_0.50,lg_2,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg",
+  CREATIVEWRITING: "https://www.edynamiclearning.com/wp-content/uploads/2019/04/Creative-Writing-I-HIGH-RES.jpg",
+  CRYPTICCROSSWORD: "https://events.mosman.nsw.gov.au/sites/default/files/styles/large/public/img/cryptic_crossword_club_eventsmosman.jpg?itok=UxoULuC7",
+
   // Quiz Events
-  MELA: art,
-  LONEWOLFQUIZ: "https://media-hosting.imagekit.io//b1016152bb05489a/IMG-20250204-WA0005.jpg?Expires=1833267638&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Ky4g6DPGuq-XSX3NCL915LnWjc~JO7Q70ogM~Zs2SqZvLR0ZxUtIpNg34Ju-a6izXdQ-qEnBf5nv6GbUtc73jflSBXR4VU2Pf~dxtOWyDT3DDicZiU9hQww8mHOfnf5uPEdVRU4a6UuMYpBQJN6-95iy04RficW~H0ScPJ5Niw2scmzuMZA31mrB9tvtlcm0Aolg3OK6SkEvDEtM7d3WzxlED7qUpciEm08Muy80GcD9XUihsfsDCHoczRuQfgmlFMK6s8fVUWtxBVR~bJB~1RuUOc74B3N3jZzfvT5tePeXh8GFpHsZpBBvOiS1HLQi2aCRQm1qMnQpj3fEq6dsZQ__",
-  BOLLYWOODQUIZ: "https://media-hosting.imagekit.io//f38998d0102a4358/IMG-20250204-WA0004.jpg?Expires=1833267655&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=otAXlBqmNZoaU3IYvRGpVBQIDwygx3wOoJ5g7ZGyfHGEmsrHOzs4uEyk4IJmBMVQL92kkZpJwb8Hsr~wftsJZlykIZj~1y3T15x1aS2Tr~0XS7i3gL9ICRPNDelfnSaTdx5TrnE1saxb~N2EHrQLCSZh7ax8FlTWdPVeG0KX9bT-AG2RorbdfdUSk0gjwpA6wbDqLtZPGDIvqG7wLLUQduxwyD5tJJd7kagfZcYUW2nePPiZ9AI3vS4dvhGUC~5lTQvwLpekbfFjYAP3WcGZD-EAmCPe-jzgOChOpSn2WrDRsyDCCy1-HLTlRXakvc55JJMTn6B9ZQBKWk6maThu4Q__",
+  MELA: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  LONEWOLFQUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  BOLLYWOODQUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
 
   // Film Events
   "IGNUS.JPG": "https://media-hosting.imagekit.io//302f4d57f5124512/Untitled%20design%20(54).webp?Expires=1831194176&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=oD-IuJcekQ2SgmgB8Z0pN8ZZ1a5eaBBlnRtXsHPk7Oiujy~zL3kK2-97rBHWRASW2iwvJrTkZbrwA2S~asqndcoPwffFu~IX1DhYYA-xmDi3B7tRS9HFt0kuXxfzq8UFeEGkgARC5kZ2If6NlKv2tK6hl2Ng8oMFRbCg~s73mGXbXvnnGMFTeVzLokVVRKNXIEbV~vCwRrXmL~QFFSZ7zu7hAMyHzOkaGCDrC8TqrDcnlTdhAy0xM0FEQZHcNUzSfPOgOtn2f68GKO~rMJ1~C0jkdfVYXo0eOZ1PHuIO1bMkLMM02l4M3HqwbPh6eoQVsWyu2jZohRiInrzdnFES0Q__",
@@ -80,10 +102,10 @@ const EVENT_IMAGE_MAP = {
   // Lifestyle Events
   COSPLAY: "https://media-hosting.imagekit.io//50012084ac5749f7/Untitled%20design%20(52).webp?Expires=1831194061&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=2fn3Ib9qb8jEPI3qNQVPWzRRaDPUjtwpLmsQuvJ7nDcMlLtWrbuJRcrAWXrg4ffdu7I1SjGVjOtTmjSsAP46seB8r4qyWoc4hRUouyBXdoyWdf-FUEv0BlTCG7NTH9g98Q275N1fYdQXQIgxiq71bmuMT-HwpxqArDHSakhQNmCgyR4dVuky~xaiiSMcg6UohKeJoAJhybuXitK5D9tJo9ClKqzj78w0CEzAEteAuDRNxVtQW6JrCPSHbD1ETetPOGFuF8Nkr3yveRe~LlDDcXNzpQEPBHybfiThM-9uEDSOzrPPBr-NDtLmHc1MYLEjymTAJq6WSJlVXS2WP0cpyg__",
   DIGITALARENA: "https://media-hosting.imagekit.io//bb70bf7e065b4985/Untitled%20design%20(51).webp?Expires=1831194035&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=DuGZ838-p-3j3x-i~W0OwGi8JM2JaVVz~lOXQ8C0K5N6jAUBMIneqNieopRazwptFpi2CVuXm96tcQbSAJNxpFpc0B077WAOf7nta0wBSZRyk-OOvTf9rgEhEa5peCYMEmcjguKR4p4GzwLPFzHup-4nEGytAqlWA0z2rql76UYRW6CPg~R3HpJ-lFLRu-QpnzzKgqNjTwycW6SvVNH~EMJ6JFdemewUl6Go~UuOmnapKXZHGv8S72Kz8dn-KsBa3NAV-xZOGqti8Kf0jusq9Zkj7-iONKiALSUEY94fHtsRIMwa9LwmrB0A438TyAiuV-c4fgjTJqg6RvFOZW5rHQ__",
+  DUBSMASH: "https://media-hosting.imagekit.io//a81e7bdef93f47f1/Untitled%20design%20(55).webp?Expires=1831194205&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Xzy3ZKgowsX5Jd7uU5c4Zqm1rYHV-YZwlIF9bHEG-9HsDk0WrooBBYIudAHLVMcxNMEz0MMXu1PYce1cbjlUkAbvwifj29uZl85E0eKFriV96X3dHJWqaGEbmwN7ue2hvp6410-B3Qyy6QWWtm3Gp2LG26VGdbV~KH4sO84nSpXpsxD4-vo3PmvIfrrq-gHC2RwdO7BQE0mlQdXEfMvmalGKYoQKDJi5F5iB9BQKK2Hl5CPBLe08ZZvuqxE7A6RqR2mVnOMxcwpXurIlCq7WCTmMbYzKKGk00AS8oCcGdJ8TIWcddfxF5oU7mDmZPjke7Ln446M2sWcLK~iUvPV1xw__",
   LOLLAPALOOZA: "https://media-hosting.imagekit.io//a81e7bdef93f47f1/Untitled%20design%20(55).webp?Expires=1831194205&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Xzy3ZKgowsX5Jd7uU5c4Zqm1rYHV-YZwlIF9bHEG-9HsDk0WrooBBYIudAHLVMcxNMEz0MMXu1PYce1cbjlUkAbvwifj29uZl85E0eKFriV96X3dHJWqaGEbmwN7ue2hvp6410-B3Qyy6QWWtm3Gp2LG26VGdbV~KH4sO84nSpXpsxD4-vo3PmvIfrrq-gHC2RwdO7BQE0mlQdXEfMvmalGKYoQKDJi5F5iB9BQKK2Hl5CPBLe08ZZvuqxE7A6RqR2mVnOMxcwpXurIlCq7WCTmMbYzKKGk00AS8oCcGdJ8TIWcddfxF5oU7mDmZPjke7Ln446M2sWcLK~iUvPV1xw__",
   COSTUMEDESIGNING: "https://media-hosting.imagekit.io//33e48c50109846bc/Untitled%20design%20(50).webp?Expires=1831193998&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=t32SM5QqH-I3pNzHwMOBGUV0T6IUUBV2lBajfaol6j2OZMXmlpyjBxokF92xp~wp7gJ-gSrtnzgWbREMUgD3yL9aQECyjWHOIAaBnMwuvaVK3bc7sWGqAZCtWXpWBR9ecjrSlDChfPMGV-qsEBeFHLgKLAB1GybjKFd45133YkyIGCya1rvtkdtnFhWezrV5za4k~4PQilxY-dC4w5nP1c7sRsoWr8ev5Q~eT1QrYCtmcjbLXW5OBFb7rS4kyzbmE7hvGp63WEAk0brEk7Ut-O9TIfMMBJW2T5E4S~nGMvisfQM3rypxvfZDag7w6dvT8spEhMZV34jRnDJaWEWrsQ__",
   "MR.ANDMRS.IGNUS": "https://media-hosting.imagekit.io//b95ce6adfac24bfc/Untitled%20design%20(49).webp?Expires=1831193969&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=KhoQ8ndgP~qmT93~wV5QGeZxE8q4ffq-cyDzJNMeNAhg-ZkwOuxPT6rNuhNLhd48vR-H8SYhPcOOYO8KdTDh~V9MHDeqSQlxL2E3JwwaBiJmDIGycjnYELOikyYg3ts3Sh0Bone-7jStZcnaFIT0jkXMkT2LG55KVrUVStZAIDyYYQNwkOlahHXhAviMFONL0JIJ7MI13FNklaztZvaAydMd91wFWEeQmqY23j7tRK86yGMRIuYaYROM3WSUecT~8njBo1oVQKPOU1ekUOs--KKrjfCXPyZrvLMr2JyY~CvatZeP4nRoWcogG3mB~9bf-chPqmTmvE-qNPa4OTYaKA__",
-  // Add more sub-event mappings here as needed
 };
 
 function Events() {
