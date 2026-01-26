@@ -25,6 +25,8 @@ const isLoggedIn = () => {
 };
 
 function Events() {
+  const normalizeKey = (str = "") =>
+    str.replace(/\s+/g, "").toUpperCase();
   const navigate = useNavigate();
   const [selectedCategoryImage, setSelectedCategoryImage] = useState(null);
   const [modalCategory, setModalCategory] = useState(null);
@@ -119,13 +121,10 @@ function Events() {
   ];
 
   const CulturalEventImages = {
-    "STAG MOVES": dance,
-    "Anybody can Duet": dance,
-    "Raw War": dance,
-
-    // add more when backend grows
-    // "Solo Classical": someImage,
-  };
+    STAGMOVES: dance,
+    ANYBODYCANDUET: dance,
+    RAWWAR: dance,
+};
 
 
   const FlagshipArray = [
@@ -658,16 +657,14 @@ function Events() {
             <div className="modal-content">
               {/* LEFT SIDE — IMAGE */}
               <div className="modal-left">
-                {(
-                  selectedCategoryImage ||
-                  (selectedBackendEvent && modalCategory  !== "CULTURAL")
-                ) && (
+                { selectedCategoryImage && (
                   <img
                     src={
-                      selectedBackendEvent && modalCategory === "CULTURAL"
-                        ? CulturalEventImages[selectedBackendEvent.name] || selectedCategoryImage
+                      modalCategory === "CULTURAL"
+                        ? CulturalEventImages[
+                            normalizeKey(selectedBackendEvent?.name)
+                          ] || selectedCategoryImage
                         : selectedBackendEvent?.cover || selectedCategoryImage
-
                     }
                     alt="Event"
                     className="modal-event-image"
