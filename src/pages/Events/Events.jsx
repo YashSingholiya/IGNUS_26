@@ -119,7 +119,7 @@ function Events() {
   ];
 
   const CulturalEventImages = {
-    "Stag Moves": dance,
+    "STAG MOVES": dance,
     "Anybody can Duet": dance,
     "Raw War": dance,
 
