@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const getAccessToken = () => {
-  return localStorage.getItem("access_token");
+  return localStorage.getItem("access");
 };
 
 const isLoggedIn = () => {
