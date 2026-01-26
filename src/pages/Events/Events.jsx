@@ -24,9 +24,19 @@ const isLoggedIn = () => {
 };
 
 function Events() {
-
   const navigate = useNavigate();
   // ---------- MODAL STATE ----------
+  const [backendEvents, setBackendEvents] = useState([]);
+  const [modalEvents, setModalEvents] = useState([]);
+  const [selectedBackendEvent, setSelectedBackendEvent] = useState(null);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/events/list`)
+      .then((res) => res.json())
+      .then((data) => setBackendEvents(data))
+      .catch(() => toast.error("Failed to load events"));
+  }, []);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -104,7 +114,7 @@ function Events() {
       image: clash,
     },
     {
-      name: "AAYYAM",
+      name: "AAYAAM",
       venue: "TBA",
       date: "TBA",
       image: aayam,
@@ -215,20 +225,22 @@ function Events() {
   }
 
   // ---------- EVENT CLICK HANDLER ----------
-  function handleEventClick(eventName, category) {
-    // ONLINE → open Google Form
-    // if (category === "ONLINE" && onlineEventLinks[eventName]) {
-    //   window.open(onlineEventLinks[eventName], "_blank");
-    //   return;
-    // }
+  function handleEventClick(categoryName, category) {
+    if (category === "PRONITE") return;
 
-    // PRONITE → do nothing (no modal)
-    if (category === "PRONITE") {
+    // Filter real events from backend
+    const filtered = backendEvents.filter(
+      (e) => e.category.toUpperCase() === categoryName,
+    );
+
+    if (filtered.length === 0) {
+      toast.info("Events will be announced soon");
       return;
     }
 
-    // ALL OTHER EVENTS → open modal
-    openModal(eventName, category);
+    setModalEvents(filtered);
+    setSelectedBackendEvent(null);
+    setIsModalOpen(true);
   }
 
   const handleRegister = async () => {
@@ -239,7 +251,10 @@ function Events() {
       setTimeout(() => navigate("/login"), 1500);
       return;
     }
-
+    if (!selectedBackendEvent) {
+      toast.error("Please select an event");
+      return;
+    }
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/events/register/`,
@@ -250,7 +265,7 @@ function Events() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            event_name: eventData.name,
+            event_name: selectedBackendEvent.name,
           }),
         },
       );
@@ -346,8 +361,6 @@ function Events() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const eventData = selectedEvent ? getEventData() : null;
 
   return (
     <div className="events-page">
@@ -548,57 +561,54 @@ function Events() {
       </div>
 
       {/* ================= MODAL ================= */}
-      {isModalOpen &&
-        selectedEvent &&
-        selectedEvent.category !== "ONLINE" &&
-        selectedEvent.category !== "PRONITE" && (
-          <div className="event-modal-overlay" onClick={closeModal}>
-            <div className="event-modal" onClick={(e) => e.stopPropagation()}>
-              <button className="modal-close" onClick={closeModal}>
-                ✕
-              </button>
+      {isModalOpen && (
+        <div className="event-modal-overlay" onClick={closeModal}>
+          <div className="event-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>
+              ✕
+            </button>
 
-              {eventData ? (
-                <div className="modal-content">
-                  {/* LEFT 50% IMAGE */}
-                  <div className="modal-left">
-                    <img
-                      src={eventData.image}
-                      alt={eventData.name}
-                      className="modal-event-image"
-                    />
-                  </div>
-
-                  {/* RIGHT 50% TEXT */}
-                  <div className="modal-right">
-                    <h2>{eventData.name}</h2>
-                    <p>
-                      <strong>Venue:</strong> {eventData.venue}
-                    </p>
-                    <p>
-                      <strong>Date:</strong> {eventData.date}
-                    </p>
-
-                    {selectedEvent.category !== "ONLINE" && (
-                      <button
-                        className="modal-register-btn"
-                        onClick={handleRegister}
-                      >
-                        {isLoggedIn() ? "REGISTER" : "LOGIN TO REGISTER"}
-                      </button>
-                    )}
-                  </div>
+            {!selectedBackendEvent ? (
+              <>
+                <h2>Select Event</h2>
+                <div className="modal-event-list">
+                  {modalEvents.map((ev) => (
+                    <button
+                      key={ev.id}
+                      className="event-item"
+                      onClick={() => setSelectedBackendEvent(ev)}
+                    >
+                      {ev.name}
+                    </button>
+                  ))}
                 </div>
-              ) : (
-                /* FALLBACK (prevents white screen) */
-                <>
-                  <h2>{selectedEvent.eventName}</h2>
-                  <p>Details will be announced soon.</p>
-                </>
-              )}
-            </div>
+              </>
+            ) : (
+              <div className="modal-content">
+                <div className="modal-left">
+                  <img
+                    src={selectedBackendEvent.cover}
+                    alt={selectedBackendEvent.name}
+                    className="modal-event-image"
+                  />
+                </div>
+
+                <div className="modal-right">
+                  <h2>{selectedBackendEvent.name}</h2>
+                  <p>{selectedBackendEvent.about}</p>
+
+                  <button
+                    className="modal-register-btn"
+                    onClick={handleRegister}
+                  >
+                    {isLoggedIn() ? "REGISTER" : "LOGIN TO REGISTER"}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }
