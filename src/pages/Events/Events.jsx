@@ -548,7 +548,14 @@ function Events() {
               <button
                 key={event}
                 className="event-item"
-                onClick={() => handleEventClick(event, "FLAGSHIP")}
+                onClick={() => {
+                  const categoryEvent = FlagshipArray.find(
+                    (e) => e.name === event
+                  );
+
+                  setSelectedCategoryImage(categoryEvent?.image || null);
+                  handleEventClick(event, "FLAGSHIP");
+                }}
               >
                 {event}
               </button>
