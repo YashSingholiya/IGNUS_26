@@ -15,6 +15,9 @@ import "./Events.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+const [selectedCategoryImage, setSelectedCategoryImage] = useState(null);
+
+
 const getAccessToken = () => {
   return localStorage.getItem("access");
 };
@@ -426,7 +429,13 @@ function Events() {
               <button
                 key={event}
                 className="event-item"
-                onClick={() => handleEventClick(event, "CULTURAL")}
+                onClick={() => {
+                  const categoryEvent = CulturalArray.find(
+                    (e) => e.name === event
+                  );
+                  setSelectedCategoryImage(categoryEvent?.image || null);
+                  handleEventClick(event, "CULTURAL");
+                }}
               >
                 {event}
               </button>
@@ -512,7 +521,7 @@ function Events() {
         </div>
 
         <div className="flagship-events">
-          {["ANTARANG", "NRITYANSH", "CLASH OF BANDS", "AAYYAM"].map(
+          {["ANTARANG", "NRITYANSH", "CLASH OF BANDS", "AAYAAM"].map(
             (event) => (
               <button
                 key={event}
@@ -590,44 +599,57 @@ function Events() {
               ✕
             </button>
 
-            {!selectedBackendEvent ? (
-              <>
-                <h2>Select Event</h2>
-                <div className="modal-event-list">
-                  {modalEvents.map((ev) => (
-                    <button
-                      key={ev.id}
-                      className="event-item"
-                      onClick={() => setSelectedBackendEvent(ev)}
-                    >
-                      {ev.name}
-                    </button>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <div className="modal-content">
-                <div className="modal-left">
-                  <img
-                    src={selectedBackendEvent.cover}
-                    alt={selectedBackendEvent.name}
-                    className="modal-event-image"
-                  />
-                </div>
-
-                <div className="modal-right">
-                  <h2>{selectedBackendEvent.name}</h2>
-                  <p>{selectedBackendEvent.about}</p>
-
-                  <button
-                    className="modal-register-btn"
-                    onClick={handleRegister}
-                  >
-                    {isLoggedIn() ? "REGISTER" : "LOGIN TO REGISTER"}
-                  </button>
-                </div>
+            <div className="modal-content">
+              {/* LEFT SIDE — IMAGE */}
+              <div className="modal-left">
+                <img
+                  src={
+                    selectedBackendEvent
+                      ? selectedBackendEvent.cover        // specific event image
+                      : selectedCategoryImage             // dance category image
+                  }
+                  alt="Event"
+                  className="modal-event-image"
+                />
               </div>
-            )}
+
+              {/* RIGHT SIDE — CONTENT */}
+              <div className="modal-right">
+                {!selectedBackendEvent ? (
+                  <>
+                    <h2>Select Event</h2>
+
+                    <div className="modal-event-list">
+                      {modalEvents.map((ev) => (
+                        <button
+                          key={ev.id}
+                          className="event-item"
+                          onClick={() => setSelectedBackendEvent(ev)}
+                        >
+                          {ev.name}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h2>{selectedBackendEvent.name}</h2>
+
+                    <p><strong>Venue:</strong> {selectedBackendEvent.venue || "TBA"}</p>
+                    <p><strong>Date:</strong> {selectedBackendEvent.date || "TBA"}</p>
+
+                    <button
+                      className="modal-register-btn"
+                      onClick={handleRegister}
+                    >
+                      {isLoggedIn() ? "REGISTER" : "LOGIN TO REGISTER"}
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+
+
           </div>
         </div>
       )}

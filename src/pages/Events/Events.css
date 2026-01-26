@@ -708,6 +708,34 @@ div.online {
   }
 }
 
+/* ================= CULTURAL MODAL EVENT LIST ================= */
+
+.modal-event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Clean scrollbar */
+.modal-event-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.modal-event-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+}
+
+/* LEFT IMAGE SHOULD ALWAYS BE STATIC CATEGORY IMAGE */
+.modal-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 
 /* ================================================= */
 /* ============ EVENTS PAGE FOOTER BAR ============= */
