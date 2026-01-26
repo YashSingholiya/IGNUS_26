@@ -660,11 +660,11 @@ function Events() {
               <div className="modal-left">
                 {(
                   selectedCategoryImage ||
-                  (selectedBackendEvent && selectedEvent?.category !== "CULTURAL")
+                  (selectedBackendEvent && modalCategory  !== "CULTURAL")
                 ) && (
                   <img
                     src={
-                      selectedBackendEvent && selectedEvent?.category === "CULTURAL"
+                      selectedBackendEvent && modalCategory === "CULTURAL"
                         ? CulturalEventImages[selectedBackendEvent.name] || selectedCategoryImage
                         : selectedBackendEvent?.cover || selectedCategoryImage
 
@@ -694,7 +694,7 @@ function Events() {
                   </>
                 ) : (
                   <>
-                    <h2>{selectedBackendEvent.name}</h2>
+                    <h2>{selectedBackendEvent?.name}</h2>
 
                     <p><strong>Venue:</strong> {selectedBackendEvent.venue || "TBA"}</p>
                     <p><strong>Date:</strong> {selectedBackendEvent.date || "TBA"}</p>
