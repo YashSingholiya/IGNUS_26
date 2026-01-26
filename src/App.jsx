@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Home from "./pages/Home/Home";
 import Events from "./pages/Events/Events";
@@ -27,11 +29,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
           <Route path="/passes" element={<Passes />} />
-          
           <Route path="/prakriti" element={<Prakrit />} />
           <Route path="/login" element={<Login />} />
           <Route path="/ca" element={<CA />} />
-
           🔐 PROTECTED ROUTE
           <Route
             path="/profile"
@@ -42,10 +42,10 @@ function App() {
             }
           />
           {/* <Route path="/oauth/callback" element={<OAuthCallback />} /> */}
-
           {/* Fallback */}
           <Route path="*" element={<Home />} />
         </Routes>
+        <ToastContainer position="top-right" autoClose={3000} pauseOnHover />
       </BrowserRouter>
     </>
   );

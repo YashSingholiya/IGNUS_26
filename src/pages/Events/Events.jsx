@@ -12,97 +12,112 @@ import aayam from "./images/aayam.jpeg";
 import tshirt from "./images/tshirt.jpg";
 import pottery from "./images/pottery.jpg";
 import "./Events.css";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+const getAccessToken = () => {
+  return localStorage.getItem("access_token");
+};
+
+const isLoggedIn = () => {
+  return !!getAccessToken();
+};
 
 function Events() {
+
+  const navigate = useNavigate();
   // ---------- MODAL STATE ----------
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   // ---------- INFORMAL EVENTS DATA ----------
   const CulturalArray = [
-  {
-    name: "DANCE",
-    venue: "TBA",
-    date: "TBA",
-    image: dance,
-  },
-  {
-    name: "MUSIC",
-    venue: "TBA",
-    date: "TBA",
-    image: music,
-  },
-  {
-    name: "QUIZ",
-    venue: "TBA",
-    date: "TBA",
-    image: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-  },
-  {
-    name: "ART",
-    venue: "TBA",
-    date: "TBA",
-    image: art,
-  },
-  {
-    name: "LITERATURE",
-    venue: "TBA",
-    date: "TBA",
-    image: lit,
-  },
-  {
-    name: "FILM MAKING",
-    venue: "TBA",
-    date: "TBA",
-    image: "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
-  },
-  {
-    name: "LIFESTYLE",
-    venue: "TBA",
-    date: "TBA",
-    image: LifeStyle,
-  },
-  {
-    name: "DRAMA",
-    venue: "TBA",
-    date: "TBA",
-    image: drama,
-  }
-];
+    {
+      name: "DANCE",
+      venue: "TBA",
+      date: "TBA",
+      image: dance,
+    },
+    {
+      name: "MUSIC",
+      venue: "TBA",
+      date: "TBA",
+      image: music,
+    },
+    {
+      name: "QUIZ",
+      venue: "TBA",
+      date: "TBA",
+      image:
+        "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+    },
+    {
+      name: "ART",
+      venue: "TBA",
+      date: "TBA",
+      image: art,
+    },
+    {
+      name: "LITERATURE",
+      venue: "TBA",
+      date: "TBA",
+      image: lit,
+    },
+    {
+      name: "FILM MAKING",
+      venue: "TBA",
+      date: "TBA",
+      image:
+        "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
+    },
+    {
+      name: "LIFESTYLE",
+      venue: "TBA",
+      date: "TBA",
+      image: LifeStyle,
+    },
+    {
+      name: "DRAMA",
+      venue: "TBA",
+      date: "TBA",
+      image: drama,
+    },
+  ];
 
   const FlagshipArray = [
-  {
-    name: "ANTARANG",
-    venue: "TBA",
-    date: "TBA",
-    image: antarang,
-  },
-  {
-    name: "NRITYANSH",
-    venue: "TBA",
-    date: "TBA",
-    image: nritya,
-  },
-  {
-    name: "CLASH OF BANDS",
-    venue: "TBA",
-    date: "TBA",
-    image: clash,
-  },
-  {
-    name: "AAYYAM",
-    venue: "TBA",
-    date: "TBA",
-    image: aayam,
-  },
-];
+    {
+      name: "ANTARANG",
+      venue: "TBA",
+      date: "TBA",
+      image: antarang,
+    },
+    {
+      name: "NRITYANSH",
+      venue: "TBA",
+      date: "TBA",
+      image: nritya,
+    },
+    {
+      name: "CLASH OF BANDS",
+      venue: "TBA",
+      date: "TBA",
+      image: clash,
+    },
+    {
+      name: "AAYYAM",
+      venue: "TBA",
+      date: "TBA",
+      image: aayam,
+    },
+  ];
 
   const InformalsArray = [
     {
       name: "PROM NIGHT",
       venue: "TBA",
       date: "TBA",
-      image: "https://ilead.net.in/wp-content/uploads/2023/02/prom_night_2023_16.jpg",
+      image:
+        "https://ilead.net.in/wp-content/uploads/2023/02/prom_night_2023_16.jpg",
     },
     {
       name: "CUSTOMIZED T-SHIRT",
@@ -114,13 +129,15 @@ function Events() {
       name: "CARICATURE",
       venue: "TBA",
       date: "TBA",
-      image: "https://www.shutterstock.com/image-photo/firenze-italy-09-july-2024-600nw-2496659593.jpg"
+      image:
+        "https://www.shutterstock.com/image-photo/firenze-italy-09-july-2024-600nw-2496659593.jpg",
     },
     {
       name: "BONFIRE & MOVIE NIGHT",
       venue: "TBA",
       date: "TBA",
-      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCWAn03mhVoHwm-hkdnMQ_-KO2crJhyySbdoNBAyaHDvX96HjIT4WQqAylVmnrbwun-XluCVQedPxddbwjonLpd68PjJdfKih86Fo-1v9Y3At7EMF2M7NCfPvpTAPlombGIrk-kSWqLpcN/s1600/20170303_214950-1612x1209.jpg"
+      image:
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCWAn03mhVoHwm-hkdnMQ_-KO2crJhyySbdoNBAyaHDvX96HjIT4WQqAylVmnrbwun-XluCVQedPxddbwjonLpd68PjJdfKih86Fo-1v9Y3At7EMF2M7NCfPvpTAPlombGIrk-kSWqLpcN/s1600/20170303_214950-1612x1209.jpg",
     },
     {
       name: "POTTERY",
@@ -138,40 +155,52 @@ function Events() {
       name: "KARAOKE",
       venue: "TBA",
       date: "TBA",
-      image: "https://wallpapercave.com/wp/wp12329107.jpg"
+      image: "https://wallpapercave.com/wp/wp12329107.jpg",
     },
     {
       name: "DANCE WORKSHOP",
       venue: "TBA",
       date: "TBA",
-      image: "https://w0.peakpx.com/wallpaper/943/50/HD-wallpaper-music-and-dance-and-dance-music.jpg"
+      image:
+        "https://w0.peakpx.com/wallpaper/943/50/HD-wallpaper-music-and-dance-and-dance-music.jpg",
     },
     {
       name: "FOOD EATING COMPETITION",
       venue: "TBA",
       date: "TBA",
-      image: "https://c4.wallpaperflare.com/wallpaper/741/599/723/pizza-food-vegetables-fruit-wallpaper-preview.jpg"
+      image:
+        "https://c4.wallpaperflare.com/wallpaper/741/599/723/pizza-food-vegetables-fruit-wallpaper-preview.jpg",
     },
     {
       name: "OPEN MIC (KAVI SAMMELAN)",
       venue: "TBA",
       date: "TBA",
-      image: "https://devizine.com/wp-content/uploads/2024/09/openmic.jpg"
-    }
+      image: "https://devizine.com/wp-content/uploads/2024/09/openmic.jpg",
+    },
   ];
 
   // ---------- GOOGLE FORM LINKS (ONLINE ONLY) ----------
   const onlineEventLinks = {
-    "Mr & Miss IGNUS": "https://docs.google.com/forms/d/e/1FAIpQLScXnEU0fUd3esXfza4N1jvVoxFZ_SfWHOsewS61r7ywZURYJQ/viewform?usp=sharing",
-    "DIGITAL ART": "https://docs.google.com/forms/d/e/1FAIpQLSfLbvYluONmCZ__EoUuv0Nc_1USXH5QSte-5TyGOYchBrsKeQ/viewform",
-    "DUBSMASH": "https://docs.google.com/forms/d/e/1FAIpQLSeqF1_Zmpn7JSblNgCAfmSYySp4Vf7tSJJSysR0hxgEirVRbg/viewform",
-    "PHOTOGRAPHY": "https://docs.google.com/forms/d/e/1FAIpQLSfzLbnGBnPWv3bkYQCug_09v_0AiKf3qch7VL-JUTVZjmgqCg/viewform",
-    "SHORT MOVIE": "https://docs.google.com/forms/d/e/1FAIpQLSezdNUGZcXi9wXeXGMLNPJsSZ_4zy7ABBvevB8kk-7VWsLW2Q/viewform",
-    "MEME MAKING": "https://docs.google.com/forms/d/e/1FAIpQLSdyfPp2n4az6gJp1AaDlfHWmF_exMeC0G0Njz6KK12ujSSx8A/viewform",
-    "PHOTOSHOP BATTLE": "https://docs.google.com/forms/d/e/1FAIpQLScNJ3pMvjVLSMD6lDYATTMFtJc_Hx4sIr6Mk6aG9hVOWBDe7w/viewform",
-    "CREATIVE WRITING": "https://docs.google.com/forms/d/e/1FAIpQLSc4t6YGLGDQtUKXznmAj5v8jW4iH7kqkb0FPVnak2MaK3_Lvw/viewform",
-    "REEL MAKING": "https://docs.google.com/forms/d/e/1FAIpQLSfJ_ZPtMYeDVouqL2WHU4Sz2BLKcgtujCrgOKSzXK4wR2r8Yg/viewform",
-    "PHOTOGRAPHY at IITJ": "https://docs.google.com/forms/d/e/1FAIpQLSfzLbnGBnPWv3bkYQCug_09v_0AiKf3qch7VL-JUTVZjmgqCg/viewform",
+    "Mr & Miss IGNUS":
+      "https://docs.google.com/forms/d/e/1FAIpQLScXnEU0fUd3esXfza4N1jvVoxFZ_SfWHOsewS61r7ywZURYJQ/viewform?usp=sharing",
+    "DIGITAL ART":
+      "https://docs.google.com/forms/d/e/1FAIpQLSfLbvYluONmCZ__EoUuv0Nc_1USXH5QSte-5TyGOYchBrsKeQ/viewform",
+    DUBSMASH:
+      "https://docs.google.com/forms/d/e/1FAIpQLSeqF1_Zmpn7JSblNgCAfmSYySp4Vf7tSJJSysR0hxgEirVRbg/viewform",
+    PHOTOGRAPHY:
+      "https://docs.google.com/forms/d/e/1FAIpQLSfzLbnGBnPWv3bkYQCug_09v_0AiKf3qch7VL-JUTVZjmgqCg/viewform",
+    "SHORT MOVIE":
+      "https://docs.google.com/forms/d/e/1FAIpQLSezdNUGZcXi9wXeXGMLNPJsSZ_4zy7ABBvevB8kk-7VWsLW2Q/viewform",
+    "MEME MAKING":
+      "https://docs.google.com/forms/d/e/1FAIpQLSdyfPp2n4az6gJp1AaDlfHWmF_exMeC0G0Njz6KK12ujSSx8A/viewform",
+    "PHOTOSHOP BATTLE":
+      "https://docs.google.com/forms/d/e/1FAIpQLScNJ3pMvjVLSMD6lDYATTMFtJc_Hx4sIr6Mk6aG9hVOWBDe7w/viewform",
+    "CREATIVE WRITING":
+      "https://docs.google.com/forms/d/e/1FAIpQLSc4t6YGLGDQtUKXznmAj5v8jW4iH7kqkb0FPVnak2MaK3_Lvw/viewform",
+    "REEL MAKING":
+      "https://docs.google.com/forms/d/e/1FAIpQLSfJ_ZPtMYeDVouqL2WHU4Sz2BLKcgtujCrgOKSzXK4wR2r8Yg/viewform",
+    "PHOTOGRAPHY at IITJ":
+      "https://docs.google.com/forms/d/e/1FAIpQLSfzLbnGBnPWv3bkYQCug_09v_0AiKf3qch7VL-JUTVZjmgqCg/viewform",
   };
 
   // ---------- MODAL FUNCTIONS ----------
@@ -187,54 +216,92 @@ function Events() {
 
   // ---------- EVENT CLICK HANDLER ----------
   function handleEventClick(eventName, category) {
-  // ONLINE → open Google Form
-  // if (category === "ONLINE" && onlineEventLinks[eventName]) {
-  //   window.open(onlineEventLinks[eventName], "_blank");
-  //   return;
-  // }
+    // ONLINE → open Google Form
+    // if (category === "ONLINE" && onlineEventLinks[eventName]) {
+    //   window.open(onlineEventLinks[eventName], "_blank");
+    //   return;
+    // }
 
-  // PRONITE → do nothing (no modal)
-  if (category === "PRONITE") {
-    return;
+    // PRONITE → do nothing (no modal)
+    if (category === "PRONITE") {
+      return;
+    }
+
+    // ALL OTHER EVENTS → open modal
+    openModal(eventName, category);
   }
 
-  // ALL OTHER EVENTS → open modal
-  openModal(eventName, category);
-}
+  const handleRegister = async () => {
+    const token = getAccessToken();
 
+    if (!token) {
+      toast.info("Please login to register for events");
+      setTimeout(() => navigate("/login"), 1500);
+      return;
+    }
 
-  // function handleRegister() {
-  //   if (selectedEvent.category === "ONLINE" && onlineEventLinks[selectedEvent.eventName]) {
-  //     window.open(onlineEventLinks[selectedEvent.eventName], '_blank');
-  //     closeModal();
-  //   }
-  // }
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_REGISTER_API_URL}/events/register/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            event_name: eventData.name,
+          }),
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Backend sends plain strings sometimes
+        if (typeof data === "string") {
+          toast.error(data);
+        } else if (data.Message) {
+          toast.error(data.Message);
+        } else {
+          toast.error("Registration failed");
+        }
+        return;
+      }
+
+      // SUCCESS
+      toast.success(data.Message || "Event registered successfully 🎉");
+      closeModal();
+    } catch (error) {
+      console.error(error);
+      toast.error("Server error. Please try again later");
+    }
+  };
 
   // Get event data for modal
   function getEventData() {
-  if (!selectedEvent) return null;
+    if (!selectedEvent) return null;
 
-  if (selectedEvent.category === "INFORMAL") {
-    return InformalsArray.find(
-      (event) => event.name === selectedEvent.eventName
-    );
+    if (selectedEvent.category === "INFORMAL") {
+      return InformalsArray.find(
+        (event) => event.name === selectedEvent.eventName,
+      );
+    }
+
+    if (selectedEvent.category === "CULTURAL") {
+      return CulturalArray.find(
+        (event) => event.name === selectedEvent.eventName,
+      );
+    }
+
+    if (selectedEvent.category === "FLAGSHIP") {
+      return FlagshipArray.find(
+        (event) => event.name === selectedEvent.eventName,
+      );
+    }
+
+    return null;
   }
-
-  if (selectedEvent.category === "CULTURAL") {
-    return CulturalArray.find(
-      (event) => event.name === selectedEvent.eventName
-    );
-  }
-
-  if (selectedEvent.category === "FLAGSHIP") {
-    return FlagshipArray.find(
-      (event) => event.name === selectedEvent.eventName
-    );
-  }
-
-  return null;
-}
-
 
   // ---------- ACTIVE TAB ----------
   const [activeTab, setActiveTab] = useState("CULTURAL");
@@ -282,7 +349,6 @@ function Events() {
 
   const eventData = selectedEvent ? getEventData() : null;
 
-
   return (
     <div className="events-page">
       {/* ================= CULTURAL ================= */}
@@ -312,7 +378,16 @@ function Events() {
           </div>
 
           <div className="cult-events">
-            {["DANCE", "MUSIC", "QUIZ", "ART", "LITERATURE", "FILM MAKING", "LIFESTYLE", "DRAMA"].map((event) => (
+            {[
+              "DANCE",
+              "MUSIC",
+              "QUIZ",
+              "ART",
+              "LITERATURE",
+              "FILM MAKING",
+              "LIFESTYLE",
+              "DRAMA",
+            ].map((event) => (
               <button
                 key={event}
                 className="event-item"
@@ -402,15 +477,17 @@ function Events() {
         </div>
 
         <div className="flagship-events">
-          {["ANTARANG", "NRITYANSH", "CLASH OF BANDS", "AAYYAM"].map((event) => (
-            <button
-              key={event}
-              className="event-item"
-              onClick={() => handleEventClick(event, "FLAGSHIP")}
-            >
-              {event}
-            </button>
-          ))}
+          {["ANTARANG", "NRITYANSH", "CLASH OF BANDS", "AAYYAM"].map(
+            (event) => (
+              <button
+                key={event}
+                className="event-item"
+                onClick={() => handleEventClick(event, "FLAGSHIP")}
+              >
+                {event}
+              </button>
+            ),
+          )}
         </div>
       </div>
 
@@ -448,74 +525,80 @@ function Events() {
 
       {/* ================= FOOTER TABS ================= */}
       <div className="events-footer">
-        {["CULTURAL", "INFORMAL", "PRONITE", "FLAGSHIP", "ONLINE"].map((tab) => (
-          <button
-            key={tab}
-            className={`footer-btn ${tab.toLowerCase()} ${
-              activeTab === tab ? "active" : ""
-            }`}
-            onClick={() => {
-              setActiveTab(tab);
-              if (tab === "CULTURAL") scrollTo(culturalRef);
-              else if (tab === "INFORMAL") scrollTo(informalRef);
-              else if (tab === "PRONITE") scrollTo(proniteRef);
-              else if (tab === "FLAGSHIP") scrollTo(flagshipRef);
-              else scrollTo(onlineRef);
-            }}
-          >
-            {tab}
-          </button>
-        ))}
+        {["CULTURAL", "INFORMAL", "PRONITE", "FLAGSHIP", "ONLINE"].map(
+          (tab) => (
+            <button
+              key={tab}
+              className={`footer-btn ${tab.toLowerCase()} ${
+                activeTab === tab ? "active" : ""
+              }`}
+              onClick={() => {
+                setActiveTab(tab);
+                if (tab === "CULTURAL") scrollTo(culturalRef);
+                else if (tab === "INFORMAL") scrollTo(informalRef);
+                else if (tab === "PRONITE") scrollTo(proniteRef);
+                else if (tab === "FLAGSHIP") scrollTo(flagshipRef);
+                else scrollTo(onlineRef);
+              }}
+            >
+              {tab}
+            </button>
+          ),
+        )}
       </div>
 
       {/* ================= MODAL ================= */}
-      {isModalOpen && selectedEvent && selectedEvent.category !== "ONLINE" && selectedEvent.category !== "PRONITE" && (
-      <div className="event-modal-overlay" onClick={closeModal}>
-        <div className="event-modal" onClick={(e) => e.stopPropagation()}>
-          <button className="modal-close" onClick={closeModal}>
-            ✕
-          </button>
+      {isModalOpen &&
+        selectedEvent &&
+        selectedEvent.category !== "ONLINE" &&
+        selectedEvent.category !== "PRONITE" && (
+          <div className="event-modal-overlay" onClick={closeModal}>
+            <div className="event-modal" onClick={(e) => e.stopPropagation()}>
+              <button className="modal-close" onClick={closeModal}>
+                ✕
+              </button>
 
-          {eventData ? (
-            <div className="modal-content">
-              {/* LEFT 50% IMAGE */}
-              <div className="modal-left">
-                <img
-                  src={eventData.image}
-                  alt={eventData.name}
-                  className="modal-event-image"
-                />
-              </div>
+              {eventData ? (
+                <div className="modal-content">
+                  {/* LEFT 50% IMAGE */}
+                  <div className="modal-left">
+                    <img
+                      src={eventData.image}
+                      alt={eventData.name}
+                      className="modal-event-image"
+                    />
+                  </div>
 
-              {/* RIGHT 50% TEXT */}
-              <div className="modal-right">
-                <h2>{eventData.name}</h2>
-                <p><strong>Venue:</strong> {eventData.venue}</p>
-                <p><strong>Date:</strong> {eventData.date}</p>
+                  {/* RIGHT 50% TEXT */}
+                  <div className="modal-right">
+                    <h2>{eventData.name}</h2>
+                    <p>
+                      <strong>Venue:</strong> {eventData.venue}
+                    </p>
+                    <p>
+                      <strong>Date:</strong> {eventData.date}
+                    </p>
 
-                {selectedEvent.category === "FLAGSHIP" && (
-                  <button
-                    className="modal-register-btn"
-                    onClick={() => {
-                      // later you can connect this to a form / page
-                      alert(`Registering for ${eventData.name}`);
-                    }}
-                  >
-                    REGISTER
-                  </button>
-                )}
-              </div>
+                    {selectedEvent.category !== "ONLINE" && (
+                      <button
+                        className="modal-register-btn"
+                        onClick={handleRegister}
+                      >
+                        {isLoggedIn() ? "REGISTER" : "LOGIN TO REGISTER"}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                /* FALLBACK (prevents white screen) */
+                <>
+                  <h2>{selectedEvent.eventName}</h2>
+                  <p>Details will be announced soon.</p>
+                </>
+              )}
             </div>
-          ) : (
-          /* FALLBACK (prevents white screen) */
-          <>
-            <h2>{selectedEvent.eventName}</h2>
-            <p>Details will be announced soon.</p>
-          </>
+          </div>
         )}
-        </div>
-      </div>
-    )}
     </div>
   );
 }

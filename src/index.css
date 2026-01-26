@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.Toastify__toast-container {
+  z-index: 100000 !important;
+}
+
 @layer utilities {
     .animate-fade-in {
         animation: fade-in 0.5s ease-out forwards;
