@@ -51,6 +51,14 @@ const EVENT_IMAGE_MAP = {
 function Events() {
   const normalizeKey = (str = "") =>
     str.replace(/\s+/g, "").toUpperCase();
+
+  const getEventDisplayName = (name) => {
+    if (!name) return "";
+    const normalized = normalizeKey(name);
+    if (normalized === "THUNDERBEATS") return "CLASH OF BANDS";
+    return name;
+  };
+
   const navigate = useNavigate();
   const [selectedCategoryImage, setSelectedCategoryImage] = useState(null);
   const [modalCategory, setModalCategory] = useState(null);
@@ -468,9 +476,7 @@ function Events() {
                   handleEventClick(type.reference_name, "FLAGSHIP");
                 }}
               >
-                {type.reference_name.toUpperCase() === "THUNDERBEATS"
-                  ? "CLASH OF BANDS"
-                  : type.reference_name}
+                {getEventDisplayName(type.reference_name)}
               </button>
             ))}
         </div>
@@ -569,7 +575,7 @@ function Events() {
                           className="event-item"
                           onClick={() => setSelectedBackendEvent(ev)}
                         >
-                          {ev.name}
+                          {getEventDisplayName(ev.name)}
                         </button>
                       ))}
                     </div>
@@ -577,10 +583,7 @@ function Events() {
                 ) : (
                   <>
                     <h2>
-                      {selectedBackendEvent?.name.toUpperCase() ===
-                        "THUNDERBEATS"
-                        ? "CLASH OF BANDS"
-                        : selectedBackendEvent?.name}
+                      {getEventDisplayName(selectedBackendEvent?.name)}
                     </h2>
 
                     <p>
