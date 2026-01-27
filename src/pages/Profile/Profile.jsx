@@ -18,17 +18,6 @@ export default function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // 🔐 Auth guards
-        if (!isLoggedIn()) {
-          window.location.href = "/login";
-          return;
-        }
-
-        if (!isProfileComplete()) {
-          window.location.href = "/login";
-          return;
-        }
-
         const res = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/api/accounts/user-profile-details/`,
           {
@@ -40,6 +29,12 @@ export default function Profile() {
         if (res.status === 401 || res.status === 403) {
           clearAuthCookies();
           window.location.href = "/login";
+          return;
+        }
+
+        if (res.status === 401 || res.status === 403) {
+          clearAuthCookies();
+          window.location.replace("/login");
           return;
         }
 

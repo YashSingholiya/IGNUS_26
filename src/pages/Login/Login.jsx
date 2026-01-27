@@ -20,15 +20,6 @@ import "./Login.css";
 
 export default function Auth() {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (isLoggedIn()) {
-      if (!isProfileComplete()) {
-        setCurrentView("complete-profile");
-      } else {
-        navigate("/profile");
-      }
-    }
-  }, []);
 
   // Views: 'login', 'signup', 'complete-profile'
   const [currentView, setCurrentView] = useState("login");
