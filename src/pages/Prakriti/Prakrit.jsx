@@ -4,8 +4,8 @@ import PrakritiLogo from './assests/1704084756722-removebg-preview.png'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import CounterAnimation from './CounterAnimation';
-
-
+import instaIcon from '/images/Insta.svg' ;
+import mailIcon from '/images/Mail.svg' ;
 
 
 function Prakrit() {
@@ -147,11 +147,11 @@ function Prakrit() {
                         <img src={PrakritiLogo} alt='Prakriti' />
                     </a>
                     <div className="Prakriti_contact" >
-                        <b>Mayank Kunjilwar</b>
+                        <b>Jigyasa Tiwari</b>
                         <br></br>
-                        <a href="tel:+918002204096" className='text-[14px]' >+91 8002204096</a>
+                        <a href="tel:+917000366905" className='text-[14px]' >+91 7000366905</a>
                         <br></br>
-                        <a href="mailto:m23la1014@iitj.ac.in" className='text-[14px]'>m23la1014@iitj.ac.in</a>
+                        <a href="mailto:b23ee1029@iitj.ac.in" className='text-[14px]'>b23ee1029@iitj.ac.in</a>
                     </div>
 
                     <div className="Prakriti_address" >
@@ -162,13 +162,13 @@ function Prakrit() {
 
                     <div className="social-media-handles">
                         <button> 
-                            <a href="mailto:m23la1014@iitj.ac.in"> 
-                                <img src="https://ignus-23-dz52zm5qd-panyalasainathreddy.vercel.app/static/igmun/bxl_gmail.png" /> 
+                            <a href="mailto:b23ee1029@iitj.ac.in"> 
+                                <img src={mailIcon} /> 
                             </a>
                         </button>
                         <button> 
                             <a href="https://www.instagram.com/prakriti_iitj/" target="_blank" rel="noreferrer"> 
-                            <img src="https://ignus-23-dz52zm5qd-panyalasainathreddy.vercel.app/static/igmun/mdi_instagram.png" /> 
+                            <img src={instaIcon} /> 
                             </a>
                         </button>
                     </div>

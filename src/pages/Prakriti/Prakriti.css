@@ -459,6 +459,18 @@ footer img {
     margin-left: 30px;
 }
 
+.social-media-handles img {
+    width: 50px;
+    height: 50px;
+}
+
+@media screen and (max-width: 600px) {
+    .social-media-handles img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
 .social-media-handles button {
     border: none;
 }
