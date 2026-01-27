@@ -7,6 +7,11 @@ import wheel_circle from "./assets/wheel_circle.svg";
 import wheel_stand from "./assets/wheel_stand.svg";
 import cloud_2 from "./assets/cloud_2.png";
 import devicon_google from "./assets/devicon_google.svg";
+import {
+  isProfileComplete,
+  isLoggedIn,
+  isGoogleUser,
+} from "../../utils/cookies";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +20,15 @@ import "./Login.css";
 
 export default function Auth() {
   const navigate = useNavigate();
+  useEffect(() => {
+    if (isLoggedIn()) {
+      if (!isProfileComplete()) {
+        setCurrentView("complete-profile");
+      } else {
+        navigate("/profile");
+      }
+    }
+  }, []);
 
   // Views: 'login', 'signup', 'complete-profile'
   const [currentView, setCurrentView] = useState("login");
@@ -174,6 +188,7 @@ export default function Auth() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include", // 🔥 REQUIRED
           body: JSON.stringify({
             username: loginData.email,
             password: loginData.password,
@@ -185,40 +200,35 @@ export default function Auth() {
 
       if (!res.ok) {
         if (text.toLowerCase().includes("google")) {
-          toast.info(
-            "This account was created using Google. Please sign in with Google.",
-          );
+          toast.info("This account uses Google login");
+        } else if (res.status === 404) {
+          toast.error("Invalid email or password");
         } else {
-          toast.error(text || "Invalid credentials");
+          toast.error(text || "Login failed");
         }
         return;
       }
 
-      const data = JSON.parse(text);
+      // ✅ cookies are already set by backend
+      if (!isLoggedIn()) {
+        toast.error("Login failed. Cookies not set.");
+        return;
+      }
 
-      // 🔥 STORE AUTH STATE
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.refresh);
-      localStorage.setItem("isProfileComplete", String(data.profile_complete));
-      localStorage.setItem("isGoogle", String(data.is_google));
-
-      if (!data.profile_complete) {
+      if (!isProfileComplete()) {
         transitionTo("complete-profile");
       } else {
         navigate("/profile");
       }
-    } catch {
-      toast.error("Something went wrong. Please try again.");
+    } catch (err) {
+      console.error(err);
+      toast.error("Network error. Please try again.");
     }
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     if (!isSignupValid()) return;
-    if (signupData.password !== signupData.confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
 
     try {
       const res = await fetch(
@@ -226,6 +236,7 @@ export default function Auth() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify({
             first_name: signupData.firstName,
             last_name: signupData.lastName,
@@ -236,8 +247,7 @@ export default function Auth() {
       );
 
       if (res.status === 409) {
-        toast.info("Account already exists. Please sign in.");
-        setLoginData({ email: signupData.email, password: "" });
+        toast.info("Account already exists. Please login.");
         transitionTo("login");
         return;
       }
@@ -246,15 +256,8 @@ export default function Auth() {
         toast.error("Signup failed");
         return;
       }
-      const data = await res.json();
 
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.refresh);
-      localStorage.setItem("isProfileComplete", "false");
-      localStorage.setItem("isGoogle", "false");
-
-      transitionTo("complete-profile");
-
+      // cookies set automatically
       transitionTo("complete-profile");
     } catch {
       toast.error("Signup failed");
@@ -279,43 +282,31 @@ export default function Auth() {
       formData.append("state", profileData.state);
       formData.append("referral_code", profileData.referralCode ?? "");
 
-      if (profileData.govId) {
-        formData.append("govt_id", profileData.govId);
-      }
-
-      if (profileData.collegeId) {
+      if (profileData.govId) formData.append("govt_id", profileData.govId);
+      if (profileData.collegeId)
         formData.append("clg_id", profileData.collegeId);
-      }
-
-      const token = localStorage.getItem("access");
 
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/accounts/user-profile/`,
         {
           method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          credentials: "include", // 🔥 REQUIRED
           body: formData,
         },
       );
 
-      const data = await res.json();
-
       if (!res.ok) {
-        console.error(data);
-        alert(data?.detail || "Profile update failed");
+        const msg = await res.text();
+        toast.error(msg || "Profile update failed");
         return;
       }
 
-      console.log("Profile saved:", data);
-      localStorage.setItem("isProfileComplete", "true");
-
+      toast.success("Profile completed 🎉");
       setShowModal(false);
       navigate("/profile");
     } catch (err) {
-      console.error("Profile error:", err);
-      alert("Something went wrong while saving profile");
+      console.error(err);
+      toast.error("Something went wrong");
     }
   };
 
@@ -579,7 +570,11 @@ export default function Auth() {
                     className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   >
                     {GENDER_OPTIONS.map((g) => (
-                      <option key={g.value} value={g.value} className="bg-purple-900 text-white">
+                      <option
+                        key={g.value}
+                        value={g.value}
+                        className="bg-purple-900 text-white"
+                      >
                         {g.label}
                       </option>
                     ))}
@@ -610,7 +605,11 @@ export default function Auth() {
                     className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   >
                     {YEAR_OPTIONS.map((y) => (
-                      <option key={y.value} value={y.value} className="bg-purple-900 text-white">
+                      <option
+                        key={y.value}
+                        value={y.value}
+                        className="bg-purple-900 text-white"
+                      >
                         {y.label}
                       </option>
                     ))}
@@ -624,11 +623,19 @@ export default function Auth() {
                     required
                     className="w-full px-4 py-3 rounded-full bg-white/20 text-white placeholder-white border border-white/30 focus:outline-none focus:border-white"
                   >
-                    <option value="" disabled className="bg-purple-900 text-white">
+                    <option
+                      value=""
+                      disabled
+                      className="bg-purple-900 text-white"
+                    >
                       Select State
                     </option>
                     {STATE_OPTIONS.map((s) => (
-                      <option key={s.value} value={s.value} className="bg-purple-900 text-white">
+                      <option
+                        key={s.value}
+                        value={s.value}
+                        className="bg-purple-900 text-white"
+                      >
                         {s.label}
                       </option>
                     ))}
