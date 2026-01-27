@@ -53,7 +53,6 @@ export default function Passes() {
 
   return (
     <>
-      <Navbar />
 
       <div className="passes-page">
         <div className="passes-bg-overlay"></div>

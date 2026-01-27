@@ -14,13 +14,16 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/account/logout/`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/account/logout/`, {
         method: "POST",
         credentials: "include",
       });
+      console.log("Logout response:", response.status);
     } catch (error) {
       console.error("Logout error:", error);
     }
+    // Clear cookies on frontend as fallback
+    clearAuthCookies();
     window.location.href = "/login";
   };
 
@@ -147,7 +150,7 @@ export default function Navbar() {
                     <button
                       onClick={() => {
                         setOpen(false);
-                        handleLogout();
+                        handleLogout;
                       }}
                       className="w-full text-left py-2 font-rosiana text-lg text-purple-300"
                     >
