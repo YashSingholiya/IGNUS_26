@@ -14,8 +14,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     clearAuthCookies();
-    navigate("/login");
-    window.location.reload();
+    window.location.href = "/login";
   };
 
   // Close mobile menu on resize to desktop
@@ -76,7 +75,7 @@ export default function Navbar() {
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 rounded-full bg-purple-600 text-white font-medium hover:bg-purple-700 transition"
+                  className="px-4 py-2 rounded-full bg-purple-600 text-white font-medium hover:bg-purple-700 transition ml-2"
                 >
                   Logout
                 </button>
