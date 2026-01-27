@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { navLinks } from "./navLinks";
 import logo from "../../assets/logo.svg";
 import profile from "../../assets/profile.svg";
-import { isLoggedIn, isProfileComplete} from "../../utils/cookies";
+import { isLoggedIn, isProfileComplete } from "../../utils/cookies";
 
 
 export default function Navbar() {
@@ -35,7 +35,7 @@ export default function Navbar() {
               <img
                 src={logo}
                 alt="Ignus"
-                className="h-12 md:h-14 w-auto relative z-10"
+                className="h-12 md:h-14 w-auto relative z-10 invert"
               />
             </Link>
           </div>
@@ -46,7 +46,7 @@ export default function Navbar() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="font-rosiana text-base md:text-lg tracking-wide hover:text-purple-300 transition-colors"
+                  className="font-rosiana text-base md:text-lg tracking-wide ease-out hover:text-purple-300 transition-all duration-200 hover:scale-[1.1] inline-block"
                 >
                   {link.label}
                 </a>

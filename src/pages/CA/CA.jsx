@@ -38,7 +38,7 @@ const CA = () => {
         <video
           ref={videoRef}
           className="bg-video"
-          src="/celebs.mp4"
+          src="/celebs.webm"
           autoPlay
           muted
           loop
