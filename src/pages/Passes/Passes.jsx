@@ -14,11 +14,7 @@ const PassCard = ({ variant, title, subtitle, price }) => {
     <div className={`pass-card ${variant}`}>
       <div className="pass-card-header">
         <h3 className="pass-title">{title}</h3>
-        {(variant === "gold" || variant === "silver" || variant === "glass") && (
-          <span className={`verified-badge ${variant === "gold" ? "" : "glass-badge"}`}>
-            ✓
-          </span>
-        )}
+        
       </div>
 
       <p className="pass-subtitle">{subtitle}</p>

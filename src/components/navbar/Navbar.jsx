@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { navLinks } from "./navLinks";
 import logo from "../../assets/logo.svg";
 import profile from "../../assets/profile.svg";
-import { isLoggedIn, isProfileComplete } from "../../utils/cookies";
+import { isLoggedIn, isProfileComplete, clearAuthCookies } from "../../utils/cookies";
 
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   // ✅ login state from cookie
 
+  const handleLogout = () => {
+    clearAuthCookies();
+    navigate("/login");
+    window.location.reload();
+  };
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
@@ -55,18 +61,26 @@ export default function Navbar() {
           </ul>
 
           {/* Desktop Right Section */}
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-3">
             {isLoggedIn() && isProfileComplete() ? (
-              <Link
-                to="/profile"
-                className="transition-opacity hover:opacity-80"
-              >
-                <img
-                  src={profile}
-                  alt="Profile"
-                  className="h-8 w-8"
-                />
-              </Link>
+              <>
+                <Link
+                  to="/profile"
+                  className="transition-opacity hover:opacity-80"
+                >
+                  <img
+                    src={profile}
+                    alt="Profile"
+                    className="h-8 w-8"
+                  />
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 rounded-full bg-purple-600 text-white font-medium hover:bg-purple-700 transition"
+                >
+                  Logout
+                </button>
+              </>
             ) : (
               <Link
                 to="/login"
@@ -107,21 +121,36 @@ export default function Navbar() {
               ))}
 
               {/* Mobile Auth Section */}
-              <li>
-                {isLoggedIn() && isProfileComplete() ? (
-                  <Link
-                    to="/profile"
-                    onClick={() => setOpen(false)}
-                    className="flex items-center gap-2 py-2 font-rosiana text-lg"
-                  >
-                    <img
-                      src={profile}
-                      alt="Profile"
-                      className="h-6 w-6"
-                    />
-                    Profile
-                  </Link>
-                ) : (
+              {isLoggedIn() && isProfileComplete() ? (
+                <>
+                  <li>
+                    <Link
+                      to="/profile"
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-2 py-2 font-rosiana text-lg"
+                    >
+                      <img
+                        src={profile}
+                        alt="Profile"
+                        className="h-6 w-6"
+                      />
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => {
+                        setOpen(false);
+                        handleLogout();
+                      }}
+                      className="w-full text-left py-2 font-rosiana text-lg text-purple-300"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <li>
                   <Link
                     to="/login"
                     onClick={() => setOpen(false)}
@@ -129,8 +158,8 @@ export default function Navbar() {
                   >
                     Login / Register
                   </Link>
-                )}
-              </li>
+                </li>
+              )}
             </ul>
           </div>
         )}
