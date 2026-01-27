@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
-import mascot_video from "../assets/video_mascot.mp4";
+import mascot_video from "../assets/video_mascot.webm";
 
 export default function MascotSection() {
   const videoRef = useRef(null);
