@@ -19,7 +19,7 @@ export const isCA = () => getCookie("isCA") === "true";
 export const getIgnusID = () => getCookie("ignusID");
 
 export const clearAuthCookies = () => {
-  [
+  const cookies = [
     "access",
     "refresh",
     "LoggedIn",
@@ -27,7 +27,10 @@ export const clearAuthCookies = () => {
     "isProfileComplete",
     "isCA",
     "ignusID",
-  ].forEach((cookie) => {
+  ];
+
+  cookies.forEach((cookie) => {
     document.cookie = `${cookie}=; Max-Age=0; path=/`;
+    document.cookie = `${cookie}=; Max-Age=0; path=/; domain=${window.location.hostname}`;
   });
 };
