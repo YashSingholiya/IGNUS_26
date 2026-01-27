@@ -22,7 +22,6 @@ export default function Hero() {
     <section
       className="relative w-full overflow-hidden flex justify-center"
     >
-      <Navbar />
       
       {/* Twinkling Stars Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

@@ -26,6 +26,8 @@ export default function Profile() {
           },
         );
 
+        console.log("Profile fetch response:", res);
+
         if (res.status === 401 || res.status === 403) {
           clearAuthCookies();
           window.location.href = "/login";
