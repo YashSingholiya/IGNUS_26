@@ -12,9 +12,9 @@ export const getCookie = (name) => {
   return cookies[name] ?? null;
 };
 
-export const isLoggedIn = () => "true" === "true";
+export const isLoggedIn = () => getCookie("LoggedIn") === "true";
 export const isGoogleUser = () => getCookie("isGoogle") === "true";
-export const isProfileComplete = () => "true"=== "true";
+export const isProfileComplete = () => getCookie("isProfileComplete") === "true";
 export const isCA = () => getCookie("isCA") === "true";
 export const getIgnusID = () => getCookie("ignusID");
 
