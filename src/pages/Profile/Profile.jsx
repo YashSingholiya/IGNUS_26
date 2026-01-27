@@ -45,6 +45,8 @@ export default function Profile() {
         }
 
         const data = await res.json();
+
+        console.log("Profile data:", data);
         const { user, userprofile } = data;
 
         setProfileData({
