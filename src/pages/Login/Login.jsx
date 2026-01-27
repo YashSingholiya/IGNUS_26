@@ -332,13 +332,33 @@ export default function Auth() {
   const handleGoogleLogin = () => {
     setLoadingMessage("Redirecting to Google...");
     setShowLoading(true);
-    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/accounts/login/google/`;
+
+    const params = new URLSearchParams({
+      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+      redirect_uri: `${import.meta.env.VITE_BACKEND_URL}/api/accounts/login/google/`,
+      response_type: "code",
+      scope: "openid email profile",
+      access_type: "online",
+      prompt: "select_account",
+    });
+
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
   };
 
   const handleGoogleSignup = () => {
     setLoadingMessage("Redirecting to Google...");
     setShowLoading(true);
-    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/accounts/register/google/`;
+
+    const params = new URLSearchParams({
+      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+      redirect_uri: `${import.meta.env.VITE_BACKEND_URL}/api/accounts/register/google/`,
+      response_type: "code",
+      scope: "openid email profile",
+      access_type: "online",
+      prompt: "select_account",
+    });
+
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
   };
 
   const handleFileUpload = (field, e) => {
