@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import mascot from "./assets/mascot.svg";
@@ -25,6 +26,8 @@ export default function Auth() {
   const [currentView, setCurrentView] = useState("login");
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState("");
 
   // const getCookie = (name) => {
   //   return document.cookie
@@ -171,6 +174,10 @@ export default function Auth() {
   // Form handlers
   const handleLogin = async (e) => {
     e.preventDefault();
+    // show loading overlay for at least 2s after clicking Sign In
+    setLoadingMessage("Signing you in...");
+    setShowLoading(true);
+    setTimeout(() => setShowLoading(false), 2000);
     if (!isLoginValid()) return;
 
     try {
@@ -216,6 +223,7 @@ export default function Auth() {
       toast.error("Network error. Please try again.");
     }
   };
+
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -285,6 +293,9 @@ export default function Auth() {
           body: formData,
         },
       );
+      setLoadingMessage("Signing you up...");
+      setShowLoading(true);
+      setTimeout(() => setShowLoading(false), 2000);
 
       if (!res.ok) {
         const msg = await res.text();
@@ -332,6 +343,7 @@ export default function Auth() {
   return (
     <>
       <ToastContainer position="top-right" autoClose={4000} />
+      {showLoading && <Loading message={loadingMessage || "Loading..."} />}
       <main
         className="pt-16 min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden"
         style={{
