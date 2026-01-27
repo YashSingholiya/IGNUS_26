@@ -29,14 +29,7 @@ import cos from "./images/cos.jpeg";
 import "./Events.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
-const getAccessToken = () => {
-  return localStorage.getItem("access");
-};
-
-const isLoggedIn = () => {
-  return !!getAccessToken();
-};
+import { isLoggedIn, isProfileComplete } from "../../utils/cookies";
 
 const EVENT_IMAGE_MAP = {
   // Categories / Main Types
@@ -66,13 +59,19 @@ const EVENT_IMAGE_MAP = {
   STAGEPLAY: Stagplay,
 
   // Art Sub-events
-  FUNKYFACES: "https://scontent.fdel27-7.fna.fbcdn.net/v/t39.30808-6/480694281_1145653750351494_9015891246071082618_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EDQkNcproQUQ7kNvwHb7giO&_nc_oc=AdnbHB7kovReB6_eX1q9Yw-0-Vp098C1xVwfaa1PbKos6k-RApZE5bolU5g5RPgdxfA&_nc_zt=23&_nc_ht=scontent.fdel27-7.fna&_nc_gid=fSuB3_rY94F8SZHrnEMVyA&oh=00_Afp6nmIpHezTBcvRKvkxnnm2hWe6NEIGGd82N9UyFSLdgQ&oe=697D7BE3",
+  FUNKYFACES:
+    "https://scontent.fdel27-7.fna.fbcdn.net/v/t39.30808-6/480694281_1145653750351494_9015891246071082618_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EDQkNcproQUQ7kNvwHb7giO&_nc_oc=AdnbHB7kovReB6_eX1q9Yw-0-Vp098C1xVwfaa1PbKos6k-RApZE5bolU5g5RPgdxfA&_nc_zt=23&_nc_ht=scontent.fdel27-7.fna&_nc_gid=fSuB3_rY94F8SZHrnEMVyA&oh=00_Afp6nmIpHezTBcvRKvkxnnm2hWe6NEIGGd82N9UyFSLdgQ&oe=697D7BE3",
   ARTEES: artees,
-  CHARCOALART: "https://www.cbcity.nsw.gov.au/m/DMbsAblx0XpRPAB5JtjMnzcyviiMDPyPlAFPgmLk7FY/resize:fill:412:412:1:1/g:fp:0.5:0.5/sm:1/dpr:2.625/L3NpdGVzL2RlZmF1bHQvZmlsZXMvMjAyNS0xMi9hZG9iZXN0b2NrXzE0NDA5NzY5MzQuanBn",
-  GRAFFITIWALLS: "https://graffiti-artist.net/wp-content/uploads/2023/07/DSC03800.jpg",
-  DOODLING: "https://www.carandache.com/ch/en/content_images/01_CdA_SEO_Doodling_041.jpg",
-  RAPIDO: "https://primary.jwwb.nl/public/s/z/k/temp-valgczriyakksipnfhlt/6r7ia0/whitehighlighterpens4.webp",
-  DIGITALART: "https://static.skillshare.com/uploads/discussion/tmp/5619e779.jpg",
+  CHARCOALART:
+    "https://www.cbcity.nsw.gov.au/m/DMbsAblx0XpRPAB5JtjMnzcyviiMDPyPlAFPgmLk7FY/resize:fill:412:412:1:1/g:fp:0.5:0.5/sm:1/dpr:2.625/L3NpdGVzL2RlZmF1bHQvZmlsZXMvMjAyNS0xMi9hZG9iZXN0b2NrXzE0NDA5NzY5MzQuanBn",
+  GRAFFITIWALLS:
+    "https://graffiti-artist.net/wp-content/uploads/2023/07/DSC03800.jpg",
+  DOODLING:
+    "https://www.carandache.com/ch/en/content_images/01_CdA_SEO_Doodling_041.jpg",
+  RAPIDO:
+    "https://primary.jwwb.nl/public/s/z/k/temp-valgczriyakksipnfhlt/6r7ia0/whitehighlighterpens4.webp",
+  DIGITALART:
+    "https://static.skillshare.com/uploads/discussion/tmp/5619e779.jpg",
   PHOTOSHOPBATTLE: "https://img-c.udemycdn.com/course/480x270/5346430_f677.jpg",
 
   // Music Events
@@ -82,38 +81,51 @@ const EVENT_IMAGE_MAP = {
   DJBATTLE: dj,
 
   // Literature Events
-  WORDZEE: "https://mb.cision.com/Public/16579/2943123/8e44b9b5c4968475_800x800ar.png",
-  SCRABBLE: "https://images.hindustantimes.com/img/2022/11/03/550x309/_380b84aa-f042-11e5-ac5f-8ebef762d494_1667457238330_1667457238330.jpg",
-  SLAMPOETRY: "https://www.kulturfabrikkrawatte.de/wp-content/uploads/2022/04/PoetrySlamLogo-e1655074794832.jpeg",
+  WORDZEE:
+    "https://mb.cision.com/Public/16579/2943123/8e44b9b5c4968475_800x800ar.png",
+  SCRABBLE:
+    "https://images.hindustantimes.com/img/2022/11/03/550x309/_380b84aa-f042-11e5-ac5f-8ebef762d494_1667457238330_1667457238330.jpg",
+  SLAMPOETRY:
+    "https://www.kulturfabrikkrawatte.de/wp-content/uploads/2022/04/PoetrySlamLogo-e1655074794832.jpeg",
   PUNWARS: pun,
-  "3VS3DEBATE": "https://observatory.tec.mx/wp-content/uploads/2022/08/debate-escolar.jpg",
+  "3VS3DEBATE":
+    "https://observatory.tec.mx/wp-content/uploads/2022/08/debate-escolar.jpg",
   STEW: stew,
   JAM: "https://static.wixstatic.com/media/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg/v1/fill/w_850,h_750,fp_0.50_0.50,lg_2,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg",
-  CREATIVEWRITING: "https://www.edynamiclearning.com/wp-content/uploads/2019/04/Creative-Writing-I-HIGH-RES.jpg",
-  CRYPTICCROSSWORD: "https://events.mosman.nsw.gov.au/sites/default/files/styles/large/public/img/cryptic_crossword_club_eventsmosman.jpg?itok=UxoULuC7",
+  CREATIVEWRITING:
+    "https://www.edynamiclearning.com/wp-content/uploads/2019/04/Creative-Writing-I-HIGH-RES.jpg",
+  CRYPTICCROSSWORD:
+    "https://events.mosman.nsw.gov.au/sites/default/files/styles/large/public/img/cryptic_crossword_club_eventsmosman.jpg?itok=UxoULuC7",
 
   // Quiz Events
   MELA: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-  LONEWOLFQUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-  BOLLYWOODQUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  LONEWOLFQUIZ:
+    "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  BOLLYWOODQUIZ:
+    "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
 
   // Film Events
   "IGNUS.JPG": ignus,
-  IGNIGY: "https://www.sparksarts.co.uk/wp-content/uploads/2022/03/Top-10-Easy-Filmmaking-Tips-for-Beginners-2-1024x683.jpg",
-  SHORTMOVIEMAKING: "https://miro.medium.com/v2/resize:fit:1400/1*CHNXavYcG3iSKZfd0oEwzQ.jpeg",
+  IGNIGY:
+    "https://www.sparksarts.co.uk/wp-content/uploads/2022/03/Top-10-Easy-Filmmaking-Tips-for-Beginners-2-1024x683.jpg",
+  SHORTMOVIEMAKING:
+    "https://miro.medium.com/v2/resize:fit:1400/1*CHNXavYcG3iSKZfd0oEwzQ.jpeg",
 
   // Lifestyle Events
   COSPLAY: cos,
-  DIGITALARENA: "https://dancehubtv.uk/wp-content/uploads/2020/11/header-4-1024x424.jpg",
+  DIGITALARENA:
+    "https://dancehubtv.uk/wp-content/uploads/2020/11/header-4-1024x424.jpg",
   DUBSMASH: dub,
-  LOLLAPALOOZA: "https://i.pinimg.com/736x/ac/b7/e2/acb7e24c756e765d16e46f8de451c2f9.jpg",
-  COSTUMEDESIGNING: "https://jdinstituteoffashiontechnology.b-cdn.net/wp-content/uploads/2021/07/Costume-Designing-As-A-Profession-What-Should-You-Expect-Thumbnail.jpg",
-  "MR.ANDMRS.IGNUS": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56haMI-IROURtyA_edjuHQf5hl5N2GOGGDg&s",
+  LOLLAPALOOZA:
+    "https://i.pinimg.com/736x/ac/b7/e2/acb7e24c756e765d16e46f8de451c2f9.jpg",
+  COSTUMEDESIGNING:
+    "https://jdinstituteoffashiontechnology.b-cdn.net/wp-content/uploads/2021/07/Costume-Designing-As-A-Profession-What-Should-You-Expect-Thumbnail.jpg",
+  "MR.ANDMRS.IGNUS":
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56haMI-IROURtyA_edjuHQf5hl5N2GOGGDg&s",
 };
 
 function Events() {
-  const normalizeKey = (str = "") =>
-    str.replace(/\s+/g, "").toUpperCase();
+  const normalizeKey = (str = "") => str.replace(/\s+/g, "").toUpperCase();
 
   const getEventDisplayName = (name) => {
     if (!name) return "";
@@ -294,7 +306,11 @@ function Events() {
 
     console.log("✅ MATCHED TYPE:", matchedType);
 
-    if (!matchedType || !matchedType.events || matchedType.events.length === 0) {
+    if (
+      !matchedType ||
+      !matchedType.events ||
+      matchedType.events.length === 0
+    ) {
       toast.info("Events will be announced soon");
       setIsModalOpen(false);
       setModalEvents([]);
@@ -310,25 +326,32 @@ function Events() {
   }
 
   const handleRegister = async () => {
-    const token = getAccessToken();
-
-    if (!token) {
+    // 🔐 Auth guards
+    if (!isLoggedIn()) {
       toast.info("Please login to register for events");
-      setTimeout(() => navigate("/login"), 1500);
+      setTimeout(() => navigate("/login"), 1200);
       return;
     }
+
+    if (!isProfileComplete()) {
+      toast.info("Please complete your profile first");
+      setTimeout(() => navigate("/login"), 1200);
+      return;
+    }
+
     if (!selectedBackendEvent) {
       toast.error("Please select an event");
       return;
     }
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/events/register/`,
         {
           method: "POST",
+          credentials: "include", // 🔥 REQUIRED
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             event_name: selectedBackendEvent.name,
@@ -339,13 +362,7 @@ function Events() {
       const data = await response.json();
 
       if (!response.ok) {
-        if (typeof data === "string") {
-          toast.error(data);
-        } else if (data.Message) {
-          toast.error(data.Message);
-        } else {
-          toast.error("Registration failed");
-        }
+        toast.error(data?.Message || data || "Registration failed");
         return;
       }
 
@@ -583,8 +600,9 @@ function Events() {
           (tab) => (
             <button
               key={tab}
-              className={`footer-btn ${tab.toLowerCase()} ${activeTab === tab ? "active" : ""
-                }`}
+              className={`footer-btn ${tab.toLowerCase()} ${
+                activeTab === tab ? "active" : ""
+              }`}
               onClick={() => {
                 setActiveTab(tab);
                 if (tab === "CULTURAL") scrollTo(culturalRef);
@@ -615,7 +633,7 @@ function Events() {
                   <img
                     src={
                       EVENT_IMAGE_MAP[
-                      normalizeKey(selectedBackendEvent?.name)
+                        normalizeKey(selectedBackendEvent?.name)
                       ] ||
                       selectedBackendEvent?.cover ||
                       selectedCategoryImage
@@ -645,9 +663,7 @@ function Events() {
                   </>
                 ) : (
                   <>
-                    <h2>
-                      {getEventDisplayName(selectedBackendEvent?.name)}
-                    </h2>
+                    <h2>{getEventDisplayName(selectedBackendEvent?.name)}</h2>
 
                     <p>
                       <strong>Venue:</strong>{" "}
@@ -662,7 +678,11 @@ function Events() {
                       className="modal-register-btn"
                       onClick={handleRegister}
                     >
-                      {isLoggedIn() ? "REGISTER" : "LOGIN TO REGISTER"}
+                      {!isLoggedIn()
+                        ? "LOGIN TO REGISTER"
+                        : !isProfileComplete()
+                          ? "COMPLETE PROFILE TO REGISTER"
+                          : "REGISTER"}
                     </button>
                   </>
                 )}
