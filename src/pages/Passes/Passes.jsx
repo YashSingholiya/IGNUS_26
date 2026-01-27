@@ -2,14 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import "./Passes.css";
+import {
+  isLoggedIn,
+  isProfileComplete,
+} from "../../utils/cookies";
 
-/* -------- Helper to read cookie -------- */
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-  return null;
-}
 
 // Helper component for individual pass cards
 const PassCard = ({ variant, title, subtitle, price }) => {
@@ -53,7 +50,9 @@ const passesData = [
 ];
 
 export default function Passes() {
-  const isLoggedIn = !! localStorage.getItem("access") || getCookie("LoggedIn") === "true";
+  const loggedIn = isLoggedIn();
+  const profileComplete = isProfileComplete();
+
 
   return (
     <>
@@ -66,7 +65,7 @@ export default function Passes() {
           <h1 className="passes-heading">PASSES</h1>
 
           {/* 🔐 Buy Pass only for logged-in users */}
-          {isLoggedIn ? (
+          {loggedIn && profileComplete ? (
             <a
               href="https://form.qfixonline.com/ignuspps"
               target="_blank"
