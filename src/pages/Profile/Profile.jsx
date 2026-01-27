@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import profileBg from "./assets/profile.png";
 import "./Profile.css";
+import {
+  isLoggedIn,
+  isProfileComplete,
+  clearAuthCookies,
+} from "../../utils/cookies";
 
 export default function Profile() {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -13,21 +18,30 @@ export default function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const accessToken = localStorage.getItem("access");
+        // 🔐 Auth guards
+        if (!isLoggedIn()) {
+          window.location.href = "/login";
+          return;
+        }
 
-        if (!accessToken) {
-          throw new Error("No access token found");
+        if (!isProfileComplete()) {
+          window.location.href = "/login";
+          return;
         }
 
         const res = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/api/accounts/user-profile-details/`,
           {
             method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
+            credentials: "include", // 🔥 REQUIRED
           },
         );
+
+        if (res.status === 401 || res.status === 403) {
+          clearAuthCookies();
+          window.location.href = "/login";
+          return;
+        }
 
         if (!res.ok) {
           throw new Error(`Failed to fetch profile (${res.status})`);
@@ -61,9 +75,7 @@ export default function Profile() {
         setEventsRegistered(userprofile.events || []);
       } catch (err) {
         console.error("Profile error:", err);
-
-        // optional: force logout on auth failure
-        localStorage.clear();
+        clearAuthCookies();
         window.location.href = "/login";
       } finally {
         setLoading(false);
@@ -88,7 +100,6 @@ export default function Profile() {
   if (!profileData) {
     return (
       <div className="profile-container">
-        
         <div style={{ color: "#fff", textAlign: "center", marginTop: 120 }}>
           Unable to load profile.
         </div>
