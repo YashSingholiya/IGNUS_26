@@ -31,160 +31,6 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { isLoggedIn, isProfileComplete } from "../../utils/cookies";
 
-const EVENTS = {
-  DANCE: [
-    "Street Battle",
-    "Group Dance - Nrityansh",
-    "Solo Dance",
-    "Duet Dance",
-  ],
-
-  MUSIC: [
-    "Band Competition",
-    "Pair On Stage",
-    "Solo Singing",
-    "Rap Battle",
-  ],
-
-  DRAMA: [
-    "Stage Play - Theatre",
-    "Street Play - Nukkad",
-    "Monoact",
-    "Mime",
-  ],
-
-  FINE_ARTS: [
-    "Face Painting",
-    "T shirt Painting",
-    "Doodling",
-    "Charcoal Painting",
-    "Rapido",
-    "Costume Design",
-    "MUN",
-  ],
-
-  FASHION: [
-    "Mr. and Ms. Ignus",
-    "Fashion Show - Antarang",
-  ],
-
-  DIGITAL_MEDIA: [
-    "Short Filmmaking Competition",
-    "Photostory (Online)",
-    "Themed Photography (Online)",
-    "Photoshop Battle",
-  ],
-
-  LITERATURE: [
-    "Word Games",
-    "Pun Wars",
-    "Cryptic Crossword",
-    "Scrabble",
-    "Slam Poetry - English",
-    "Slam Poetry - Hindi/Urdu",
-    "JAM",
-    "Standup Comedy",
-  ],
-
-  QUIZ: [
-    "Meme Quiz",
-    "TLC Quiz",
-    "Bollywood Quiz",
-    "General Quiz",
-  ],
-
-  ONLINE: [
-    "Reel Making",
-    "Meme Making",
-    "Dubsmash Competition",
-  ],
-};
-
-const SUB_EVENT_IMAGE_MAP = {
-  "STREET BATTLE": war,
-  "GROUP DANCE - NRITYANSH": nritya,
-  "SOLO DANCE": stag,
-  "DUET DANCE": duet,
-
-  "BAND COMPETITION": dj,
-  "PAIR ON STAGE": duetto,
-  "SOLO SINGING": aria,
-  "RAP BATTLE": beat,
-
-  "STAGE PLAY - THEATRE": Stagplay,
-  "STREET PLAY - NUKKAD": aayam,
-  "MONOACT": ekalnatya,
-  "MIME": "https://alvascollege.org/wp-content/uploads/2014/11/mime-team.jpg",
-
-  "FACE PAINTING": "https://scontent.fdel27-7.fna.fbcdn.net/v/t39.30808-6/480694281_1145653750351494_9015891246071082618_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EDQkNcproQUQ7kNvwHb7giO&_nc_oc=AdnbHB7kovReB6_eX1q9Yw-0-Vp098C1xVwfaa1PbKos6k-RApZE5bolU5g5RPgdxfA&_nc_zt=23&_nc_ht=scontent.fdel27-7.fna&_nc_gid=fSuB3_rY94F8SZHrnEMVyA&oh=00_Afp6nmIpHezTBcvRKvkxnnm2hWe6NEIGGd82N9UyFSLdgQ&oe=697D7BE3",
-  "T SHIRT PAINTING": tshirt,
-  "DOODLING": "https://www.carandache.com/ch/en/content_images/01_CdA_SEO_Doodling_041.jpg",
-  "CHARCOAL PAINTING": "https://www.cbcity.nsw.gov.au/m/DMbsAblx0XpRPAB5JtjMnzcyviiMDPyPlAFPgmLk7FY/resize:fill:412:412:1:1/g:fp:0.5:0.5/sm:1/dpr:2.625/L3NpdGVzL2RlZmF1bHQvZmlsZXMvMjAyNS0xMi9hZG9iZXN0b2NrXzE0NDA5NzY5MzQuanBn",
-  "RAPIDO": "https://primary.jwwb.nl/public/s/z/k/temp-valgczriyakksipnfhlt/6r7ia0/whitehighlighterpens4.webp",
-  "COSTUME DESIGN": "https://jdinstituteoffashiontechnology.b-cdn.net/wp-content/uploads/2021/07/Costume-Designing-As-A-Profession-What-Should-You-Expect-Thumbnail.jpg",
-  "MUN": "https://cdn.shopify.com/s/files/1/0367/8135/9239/t/2/assets/pf-37364aa4--DSC0145.JPG?v=1628027810",
-
-  "MR. AND MS. IGNUS":
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56haMI-IROURtyA_edjuHQf5hl5N2GOGGDg&s",
-  "FASHION SHOW - ANTARANG": antarang,
-
-
-  /* ===================== DIGITAL MEDIA ===================== */
-  "SHORT FILMMAKING COMPETITION":
-    "https://miro.medium.com/v2/resize:fit:1400/1*CHNXavYcG3iSKZfd0oEwzQ.jpeg",
-
-  "PHOTOSTORY (ONLINE)":
-    "https://static.skillshare.com/uploads/discussion/tmp/5619e779.jpg",
-
-  "THEMED PHOTOGRAPHY (ONLINE)":
-    "https://www.sparksarts.co.uk/wp-content/uploads/2022/03/Top-10-Easy-Filmmaking-Tips-for-Beginners-2-1024x683.jpg",
-
-  "PHOTOSHOP BATTLE":
-    "https://img-c.udemycdn.com/course/480x270/5346430_f677.jpg",
-
-
-  /* ===================== LITERATURE ===================== */
-  "WORD GAMES":
-    "https://play-lh.googleusercontent.com/2ouyPCoPYIntB5Qwo7KjGGllgRiQG1aBHVzUnWP6Clk3QWAISpTVmud37df4XZTTcz8",
-
-  "PUN WARS": pun,
-
-  "CRYPTIC CROSSWORD":
-    "https://events.mosman.nsw.gov.au/sites/default/files/styles/large/public/img/cryptic_crossword_club_eventsmosman.jpg?itok=UxoULuC7",
-
-  "SCRABBLE":
-    "https://images.hindustantimes.com/img/2022/11/03/550x309/_380b84aa-f042-11e5-ac5f-8ebef762d494_1667457238330_1667457238330.jpg",
-
-  "SLAM POETRY - ENGLISH":
-    "https://www.kulturfabrikkrawatte.de/wp-content/uploads/2022/04/PoetrySlamLogo-e1655074794832.jpeg",
-
-  "SLAM POETRY - HINDI/URDU":
-    "https://www.kulturfabrikkrawatte.de/wp-content/uploads/2022/04/PoetrySlamLogo-e1655074794832.jpeg",
-
-  "JAM":
-    "https://static.wixstatic.com/media/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg",
-
-  "STANDUP COMEDY":
-    "https://img.freepik.com/free-vector/stand-up-comedy-logo-with-microphone_1308-95780.jpg?semt=ais_hybrid&w=740&q=80",
-
-
-  /* ===================== QUIZ ===================== */
-  "MEME QUIZ":
-    "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-
-  "TLC QUIZ":
-    "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-
-  "BOLLYWOOD QUIZ":
-    "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-
-  "GENERAL QUIZ":
-    "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-
-};
-
-
-
 const EVENT_IMAGE_MAP = {
   // Categories / Main Types
   DANCE: dance,
@@ -203,79 +49,79 @@ const EVENT_IMAGE_MAP = {
   THUNDERBEATS: clash,
   AAYAAM: aayam,
 
-  // // Dance Sub-events
-  // Street_Battle: stag,
-  // ANYBODYCANDUET: duet,
-  // RAWWAR: war,
+  // Dance Sub-events
+  STAGMOVES: stag,
+  ANYBODYCANDUET: duet,
+  RAWWAR: war,
 
-  // // Drama Sub-events
-  // EKALNATYA: ekalnatya,
-  // STAGEPLAY: Stagplay,
+  // Drama Sub-events
+  EKALNATYA: ekalnatya,
+  STAGEPLAY: Stagplay,
 
-  // // Art Sub-events
-  // FUNKYFACES:
-  //   "https://scontent.fdel27-7.fna.fbcdn.net/v/t39.30808-6/480694281_1145653750351494_9015891246071082618_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EDQkNcproQUQ7kNvwHb7giO&_nc_oc=AdnbHB7kovReB6_eX1q9Yw-0-Vp098C1xVwfaa1PbKos6k-RApZE5bolU5g5RPgdxfA&_nc_zt=23&_nc_ht=scontent.fdel27-7.fna&_nc_gid=fSuB3_rY94F8SZHrnEMVyA&oh=00_Afp6nmIpHezTBcvRKvkxnnm2hWe6NEIGGd82N9UyFSLdgQ&oe=697D7BE3",
-  // ARTEES: artees,
-  // CHARCOALART:
-  //   "https://www.cbcity.nsw.gov.au/m/DMbsAblx0XpRPAB5JtjMnzcyviiMDPyPlAFPgmLk7FY/resize:fill:412:412:1:1/g:fp:0.5:0.5/sm:1/dpr:2.625/L3NpdGVzL2RlZmF1bHQvZmlsZXMvMjAyNS0xMi9hZG9iZXN0b2NrXzE0NDA5NzY5MzQuanBn",
-  // GRAFFITIWALLS:
-  //   "https://graffiti-artist.net/wp-content/uploads/2023/07/DSC03800.jpg",
-  // DOODLING:
-  //   "https://www.carandache.com/ch/en/content_images/01_CdA_SEO_Doodling_041.jpg",
-  // RAPIDO:
-  //   "https://primary.jwwb.nl/public/s/z/k/temp-valgczriyakksipnfhlt/6r7ia0/whitehighlighterpens4.webp",
-  // DIGITALART:
-  //   "https://static.skillshare.com/uploads/discussion/tmp/5619e779.jpg",
-  // PHOTOSHOPBATTLE: "https://img-c.udemycdn.com/course/480x270/5346430_f677.jpg",
+  // Art Sub-events
+  FUNKYFACES:
+    "https://scontent.fdel27-7.fna.fbcdn.net/v/t39.30808-6/480694281_1145653750351494_9015891246071082618_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EDQkNcproQUQ7kNvwHb7giO&_nc_oc=AdnbHB7kovReB6_eX1q9Yw-0-Vp098C1xVwfaa1PbKos6k-RApZE5bolU5g5RPgdxfA&_nc_zt=23&_nc_ht=scontent.fdel27-7.fna&_nc_gid=fSuB3_rY94F8SZHrnEMVyA&oh=00_Afp6nmIpHezTBcvRKvkxnnm2hWe6NEIGGd82N9UyFSLdgQ&oe=697D7BE3",
+  ARTEES: artees,
+  CHARCOALART:
+    "https://www.cbcity.nsw.gov.au/m/DMbsAblx0XpRPAB5JtjMnzcyviiMDPyPlAFPgmLk7FY/resize:fill:412:412:1:1/g:fp:0.5:0.5/sm:1/dpr:2.625/L3NpdGVzL2RlZmF1bHQvZmlsZXMvMjAyNS0xMi9hZG9iZXN0b2NrXzE0NDA5NzY5MzQuanBn",
+  GRAFFITIWALLS:
+    "https://graffiti-artist.net/wp-content/uploads/2023/07/DSC03800.jpg",
+  DOODLING:
+    "https://www.carandache.com/ch/en/content_images/01_CdA_SEO_Doodling_041.jpg",
+  RAPIDO:
+    "https://primary.jwwb.nl/public/s/z/k/temp-valgczriyakksipnfhlt/6r7ia0/whitehighlighterpens4.webp",
+  DIGITALART:
+    "https://static.skillshare.com/uploads/discussion/tmp/5619e779.jpg",
+  PHOTOSHOPBATTLE: "https://img-c.udemycdn.com/course/480x270/5346430_f677.jpg",
 
-  // // Music Events
-  // ARIA: aria,
-  // DUETTO: duetto,
-  // BEATNICKS: beat,
-  // DJBATTLE: dj,
+  // Music Events
+  ARIA: aria,
+  DUETTO: duetto,
+  BEATNICKS: beat,
+  DJBATTLE: dj,
 
-  // // Literature Events
-  // WORDZEE:
-  //   "https://mb.cision.com/Public/16579/2943123/8e44b9b5c4968475_800x800ar.png",
-  // SCRABBLE:
-  //   "https://images.hindustantimes.com/img/2022/11/03/550x309/_380b84aa-f042-11e5-ac5f-8ebef762d494_1667457238330_1667457238330.jpg",
-  // SLAMPOETRY:
-  //   "https://www.kulturfabrikkrawatte.de/wp-content/uploads/2022/04/PoetrySlamLogo-e1655074794832.jpeg",
-  // PUNWARS: pun,
-  // "3VS3DEBATE":
-  //   "https://observatory.tec.mx/wp-content/uploads/2022/08/debate-escolar.jpg",
-  // STEW: stew,
-  // JAM: "https://static.wixstatic.com/media/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg/v1/fill/w_850,h_750,fp_0.50_0.50,lg_2,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg",
-  // CREATIVEWRITING:
-  //   "https://www.edynamiclearning.com/wp-content/uploads/2019/04/Creative-Writing-I-HIGH-RES.jpg",
-  // CRYPTICCROSSWORD:
-  //   "https://events.mosman.nsw.gov.au/sites/default/files/styles/large/public/img/cryptic_crossword_club_eventsmosman.jpg?itok=UxoULuC7",
+  // Literature Events
+  WORDZEE:
+    "https://mb.cision.com/Public/16579/2943123/8e44b9b5c4968475_800x800ar.png",
+  SCRABBLE:
+    "https://images.hindustantimes.com/img/2022/11/03/550x309/_380b84aa-f042-11e5-ac5f-8ebef762d494_1667457238330_1667457238330.jpg",
+  SLAMPOETRY:
+    "https://www.kulturfabrikkrawatte.de/wp-content/uploads/2022/04/PoetrySlamLogo-e1655074794832.jpeg",
+  PUNWARS: pun,
+  "3VS3DEBATE":
+    "https://observatory.tec.mx/wp-content/uploads/2022/08/debate-escolar.jpg",
+  STEW: stew,
+  JAM: "https://static.wixstatic.com/media/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg/v1/fill/w_850,h_750,fp_0.50_0.50,lg_2,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg",
+  CREATIVEWRITING:
+    "https://www.edynamiclearning.com/wp-content/uploads/2019/04/Creative-Writing-I-HIGH-RES.jpg",
+  CRYPTICCROSSWORD:
+    "https://events.mosman.nsw.gov.au/sites/default/files/styles/large/public/img/cryptic_crossword_club_eventsmosman.jpg?itok=UxoULuC7",
 
-  // // Quiz Events
-  // MELA: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-  // LONEWOLFQUIZ:
-  //   "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-  // BOLLYWOODQUIZ:
-  //   "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  // Quiz Events
+  MELA: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  LONEWOLFQUIZ:
+    "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  BOLLYWOODQUIZ:
+    "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
 
-  // // Film Events
-  // "IGNUS.JPG": ignus,
-  // IGNIGY:
-  //   "https://www.sparksarts.co.uk/wp-content/uploads/2022/03/Top-10-Easy-Filmmaking-Tips-for-Beginners-2-1024x683.jpg",
-  // SHORTMOVIEMAKING:
-  //   "https://miro.medium.com/v2/resize:fit:1400/1*CHNXavYcG3iSKZfd0oEwzQ.jpeg",
+  // Film Events
+  "IGNUS.JPG": ignus,
+  IGNIGY:
+    "https://www.sparksarts.co.uk/wp-content/uploads/2022/03/Top-10-Easy-Filmmaking-Tips-for-Beginners-2-1024x683.jpg",
+  SHORTMOVIEMAKING:
+    "https://miro.medium.com/v2/resize:fit:1400/1*CHNXavYcG3iSKZfd0oEwzQ.jpeg",
 
-  // // Lifestyle Events
-  // COSPLAY: cos,
-  // DIGITALARENA:
-  //   "https://dancehubtv.uk/wp-content/uploads/2020/11/header-4-1024x424.jpg",
-  // DUBSMASH: dub,
-  // LOLLAPALOOZA:
-  //   "https://i.pinimg.com/736x/ac/b7/e2/acb7e24c756e765d16e46f8de451c2f9.jpg",
-  // COSTUMEDESIGNING:
-  //   "https://jdinstituteoffashiontechnology.b-cdn.net/wp-content/uploads/2021/07/Costume-Designing-As-A-Profession-What-Should-You-Expect-Thumbnail.jpg",
-  // "MR.ANDMRS.IGNUS":
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56haMI-IROURtyA_edjuHQf5hl5N2GOGGDg&s",
+  // Lifestyle Events
+  COSPLAY: cos,
+  DIGITALARENA:
+    "https://dancehubtv.uk/wp-content/uploads/2020/11/header-4-1024x424.jpg",
+  DUBSMASH: dub,
+  LOLLAPALOOZA:
+    "https://i.pinimg.com/736x/ac/b7/e2/acb7e24c756e765d16e46f8de451c2f9.jpg",
+  COSTUMEDESIGNING:
+    "https://jdinstituteoffashiontechnology.b-cdn.net/wp-content/uploads/2021/07/Costume-Designing-As-A-Profession-What-Should-You-Expect-Thumbnail.jpg",
+  "MR.ANDMRS.IGNUS":
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56haMI-IROURtyA_edjuHQf5hl5N2GOGGDg&s",
 };
 
 function Events() {
@@ -291,26 +137,26 @@ function Events() {
   const navigate = useNavigate();
   const [selectedCategoryImage, setSelectedCategoryImage] = useState(null);
   const [modalCategory, setModalCategory] = useState(null);
-  // const CATEGORY_TYPE_MAP = {
-  //   CULTURAL: "Cultural Event",
-  //   FLAGSHIP: "Flagship Event",
-  //   INFORMAL: null, // handled separately
-  // };
+  const CATEGORY_TYPE_MAP = {
+    CULTURAL: "Cultural Event",
+    FLAGSHIP: "Flagship Event",
+    INFORMAL: null, // handled separately
+  };
   // ---------- MODAL STATE ----------
-  // const [backendEvents, setBackendEvents] = useState([]);
+  const [backendEvents, setBackendEvents] = useState([]);
   const [modalEvents, setModalEvents] = useState([]);
   const [selectedBackendEvent, setSelectedBackendEvent] = useState(null);
 
-  // useEffect(() => {
-  //   console.log(import.meta.env.VITE_BACKEND_URL)
-  //   fetch(`${import.meta.env.VITE_BACKEND_URL}/events/list`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("✅ EVENTS FROM BACKEND:", data);
-  //       setBackendEvents(data);
-  //     })
-  //     .catch(() => toast.error("Failed to load events"));
-  // }, []);
+  useEffect(() => {
+    console.log(import.meta.env.VITE_BACKEND_URL)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/events/list`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("✅ EVENTS FROM BACKEND:", data);
+        setBackendEvents(data);
+      })
+      .catch(() => toast.error("Failed to load events"));
+  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -444,41 +290,41 @@ function Events() {
     setSelectedEvent(null);
   }
 
-  // function handleEventClick(eventName, category) {
-  //   console.log("🟡 CLICKED:", { eventName, category });
+  function handleEventClick(eventName, category) {
+    console.log("🟡 CLICKED:", { eventName, category });
 
-  //   if (category === "PRONITE") return;
+    if (category === "PRONITE") return;
 
-  //   // Set modal category early to avoid flicker
-  //   setModalCategory(category);
+    // Set modal category early to avoid flicker
+    setModalCategory(category);
 
-  //   const normalize = (str) => str.replace(/\s+/g, "").toLowerCase();
+    const normalize = (str) => str.replace(/\s+/g, "").toLowerCase();
 
-  //   const matchedType = backendEvents.find((type) => {
-  //     console.log("🔍 CHECKING TYPE:", type.reference_name);
-  //     return normalize(type.reference_name) === normalize(eventName);
-  //   });
+    const matchedType = backendEvents.find((type) => {
+      console.log("🔍 CHECKING TYPE:", type.reference_name);
+      return normalize(type.reference_name) === normalize(eventName);
+    });
 
-  //   console.log("✅ MATCHED TYPE:", matchedType);
+    console.log("✅ MATCHED TYPE:", matchedType);
 
-  //   if (
-  //     !matchedType ||
-  //     !matchedType.events ||
-  //     matchedType.events.length === 0
-  //   ) {
-  //     toast.info("Events will be announced soon");
-  //     setIsModalOpen(false);
-  //     setModalEvents([]);
-  //     setSelectedBackendEvent(null);
-  //     return;
-  //   }
+    if (
+      !matchedType ||
+      !matchedType.events ||
+      matchedType.events.length === 0
+    ) {
+      toast.info("Events will be announced soon");
+      setIsModalOpen(false);
+      setModalEvents([]);
+      setSelectedBackendEvent(null);
+      return;
+    }
 
-  //   console.log("🎯 EVENTS TO SHOW IN MODAL:", matchedType.events);
+    console.log("🎯 EVENTS TO SHOW IN MODAL:", matchedType.events);
 
-  //   setModalEvents(matchedType.events);
-  //   setSelectedBackendEvent(null);
-  //   setIsModalOpen(true);
-  // }
+    setModalEvents(matchedType.events);
+    setSelectedBackendEvent(null);
+    setIsModalOpen(true);
+  }
 
   const handleRegister = async () => {
     // 🔐 Auth guards
@@ -599,26 +445,21 @@ function Events() {
           </div>
 
           <div className="cult-events">
-            {Object.keys(EVENTS)
-              .filter(
-                (category) =>
-                  category !== "ONLINE" // online handled separately
-              )
-              .map((category) => (
+            {backendEvents
+              .filter((type) => normalizeKey(type.name || type.event_type) === "CULTURALEVENT")
+              .map((type) => (
                 <button
-                  key={category}
+                  key={type.id}
                   className="event-item"
                   onClick={() => {
-                    setModalCategory("CULTURAL");
-                    setModalEvents(EVENTS[category]);
-                    setSelectedBackendEvent(null);
+                    const normalizedName = normalizeKey(type.reference_name);
                     setSelectedCategoryImage(
-                      EVENT_IMAGE_MAP[category] || dance
+                      EVENT_IMAGE_MAP[normalizedName] || dance,
                     );
-                    setIsModalOpen(true);
+                    handleEventClick(type.reference_name, "CULTURAL");
                   }}
                 >
-                  {category.replace("_", " ")}
+                  {type.reference_name}
                 </button>
               ))}
           </div>
@@ -673,7 +514,10 @@ function Events() {
         </div>
 
         <div className="pronite-events">
-          <button className="event-item">
+          <button
+            className="event-item"
+            onClick={() => handleEventClick("Pronite", "PRONITE")}
+          >
             Coming Soon...
           </button>
         </div>
@@ -698,30 +542,25 @@ function Events() {
           </div>
         </div>
 
-        {<div className="flagship-events">
-          {["ANTARANG", "NRITYANSH", "CLASHOFBANDS", "AAYAAM"].map((event) => (
-            <button
-              key={event}
-              className="event-item"
-              onClick={() => {
-                setModalCategory("FLAGSHIP");
-                setModalEvents([event]); // direct event
-                setSelectedBackendEvent({
-                  name: event.replace(/([A-Z])/g, " $1").trim(),
-                  venue: "TBA",
-                  date: "TBA",
-                });
-                setSelectedCategoryImage(
-                  EVENT_IMAGE_MAP[event] || antarang
-                );
-                setIsModalOpen(true);
-              }}
-            >
-              {event.replace(/([A-Z])/g, " $1").trim()}
-            </button>
-          ))}
+        <div className="flagship-events">
+          {backendEvents
+            .filter((type) => normalizeKey(type.name || type.event_type) === "FLAGSHIPEVENT")
+            .map((type) => (
+              <button
+                key={type.id}
+                className="event-item"
+                onClick={() => {
+                  const normalizedName = normalizeKey(type.reference_name);
+                  setSelectedCategoryImage(
+                    EVENT_IMAGE_MAP[normalizedName] || antarang,
+                  );
+                  handleEventClick(type.reference_name, "FLAGSHIP");
+                }}
+              >
+                {getEventDisplayName(type.reference_name)}
+              </button>
+            ))}
         </div>
-        }
       </div>
 
       {/* ================= ONLINE ================= */}
@@ -744,18 +583,11 @@ function Events() {
         </div>
 
         <div className="online-events">
-          {EVENTS.ONLINE.map((event) => (
+          {Object.keys(onlineEventLinks).map((event) => (
             <button
               key={event}
               className="event-item"
-              onClick={() => {
-                const link = onlineEventLinks[event];
-                if (link) {
-                  window.open(link, "_blank");
-                } else {
-                  toast.info("Registration link will be announced soon");
-                }
-              }}
+              onClick={() => handleEventClick(event, "ONLINE")}
             >
               {event}
             </button>
@@ -801,8 +633,10 @@ function Events() {
                 {selectedCategoryImage && (
                   <img
                     src={
-                      SUB_EVENT_IMAGE_MAP[selectedBackendEvent?.name?.toUpperCase()] ||
-                      EVENT_IMAGE_MAP[normalizeKey(modalCategory)] ||
+                      EVENT_IMAGE_MAP[
+                        normalizeKey(selectedBackendEvent?.name)
+                      ] ||
+                      selectedBackendEvent?.cover ||
                       selectedCategoryImage
                     }
                     alt="Event"
@@ -819,17 +653,11 @@ function Events() {
                     <div className="modal-event-list">
                       {modalEvents.map((ev) => (
                         <button
-                          key={ev}
+                          key={ev.id}
                           className="event-item"
-                          onClick={() =>
-                            setSelectedBackendEvent({
-                              name: ev,
-                              venue: "TBA",
-                              date: "TBA",
-                            })
-                          }
+                          onClick={() => setSelectedBackendEvent(ev)}
                         >
-                          {ev}
+                          {getEventDisplayName(ev.name)}
                         </button>
                       ))}
                     </div>
@@ -847,18 +675,16 @@ function Events() {
                       {selectedBackendEvent.date || "TBA"}
                     </p>
 
-                    {modalCategory !== "INFORMAL" && (
-                      <button
-                        className="modal-register-btn"
-                        onClick={handleRegister}
-                      >
-                        {!isLoggedIn()
-                          ? "LOGIN TO REGISTER"
-                          : !isProfileComplete()
-                            ? "COMPLETE PROFILE TO REGISTER"
-                            : "REGISTER"}
-                      </button>
-                    )}
+                    <button
+                      className="modal-register-btn"
+                      onClick={handleRegister}
+                    >
+                      {!isLoggedIn()
+                        ? "LOGIN TO REGISTER"
+                        : !isProfileComplete()
+                          ? "COMPLETE PROFILE TO REGISTER"
+                          : "REGISTER"}
+                    </button>
                   </>
                 )}
               </div>
