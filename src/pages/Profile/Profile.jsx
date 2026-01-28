@@ -145,7 +145,7 @@ export default function Profile() {
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/events/update-team/`,
         {
-          method: "POST",
+          method: "PUT",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
