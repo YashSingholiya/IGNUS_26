@@ -1256,43 +1256,7 @@ div.online {
   }
 
   /* ================= MODAL ================= */
-  .event-modal {
-    /* width: 92%; */
-    height: 85%;
-    left: 4%;
-    top: 7%;
-    padding: 18px;
-  }
-
-  .modal-content {
-    /* flex-direction: column; */
-  }
-
-  .modal-left {
-    width: 100%;
-    height: auto;
-    max-height: 40vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .modal-event-image {
-    width: auto;
-    height: auto;
-    /* max-width: 100%; */
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  .modal-right h2 {
-    font-size: 1.3rem;
-  }
-
-  .modal-right p {
-    font-size: 0.9rem;
-  }
+  
 }
 
 @media screen and (max-width: 850px) {
