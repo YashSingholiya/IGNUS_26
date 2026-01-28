@@ -446,7 +446,7 @@ function Events() {
 
           <div className="cult-events">
             {backendEvents
-              .filter((type) => type.name === "Cultural Event")
+              .filter((type) => normalizeKey(type.name || type.event_type) === "CULTURALEVENT")
               .map((type) => (
                 <button
                   key={type.id}
@@ -544,7 +544,7 @@ function Events() {
 
         <div className="flagship-events">
           {backendEvents
-            .filter((type) => type.name === "Flagship Event")
+            .filter((type) => normalizeKey(type.name || type.event_type) === "FLAGSHIPEVENT")
             .map((type) => (
               <button
                 key={type.id}
