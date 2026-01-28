@@ -452,16 +452,6 @@ export default function Profile() {
                       </div>
                     </div>
 
-                    {/* Team Members Display (after successful add) */}
-                    {teamMembers[event.team_id] && teamMembers[event.team_id].length > 0 && (
-                      <div className="team-members-inline">
-                        {teamMembers[event.team_id].map((member, mIdx) => (
-                          <span key={mIdx} className="team-member-chip">
-                            {member.name || member}
-                          </span>
-                        ))}
-                      </div>
-                    )}
 
                     {/* Add Member Form */}
                     {expandedEventId === event.team_id && (
