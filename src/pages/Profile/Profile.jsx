@@ -145,7 +145,7 @@ export default function Profile() {
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/events/update-team/`,
         {
-          method: "PUT",
+          method: "POST",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
@@ -225,11 +225,13 @@ export default function Profile() {
   const handleRemoveMember = async (teamId, memberIgnusId) => {
     if (!confirm("Are you sure you want to remove this member?")) return;
 
+    console.log("Removing member:", { teamId, memberIgnusId });
+
     try {
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/events/update-team/remove-member/`,
         {
-          method: "PUT",
+          method: "POST",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
@@ -241,17 +243,26 @@ export default function Profile() {
         }
       );
 
+      console.log("Remove member response status:", res.status);
       const data = await res.json();
+      console.log("Remove member response data:", data);
 
       if (res.ok) {
-        // Success - update local state
-        setTeamMembers((prev) => ({
-          ...prev,
-          [teamId]: prev[teamId].filter((m) => (m.ignus_id || m) !== memberIgnusId),
-        }));
-        alert("Member removed successfully");
+        // Success - update local state with data from response
+        if (data.team && data.team.members) {
+          setTeamMembers((prev) => ({
+            ...prev,
+            [teamId]: data.team.members,
+          }));
+        } else {
+          setTeamMembers((prev) => ({
+            ...prev,
+            [teamId]: prev[teamId].filter((m) => (m.ignus_id || m) !== memberIgnusId),
+          }));
+        }
+        alert(data.message || "Member removed successfully");
       } else {
-        alert(data.message || "Failed to remove member");
+        alert(data.message || data || "Failed to remove member");
       }
     } catch (err) {
       console.error("Remove member error:", err);
