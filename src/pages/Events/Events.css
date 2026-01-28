@@ -511,7 +511,258 @@ div.online {
 }
 
 /* ---------- Active Tab (WHITE) ---------- */
-.footer-btn.active {}
+.footer-btn.active {
+  background: white !important;
+  color: #222;
+  box-shadow: 0 10px 26px rgba(255, 255, 255, 0.45);
+}
+
+/* ---------- Hover (non-active only) ---------- */
+.footer-btn:not(.active):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+}
+
+/* ================================================= */
+/* ================= EVENT MODAL =================== */
+/* ================================================= */
+
+.modal-content {
+  /* display: flex; */
+  height: 100%;
+  gap: 24px;
+}
+
+/* LEFT IMAGE */
+.modal-left {
+  width: 50%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* RIGHT TEXT */
+.modal-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-right h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 16px;
+}
+
+.modal-right p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+
+.event-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16.5px);
+  -webkit-backdrop-filter: blur(16.5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+/* Glassmorphism modal */
+.event-modal {
+  width: 75%;
+  height: 75%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16.5px);
+  -webkit-backdrop-filter: blur(16.5px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  /* padding: 32px; */
+  overflow-y: auto;
+  position: fixed;
+  top: 10%;
+  left: 12.5%;
+  color: #ffffff;
+  animation: modalFadeUp 0.35s ease;
+}
+
+/* Scrollbar styling (optional but clean) */
+.event-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.event-modal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Headings */
+.event-modal h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3.5rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 14px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Text */
+.event-modal p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* Action button */
+.modal-action-btn {
+  margin-top: 20px;
+  background: #ffc529;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 36px;
+  font-family: 'Caudex', serif;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.modal-register-btn {
+  margin-top: 24px;
+  padding: 0 2vw;
+  height: 3.2vw;
+  background: #FABB1E;
+  color: #fff;
+
+  border: none;
+  border-radius: 999px;
+  font-size: 1.3vw;
+  letter-spacing: 0.12em;
+  font-family: 'Caudex', serif;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  box-shadow: 0 10px 20px rgba(245, 197, 66, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Animation */
+@keyframes modalFadeUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ================= CULTURAL MODAL EVENT LIST ================= */
+
+.modal-event-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Clean scrollbar */
+.modal-event-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.modal-event-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+}
+
+/* LEFT IMAGE SHOULD ALWAYS BE STATIC CATEGORY IMAGE */
+.modal-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ================================================= */
+/* ============ EVENTS PAGE FOOTER BAR ============= */
+/* ================================================= */
+
+.events-page-footer {
+  width: 100%;
+  background: linear-gradient(90deg, #1b003a, #2b0066);
+  padding: 18px 10px;
+  text-align: center;
+}
+
+.events-page-footer p {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+/* ============================================ */
+/* ========== ONLINE SECTION FOOTER ============ */
+/* ============================================ */
+
+.online {
+  position: relative;
+}
 
 .online-footer {
   position: absolute;
@@ -1030,7 +1281,7 @@ div.online {
   .modal-event-image {
     width: auto;
     height: auto;
-    /* max-width: 100%; */
+    max-width: 100%;
     max-height: 100%;
     object-fit: contain;
   }
@@ -1131,215 +1382,5 @@ div.online {
     margin-left: auto;
     margin-right: auto;
     /* ensures button is centered */
-  }
-}
-
-/* ================================================= */
-/* ================= EVENT MODAL =================== */
-/* ================================================= */
-
-/* Overlay */
-.event-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-  padding: 2rem;
-}
-
-/* Glassmorphism Modal */
-.event-modal {
-  position: relative;
-  width: 90%;
-  max-width: 950px;
-  max-height: 85vh;
-  background: linear-gradient(135deg, rgba(25, 20, 45, 0.95), rgba(45, 35, 70, 0.92));
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), 0 0 50px rgba(212, 175, 55, 0.08);
-  overflow: hidden;
-  color: #ffffff;
-  animation: modalFadeUp 0.35s ease;
-}
-
-.event-modal::-webkit-scrollbar {
-  width: 6px;
-}
-
-.event-modal::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.4);
-  border-radius: 10px;
-}
-
-/* Close Button */
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 18px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-size: 1.3rem;
-  color: #ffffff;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.modal-close:hover {
-  background: rgba(231, 76, 60, 0.6);
-  border-color: rgba(231, 76, 60, 0.8);
-  transform: rotate(90deg);
-}
-
-/* Modal Content - Two Column Layout */
-.modal-content {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  min-height: 420px;
-}
-
-/* Left Side - Image (40%) */
-.modal-left {
-  width: 40%;
-  min-height: 420px;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.modal-left img,
-.modal-event-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Right Side - Content (60%) */
-.modal-right {
-  width: 60%;
-  padding: 2.5rem;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* Headings */
-.modal-right h2,
-.event-modal h2 {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 1.8rem;
-  letter-spacing: 0.08em;
-  margin-bottom: 1.2rem;
-  text-align: left;
-  font-weight: bold;
-  color: #d4af37;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-}
-
-/* Text */
-.modal-right p,
-.event-modal p {
-  font-family: 'Raleway', sans-serif;
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 0.7rem;
-  text-align: left;
-}
-
-.modal-right p strong {
-  color: #a0c4ff;
-}
-
-/* Register Button */
-.modal-register-btn {
-  margin-top: 1.5rem;
-  padding: 0.85rem 2.2rem;
-  background: linear-gradient(135deg, #d4af37, #f5d061);
-  color: #0a0a12;
-  border: none;
-  border-radius: 50px;
-  font-size: 0.95rem;
-  letter-spacing: 0.1em;
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-}
-
-.modal-register-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 35px rgba(212, 175, 55, 0.5);
-}
-
-/* Event Selection List */
-.modal-event-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  max-height: 50vh;
-  overflow-y: auto;
-  padding-right: 8px;
-}
-
-.modal-event-list::-webkit-scrollbar {
-  width: 5px;
-}
-
-.modal-event-list::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.4);
-  border-radius: 10px;
-}
-
-/* Event Selection Buttons */
-.modal-event-list .event-item {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  padding: 0.9rem 1rem;
-  color: #fff;
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.modal-event-list .event-item:hover {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: rgba(212, 175, 55, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-}
-
-/* Animation */
-@keyframes modalFadeUp {
-  from {
-    transform: translateY(30px) scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0) scale(1);
-    opacity: 1;
   }
 }
