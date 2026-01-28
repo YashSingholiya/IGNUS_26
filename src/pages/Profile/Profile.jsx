@@ -21,6 +21,7 @@ export default function Profile() {
   const [addMemberLoading, setAddMemberLoading] = useState(false);
   const [addMemberMessage, setAddMemberMessage] = useState({ type: "", text: "" });
   const [teamMembers, setTeamMembers] = useState({});
+  const [viewTeamModal, setViewTeamModal] = useState({ open: false, teamId: null, eventName: '' });
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -269,19 +270,44 @@ export default function Profile() {
           <div className="glass-card journey-card animate-slide-up delay-400">
             <h2>Your Events ({eventsRegistered.length})</h2>
             {eventsRegistered.length > 0 ? (
-              <div className="events-grid">
+              <div className="events-list">
                 {eventsRegistered.map((event, idx) => (
                   <div
                     key={event.team_id}
-                    className={`event-item event-card ${expandedEventId === event.team_id ? 'expanded' : ''}`}
+                    className={`event-list-item ${expandedEventId === event.team_id ? 'expanded' : ''}`}
                   >
-                    <h4>{event.name}</h4>
-                    <p className="event-meta">Team ID: {event.team_id}</p>
+                    <div className="event-header">
+                      <div className="event-info">
+                        <h4 className="event-title">{event.name || 'Event'}</h4>
+                        <p className="event-team-id">Team ID: <span>{event.team_id}</span></p>
+                      </div>
+                      <div className="event-actions">
+                        {/* View Team Button */}
+                        <button
+                          className="view-team-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setViewTeamModal({ open: true, teamId: event.team_id, eventName: event.name });
+                          }}
+                        >
+                          👥 View Team
+                        </button>
+                        {/* Add Member Button */}
+                        <button
+                          className="add-member-toggle-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleAddMember(event.team_id);
+                          }}
+                        >
+                          {expandedEventId === event.team_id ? '✕ Cancel' : '+ Add Member'}
+                        </button>
+                      </div>
+                    </div>
 
-                    {/* Team Members Display */}
+                    {/* Team Members Display (after successful add) */}
                     {teamMembers[event.team_id] && teamMembers[event.team_id].length > 0 && (
-                      <div className="team-members-list">
-                        <p className="team-members-title">Team Members:</p>
+                      <div className="team-members-inline">
                         {teamMembers[event.team_id].map((member, mIdx) => (
                           <span key={mIdx} className="team-member-chip">
                             {member.name || member}
@@ -290,38 +316,29 @@ export default function Profile() {
                       </div>
                     )}
 
-                    {/* Add Member Button */}
-                    <button
-                      className="add-member-toggle-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleAddMember(event.team_id);
-                      }}
-                    >
-                      {expandedEventId === event.team_id ? '✕ Cancel' : '+ Add Member'}
-                    </button>
-
                     {/* Add Member Form */}
                     {expandedEventId === event.team_id && (
                       <div className="add-member-section">
-                        <input
-                          type="text"
-                          className="add-member-input"
-                          placeholder="Enter Ignus ID"
-                          value={memberIgnusId}
-                          onChange={(e) => setMemberIgnusId(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') handleAddMember(event.team_id);
-                          }}
-                          disabled={addMemberLoading}
-                        />
-                        <button
-                          className="add-member-btn"
-                          onClick={() => handleAddMember(event.team_id)}
-                          disabled={addMemberLoading}
-                        >
-                          {addMemberLoading ? 'Adding...' : 'Add'}
-                        </button>
+                        <div className="add-member-form-row">
+                          <input
+                            type="text"
+                            className="add-member-input"
+                            placeholder="Enter Ignus ID"
+                            value={memberIgnusId}
+                            onChange={(e) => setMemberIgnusId(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') handleAddMember(event.team_id);
+                            }}
+                            disabled={addMemberLoading}
+                          />
+                          <button
+                            className="add-member-btn"
+                            onClick={() => handleAddMember(event.team_id)}
+                            disabled={addMemberLoading}
+                          >
+                            {addMemberLoading ? 'Adding...' : 'Add'}
+                          </button>
+                        </div>
 
                         {/* Feedback Message */}
                         {addMemberMessage.text && (
@@ -341,6 +358,38 @@ export default function Profile() {
             )}
           </div>
         </div>
+
+        {/* View Team Modal */}
+        {viewTeamModal.open && (
+          <div className="modal-overlay" onClick={() => setViewTeamModal({ open: false, teamId: null, eventName: '' })}>
+            <div className="modal-content glass-card" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <h3>Team Members</h3>
+                <button
+                  className="modal-close-btn"
+                  onClick={() => setViewTeamModal({ open: false, teamId: null, eventName: '' })}
+                >
+                  ✕
+                </button>
+              </div>
+              <p className="modal-event-name">{viewTeamModal.eventName || 'Event'}</p>
+              <p className="modal-team-id">Team ID: {viewTeamModal.teamId}</p>
+
+              <div className="modal-members-list">
+                {teamMembers[viewTeamModal.teamId] && teamMembers[viewTeamModal.teamId].length > 0 ? (
+                  teamMembers[viewTeamModal.teamId].map((member, idx) => (
+                    <div key={idx} className="modal-member-item">
+                      <span className="member-avatar">👤</span>
+                      <span className="member-name">{member.name || member}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p className="modal-no-members">No team members added yet. Add members using the "Add Member" button.</p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
