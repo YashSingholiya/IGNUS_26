@@ -209,12 +209,12 @@ const CA = () => {
 
             {isCa ? (
               <>
-                <button
+                {/* <button
                   className="about-btn"
                   onClick={() => setCAPerksDetails(true)}
                 >
                   View Perks
-                </button>
+                </button> */}
 
                 <div className="ca_details p-4 rounded-md">
                   <p>
