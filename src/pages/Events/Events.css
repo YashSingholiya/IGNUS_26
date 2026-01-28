@@ -1386,6 +1386,6 @@ div.online {
 }
 
 .modal-content {
-  display: block !important;
+  flex-direction: row !important;
   max-width: 100% !important;
 }
