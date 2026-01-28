@@ -36,29 +36,28 @@ export default function Profile() {
         );
 
         if (res.status === 401 || res.status === 403) {
-          clearAuthCookies();
-          if(res.status === 401){
-             if(getRefreshToken()){
-                const res = await fetch(
-                  `${import.meta.env.VITE_BACKEND_URL}/api/accounts/refresh-token/`,
-                  {
-                    method: "POST",
-                    credentials: "include", // 🔥 REQUIRED
-                  },
-                );
-                if (res.ok) {
-                  const data = await res.json();
-                  setAccessToken(data.access);
-                  setRefreshToken(data.refresh);
-                  window.location.href = "/profile";
-                  return;
-                }
-             }
-             else{
-              clearAuthCookies();
-              window.location.href = "/login";
-             }
+          // On 401, try to refresh the access token
+          if (res.status === 401) {
+            try {
+              const refreshRes = await fetch(
+                `${import.meta.env.VITE_BACKEND_URL}/api/accounts/refresh/`,
+                {
+                  method: "POST",
+                  credentials: "include", // Backend reads refresh cookie
+                },
+              );
+              if (refreshRes.ok) {
+                // Backend sets new access cookie automatically, just reload
+                window.location.reload();
+                return;
+              }
+            } catch (refreshErr) {
+              console.error("Token refresh failed:", refreshErr);
+            }
           }
+          // Refresh failed or 403 - clear all and redirect to login
+          clearAuthCookies();
+          window.location.href = "/login";
           return;
         }
 
