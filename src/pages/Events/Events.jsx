@@ -587,9 +587,8 @@ function Events() {
           (tab) => (
             <button
               key={tab}
-              className={`footer-btn ${tab.toLowerCase()} ${
-                activeTab === tab ? "active" : ""
-              }`}
+              className={`footer-btn ${tab.toLowerCase()} ${activeTab === tab ? "active" : ""
+                }`}
               onClick={() => {
                 setActiveTab(tab);
                 if (tab === "CULTURAL") scrollTo(culturalRef);
@@ -620,7 +619,7 @@ function Events() {
                   <img
                     src={
                       EVENT_IMAGE_MAP[
-                        normalizeKey(selectedBackendEvent?.name)
+                      normalizeKey(selectedBackendEvent?.name)
                       ] ||
                       selectedBackendEvent?.cover ||
                       selectedCategoryImage
@@ -660,17 +659,17 @@ function Events() {
                       <strong>Date:</strong>{" "}
                       {selectedBackendEvent.date || "TBA"}
                     </p>
-
-                    <button
-                      className="modal-register-btn"
-                      onClick={handleRegister}
-                    >
-                      {!isLoggedIn()
-                        ? "LOGIN TO REGISTER"
-                        : !isProfileComplete()
-                          ? "COMPLETE PROFILE TO REGISTER"
-                          : "REGISTER"}
-                    </button>
+                    {modalCategory !== "INFORMAL" && (
+                      <button
+                        className="modal-register-btn"
+                        onClick={handleRegister}
+                      >
+                        {!isLoggedIn()
+                          ? "LOGIN TO REGISTER"
+                          : !isProfileComplete()
+                            ? "COMPLETE PROFILE TO REGISTER"
+                            : "REGISTER"}
+                      </button>)}
                   </>
                 )}
               </div>
