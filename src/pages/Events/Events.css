@@ -528,7 +528,7 @@ div.online {
 /* ================================================= */
 
 .modal-content {
-  display: flex;
+  /* display: flex; */
   height: 100%;
   gap: 24px;
 }
@@ -1257,7 +1257,7 @@ div.online {
 
   /* ================= MODAL ================= */
   .event-modal {
-    width: 92%;
+    /* width: 92%; */
     height: 85%;
     left: 4%;
     top: 7%;
@@ -1265,7 +1265,7 @@ div.online {
   }
 
   .modal-content {
-    flex-direction: column;
+    /* flex-direction: column; */
   }
 
   .modal-left {
@@ -1281,7 +1281,7 @@ div.online {
   .modal-event-image {
     width: auto;
     height: auto;
-    max-width: 100%;
+    /* max-width: 100%; */
     max-height: 100%;
     object-fit: contain;
   }
