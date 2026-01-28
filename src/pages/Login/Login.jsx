@@ -191,6 +191,10 @@ export default function Auth() {
   // Form handlers
   const handleLogin = async (e) => {
     e.preventDefault();
+    if(loginData.email.toLowerCase().includes("@iitj.ac.in")) {
+      toast.error("Use Google login please");
+      return;
+    }
     // show loading overlay for at least 2s after clicking Sign In
     setLoadingMessage("Signing you in...");
     setShowLoading(true);
@@ -205,7 +209,7 @@ export default function Auth() {
           headers: { "Content-Type": "application/json" },
           credentials: "include", // 🔥 REQUIRED
           body: JSON.stringify({
-            username: loginData.email,
+            username: loginData.email.toLowerCase(),
             password: loginData.password,
           }),
         },
@@ -245,7 +249,10 @@ export default function Auth() {
   const handleSignup = async (e) => {
     e.preventDefault();
     if (!isSignupValid()) return;
-
+    if(signupData.email.toLowerCase().includes("@iitj.ac.in")) {
+      toast.error("Use Google Sign Up please");
+      return;
+    }
     try {
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/accounts/register/`,
@@ -256,7 +263,7 @@ export default function Auth() {
           body: JSON.stringify({
             first_name: signupData.firstName,
             last_name: signupData.lastName,
-            email: signupData.email,
+            email: signupData.email.toLowerCase(),
             password: signupData.password,
           }),
         },
