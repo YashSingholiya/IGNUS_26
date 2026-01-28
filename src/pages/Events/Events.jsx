@@ -50,7 +50,7 @@ const EVENT_IMAGE_MAP = {
   AAYAAM: aayam,
 
   // Dance Sub-events
-  STAGMOVES: stag,
+  "Solo Dance": stag,
   ANYBODYCANDUET: duet,
   RAWWAR: war,
 
