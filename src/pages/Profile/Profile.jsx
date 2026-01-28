@@ -159,6 +159,44 @@ export default function Profile() {
     }
   };
 
+  // Handle removing a member from the team
+  const handleRemoveMember = async (teamId, memberIgnusId) => {
+    if (!confirm("Are you sure you want to remove this member?")) return;
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/events/update-team/`,
+        {
+          method: "DELETE",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            team_id: teamId,
+            member: memberIgnusId,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // Success - update local state
+        setTeamMembers((prev) => ({
+          ...prev,
+          [teamId]: prev[teamId].filter((m) => (m.ignus_id || m) !== memberIgnusId),
+        }));
+        alert("Member removed successfully");
+      } else {
+        alert(data.message || "Failed to remove member");
+      }
+    } catch (err) {
+      console.error("Remove member error:", err);
+      alert("Network error. Please try again.");
+    }
+  };
+
   if (loading) {
     return (
       <div className="profile-container">
@@ -359,10 +397,9 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* View Team Modal */}
         {viewTeamModal.open && (
           <div className="modal-overlay" onClick={() => setViewTeamModal({ open: false, teamId: null, eventName: '' })}>
-            <div className="modal-content glass-card" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-content glass-card team-modal" onClick={(e) => e.stopPropagation()}>
               <div className="modal-header">
                 <h3>Team Members</h3>
                 <button
@@ -372,20 +409,41 @@ export default function Profile() {
                   ✕
                 </button>
               </div>
-              <p className="modal-event-name">{viewTeamModal.eventName || 'Event'}</p>
-              <p className="modal-team-id">Team ID: <span>{viewTeamModal.teamId}</span></p>
+              <div className="modal-body">
+                <p className="modal-event-name">{viewTeamModal.eventName || 'Event'}</p>
+                <p className="modal-team-id">Team ID: <span>{viewTeamModal.teamId}</span></p>
 
-              <div className="modal-members-list">
-                {teamMembers[viewTeamModal.teamId] && teamMembers[viewTeamModal.teamId].length > 0 ? (
-                  teamMembers[viewTeamModal.teamId].map((member, idx) => (
-                    <div key={idx} className="modal-member-item">
-                      <span className="member-avatar">👤</span>
-                      <span className="member-name">{member.name || member}</span>
+                <div className="modal-members-list">
+                  {teamMembers[viewTeamModal.teamId] && teamMembers[viewTeamModal.teamId].length > 0 ? (
+                    teamMembers[viewTeamModal.teamId].map((member, idx) => (
+                      <div key={idx} className="modal-member-item glass-card">
+                        <div className="member-info">
+                          <img
+                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${member.email || member.name || member}`}
+                            alt="Avatar"
+                            className="member-avatar-img"
+                          />
+                          <div className="member-details">
+                            <span className="member-name">{member.name || member}</span>
+                            <span className="member-id">{member.ignus_id || ""}</span>
+                          </div>
+                        </div>
+                        <button
+                          className="remove-member-btn"
+                          onClick={() => handleRemoveMember(viewTeamModal.teamId, member.ignus_id || member)}
+                          title="Remove Member"
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="empty-state">
+                      <p>No team members added yet.</p>
+                      <p className="sub-text">Use the "Add Member" button on the event card to build your team.</p>
                     </div>
-                  ))
-                ) : (
-                  <p className="modal-no-members">No team members added yet. Add members using the "Add Member" button.</p>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>

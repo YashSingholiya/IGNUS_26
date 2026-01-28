@@ -79,6 +79,10 @@ export default function Passes() {
             </Link>
           )}
 
+          <div className="passes-info-text">
+            Note: Purchased passes will be reflected within 24 hours
+          </div>
+
           <div className="passes-grid">
             {passesData.map((pass) => (
               <PassCard
