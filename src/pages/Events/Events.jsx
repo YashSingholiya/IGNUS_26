@@ -49,10 +49,16 @@ const EVENT_IMAGE_MAP = {
   THUNDERBEATS: clash,
   AAYAAM: aayam,
 
+  "FASHIONSHOW-ANTARANG": antarang,
+  "GROUPDANCE-NRITYANSH": nritya,
+  BANDCOMPETITION: clash,
+  THUNDERBEATS: clash,
+  "STREETPLAY-AAYAAM": aayam,
+
   // Dance Sub-events
   SOLODANCE: stag,
-  ANYBODYCANDUET: duet,
-  RAWWAR: war,
+  DUETDANCE: duet,
+  STREETBATTLE: war,
 
   // Drama Sub-events
   MONOACT: ekalnatya,
@@ -75,13 +81,13 @@ const EVENT_IMAGE_MAP = {
   PHOTOSHOPBATTLE: "https://img-c.udemycdn.com/course/480x270/5346430_f677.jpg",
 
   // Music Events
-  ARIA: aria,
-  DUETTO: duetto,
-  BEATNICKS: beat,
+  SOLOSINGING: aria,
+  PAIRONSTAGE: duetto,
+  RAPBATTLE: beat,
   DJBATTLE: dj,
 
   // Literature Events
-  WORDZEE:
+  WORDGAMES:
     "https://mb.cision.com/Public/16579/2943123/8e44b9b5c4968475_800x800ar.png",
   SCRABBLE:
     "https://images.hindustantimes.com/img/2022/11/03/550x309/_380b84aa-f042-11e5-ac5f-8ebef762d494_1667457238330_1667457238330.jpg",
@@ -99,13 +105,14 @@ const EVENT_IMAGE_MAP = {
 
   // Quiz Events
   MELA: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  TLCQUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
   LONEWOLFQUIZ:
     "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
   BOLLYWOODQUIZ:
     "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
 
   // Film Events
-  "IGNUS.JPG": ignus,
+  THEMEDPHOTOGRAPHY: ignus,
   IGNIGY:
     "https://www.sparksarts.co.uk/wp-content/uploads/2022/03/Top-10-Easy-Filmmaking-Tips-for-Beginners-2-1024x683.jpg",
   SHORTMOVIEMAKING:
@@ -115,10 +122,10 @@ const EVENT_IMAGE_MAP = {
   COSPLAY: cos,
   DIGITALARENA:
     "https://dancehubtv.uk/wp-content/uploads/2020/11/header-4-1024x424.jpg",
-  DUBSMASH: dub,
+  DUBSMASHCOMPETITION: dub,
   LOLLAPALOOZA:
     "https://i.pinimg.com/736x/ac/b7/e2/acb7e24c756e765d16e46f8de451c2f9.jpg",
-  COSTUMEDESIGNING:
+  COSTUMEDESIGN:
     "https://jdinstituteoffashiontechnology.b-cdn.net/wp-content/uploads/2021/07/Costume-Designing-As-A-Profession-What-Should-You-Expect-Thumbnail.jpg",
   "MR.ANDMRS.IGNUS":
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56haMI-IROURtyA_edjuHQf5hl5N2GOGGDg&s",
