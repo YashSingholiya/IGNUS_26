@@ -191,10 +191,6 @@ export default function Auth() {
   // Form handlers
   const handleLogin = async (e) => {
     e.preventDefault();
-    if(loginData.email.toLowerCase().includes("@iitj.ac.in")) {
-      toast.error("Use Google login please");
-      return;
-    }
     // show loading overlay for at least 2s after clicking Sign In
     setLoadingMessage("Signing you in...");
     setShowLoading(true);
@@ -250,7 +246,7 @@ export default function Auth() {
     e.preventDefault();
     if (!isSignupValid()) return;
     if(signupData.email.toLowerCase().includes("@iitj.ac.in")) {
-      toast.error("Use Google Sign Up please");
+      toast.error("IITJ users use Google Sign Up please");
       return;
     }
     try {
