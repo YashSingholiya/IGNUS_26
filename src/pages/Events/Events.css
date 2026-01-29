@@ -1389,3 +1389,63 @@ div.online {
   flex-direction: row !important;
   max-width: 100% !important;
 }
+
+/* ================================================= */
+/* ============== MOBILE MODAL FIX ================= */
+/* ================================================= */
+
+@media screen and (max-width: 850px) {
+
+  /* Stack image + content vertically */
+  .modal-content {
+    flex-direction: column !important;
+    height: auto;
+  }
+
+  /* Image container */
+  .modal-left {
+    width: 100% !important;
+    height: auto;
+    max-height: 45vh;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* Image itself */
+  .modal-event-image {
+    width: 100%;
+    height: auto;
+    max-height: 45vh;
+    object-fit: cover;
+  }
+
+  /* Text area */
+  .modal-right {
+    width: 100% !important;
+    margin-top: 20px;
+    align-items: center;
+    text-align: center;
+    padding: 0 12px;
+  }
+
+  /* Title */
+  .modal-right h2 {
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+  }
+
+  /* Details */
+  .modal-right p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  /* Register button (if present) */
+  .modal-register-btn {
+    margin-top: 22px;
+    height: 48px;
+    padding: 0 32px;
+    font-size: 1rem;
+  }
+}
