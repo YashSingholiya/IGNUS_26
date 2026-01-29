@@ -52,7 +52,6 @@ const EVENT_IMAGE_MAP = {
   "FASHIONSHOW-ANTARANG": antarang,
   "GROUPDANCE-NRITYANSH": nritya,
   BANDCOMPETITION: clash,
-  THUNDERBEATS: clash,
   "STREETPLAY-AAYAAM": aayam,
 
   // Dance Sub-events
