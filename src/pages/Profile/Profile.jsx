@@ -93,7 +93,15 @@ export default function Profile() {
           qrCodeHtml: userprofile.qr_code,
         });
 
-        setEventsRegistered(userprofile.events || []);
+        // Normalize events: handle both string and object formats
+        const normalizedEvents = (userprofile.events || []).map((event, idx) => {
+          if (typeof event === 'string') {
+            // If event is a string, convert to object with name
+            return { name: event, team_id: `event-${idx}` };
+          }
+          return event;
+        });
+        setEventsRegistered(normalizedEvents);
       } catch (err) {
         console.error("Profile error:", err);
         clearAuthCookies();
