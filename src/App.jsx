@@ -10,7 +10,7 @@ import Passes from "./pages/Passes/Passes";
 import Login from "./pages/Login/Login";
 import Prakrit from "./pages/Prakriti/Prakrit";
 // import { Desktop }  from "./screens/Desktop/Desktop";
-
+import Igmun from "./pages/igmun/igmun";
 import Navbar from "./components/navbar/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import OAuthCallback from "./pages/OAuthCallback";
@@ -32,6 +32,7 @@ function App() {
           <Route path="/prakriti" element={<Prakrit />} />
           <Route path="/login" element={<Login />} />
           <Route path="/ca" element={<CA />} />
+          <Route path="/igmun" element={<Igmun />} />
           <Route
             path="/profile"
             element={
