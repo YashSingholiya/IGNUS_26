@@ -17,6 +17,8 @@ export const isGoogleUser = () => getCookie("isGoogle") === "true";
 export const isProfileComplete = () => getCookie("isProfileComplete") === "true";
 export const isCA = () => getCookie("isCA") === "true";
 export const getIgnusID = () => getCookie("ignusID");
+export const getAccessToken = () => getCookie("access");
+export const getRefreshToken = () => getCookie("refresh");
 
 export const clearAuthCookies = () => {
   const cookies = [

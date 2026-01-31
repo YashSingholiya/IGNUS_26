@@ -528,8 +528,7 @@ div.online {
 /* ================================================= */
 
 .modal-content {
-  display: flex;
-  width: 100%;
+  /* display: flex; */
   height: 100%;
   gap: 24px;
 }
@@ -593,7 +592,7 @@ div.online {
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  padding: 32px;
+  /* padding: 32px; */
   overflow-y: auto;
   position: fixed;
   top: 10%;
@@ -1015,7 +1014,7 @@ div.online {
   }
 
   .modal-content {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 20px;
   }
 
@@ -1383,5 +1382,97 @@ div.online {
     margin-left: auto;
     margin-right: auto;
     /* ensures button is centered */
+  }
+}
+
+.modal-content {
+  flex-direction: row !important;
+  max-width: 100% !important;
+}
+
+/* ================================================= */
+/* ============== MOBILE MODAL FIX ================= */
+/* ================================================= */
+
+@media screen and (max-width: 850px) {
+
+  /* Stack image + content vertically */
+  .modal-content {
+    flex-direction: column !important;
+    height: auto;
+  }
+
+  /* Image container */
+  .modal-left {
+    width: 100% !important;
+    height: auto;
+    max-height: 45vh;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* Image itself */
+  .modal-event-image {
+    width: 100%;
+    height: auto;
+    max-height: 45vh;
+    object-fit: cover;
+  }
+
+  /* Text area */
+  .modal-right {
+    width: 100% !important;
+    margin-top: 20px;
+    align-items: center;
+    text-align: center;
+    padding: 0 12px;
+  }
+
+  /* Title */
+  .modal-right h2 {
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+  }
+
+  /* Details */
+  .modal-right p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  /* Register button (if present) */
+  .modal-register-btn {
+    margin-top: 22px;
+    height: 48px;
+    padding: 0 32px;
+    font-size: 1rem;
+  }
+}
+
+/* ================================================= */
+/* ===== MOBILE EVENT BUTTON TEXT FIX (MODAL) ====== */
+/* ================================================= */
+
+@media screen and (max-width: 850px) {
+
+  /* Allow multi-line text inside buttons */
+  .event-item {
+    white-space: normal !important;
+    height: auto !important;
+    min-height: 60px;
+    padding: 10px 16px !important;
+    line-height: 1.25;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-word;
+  }
+
+  /* Modal event list buttons */
+  .modal-event-list .event-item {
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
   }
 }

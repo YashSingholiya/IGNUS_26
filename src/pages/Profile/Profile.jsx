@@ -15,6 +15,15 @@ export default function Profile() {
   const [profileData, setProfileData] = useState(null);
   const [eventsRegistered, setEventsRegistered] = useState([]);
 
+  // Add Member feature state
+  const [expandedEventId, setExpandedEventId] = useState(null);
+  const [memberIgnusId, setMemberIgnusId] = useState("");
+  const [addMemberLoading, setAddMemberLoading] = useState(false);
+  const [addMemberMessage, setAddMemberMessage] = useState({ type: "", text: "" });
+  const [teamMembers, setTeamMembers] = useState({});
+  const [teamLeader, setTeamLeader] = useState({}); // Store leader info per team
+  const [viewTeamModal, setViewTeamModal] = useState({ open: false, teamId: null, eventName: '' });
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -27,6 +36,26 @@ export default function Profile() {
         );
 
         if (res.status === 401 || res.status === 403) {
+          // On 401, try to refresh the access token
+          if (res.status === 401) {
+            try {
+              const refreshRes = await fetch(
+                `${import.meta.env.VITE_BACKEND_URL}/api/accounts/refresh/`,
+                {
+                  method: "POST",
+                  credentials: "include", // Backend reads refresh cookie
+                },
+              );
+              if (refreshRes.ok) {
+                // Backend sets new access cookie automatically, just reload
+                window.location.reload();
+                return;
+              }
+            } catch (refreshErr) {
+              console.error("Token refresh failed:", refreshErr);
+            }
+          }
+          // Refresh failed or 403 - clear all and redirect to login
           clearAuthCookies();
           window.location.href = "/login";
           return;
@@ -77,7 +106,223 @@ export default function Profile() {
     fetchProfile();
   }, []);
 
+  // Fetch team leader info for all events after profile loads
+  useEffect(() => {
+    if (eventsRegistered.length > 0) {
+      eventsRegistered.forEach(async (event) => {
+        try {
+          const res = await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/events/team-details/?team_id=${event.team_id}`,
+            {
+              method: "GET",
+              credentials: "include",
+            }
+          );
+          const data = await res.json();
+          if (res.ok && data.team) {
+            setTeamMembers((prev) => ({
+              ...prev,
+              [event.team_id]: data.team.members,
+            }));
+            setTeamLeader((prev) => ({
+              ...prev,
+              [event.team_id]: data.team.leader,
+            }));
+          }
+        } catch (err) {
+          console.error("Error fetching team details for event:", event.team_id, err);
+        }
+      });
+    }
+  }, [eventsRegistered]);
+
   const handlePassClick = () => setIsFlipped(!isFlipped);
+
+  // Toggle the add member form for an event
+  const toggleAddMember = (teamId) => {
+    if (expandedEventId === teamId) {
+      setExpandedEventId(null);
+      setMemberIgnusId("");
+      setAddMemberMessage({ type: "", text: "" });
+    } else {
+      setExpandedEventId(teamId);
+      setMemberIgnusId("");
+      setAddMemberMessage({ type: "", text: "" });
+    }
+  };
+
+  // Handle adding a member to the team
+  const handleAddMember = async (teamId) => {
+    if (!memberIgnusId.trim()) {
+      setAddMemberMessage({ type: "error", text: "Please enter an Ignus ID" });
+      return;
+    }
+
+    setAddMemberLoading(true);
+    setAddMemberMessage({ type: "", text: "" });
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/events/update-team/`,
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            team_id: teamId,
+            member: memberIgnusId.trim(),
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // Success - update local state
+        setAddMemberMessage({ type: "success", text: data.message });
+        setMemberIgnusId("");
+
+        // Update team members display
+        if (data.team && data.team.members) {
+          setTeamMembers((prev) => ({
+            ...prev,
+            [teamId]: data.team.members,
+          }));
+        }
+      } else if (res.status === 403) {
+        setAddMemberMessage({ type: "error", text: "You are not the team leader" });
+      } else if (res.status === 404) {
+        setAddMemberMessage({ type: "error", text: "The Ignus ID you entered does not exist" });
+      } else if (res.status === 402) {
+        setAddMemberMessage({ type: "error", text: data || "Member has not completed payment" });
+      } else if (res.status === 406) {
+        setAddMemberMessage({ type: "error", text: data.message || data || "Cannot add member" });
+      } else {
+        setAddMemberMessage({ type: "error", text: "Something went wrong" });
+      }
+    } catch (err) {
+      console.error("Add member error:", err);
+      setAddMemberMessage({ type: "error", text: "Network error. Please try again." });
+    } finally {
+      setAddMemberLoading(false);
+    }
+  };
+
+  // Fetch team details when modal opens
+  useEffect(() => {
+    if (viewTeamModal.open && viewTeamModal.teamId) {
+      const fetchTeamDetails = async () => {
+        try {
+          const res = await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/events/team-details/?team_id=${viewTeamModal.teamId}`,
+            {
+              method: "GET",
+              credentials: "include",
+            }
+          );
+          const data = await res.json();
+          if (res.ok && data.team) {
+            setTeamMembers((prev) => ({
+              ...prev,
+              [viewTeamModal.teamId]: data.team.members,
+            }));
+            setTeamLeader((prev) => ({
+              ...prev,
+              [viewTeamModal.teamId]: data.team.leader,
+            }));
+          }
+        } catch (err) {
+          console.error("Error fetching team details:", err);
+        }
+      };
+      fetchTeamDetails();
+    }
+  }, [viewTeamModal.open, viewTeamModal.teamId]);
+
+  // Handle removing a member from the team
+  const handleRemoveMember = async (teamId, memberIgnusId) => {
+    if (!confirm("Are you sure you want to remove this member?")) return;
+
+    console.log("Removing member:", { teamId, memberIgnusId });
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/events/update-team/remove-member/`,
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            team_id: teamId,
+            member: memberIgnusId.id,
+          }),
+        }
+      );
+
+      console.log("Remove member response status:", res.status);
+      const data = await res.json();
+      console.log("Remove member response data:", data);
+
+      if (res.ok) {
+        // Success - update local state with data from response
+        if (data.team && data.team.members) {
+          setTeamMembers((prev) => ({
+            ...prev,
+            [teamId]: data.team.members,
+          }));
+        } else {
+          setTeamMembers((prev) => ({
+            ...prev,
+            [teamId]: prev[teamId].filter((m) => (m.ignus_id || m) !== memberIgnusId),
+          }));
+        }
+        alert(data.message || "Member removed successfully");
+      } else {
+        alert(data.message || data || "Failed to remove member");
+      }
+    } catch (err) {
+      console.error("Remove member error:", err);
+      alert("Network error. Please try again.");
+    }
+  };
+
+  // Handle de-registering self from the team
+  const handleDeregister = async (teamId, eventName) => {
+    if (!confirm("Are you sure you want to leave this team?")) return;
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/events/deregister/`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            event_name: eventName,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // Success - remove from local events list
+        setEventsRegistered((prev) => prev.filter((e) => e.team_id !== teamId));
+        alert("You have left the team successfully.");
+      } else {
+        alert(data.message || data || "Failed to leave the team.");
+      }
+    } catch (err) {
+      console.error("Deregister error:", err);
+      alert("Network error. Please try again.");
+    }
+  };
 
   if (loading) {
     return (
@@ -139,9 +384,8 @@ export default function Profile() {
 
           {/* Digital Pass */}
           <div
-            className={`pass-card-container animate-slide-up delay-300 ${
-              isFlipped ? "flipped" : ""
-            }`}
+            className={`pass-card-container animate-slide-up delay-300 ${isFlipped ? "flipped" : ""
+              }`}
             onClick={handlePassClick}
           >
             <div className="pass-card-inner">
@@ -191,11 +435,86 @@ export default function Profile() {
           <div className="glass-card journey-card animate-slide-up delay-400">
             <h2>Your Events ({eventsRegistered.length})</h2>
             {eventsRegistered.length > 0 ? (
-              <div className="events-grid">
+              <div className="events-list">
                 {eventsRegistered.map((event, idx) => (
-                  <div key={event.team_id} className="event-item event-card">
-                    <h4>{event.name}</h4>
-                    <p className="event-meta">Team ID: {event.team_id}</p>
+                  <div
+                    key={event.team_id}
+                    className={`event-list-item ${expandedEventId === event.team_id ? 'expanded' : ''}`}
+                  >
+                    <div className="event-header">
+                      <div className="event-info">
+                        <h4 className="event-title">{event.name || 'Event'}</h4>
+                        <p className="event-team-id">Team ID: <span>{event.team_id}</span></p>
+                      </div>
+                      <div className="event-actions">
+                        {/* View Team Button */}
+                        <button
+                          className="view-team-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setViewTeamModal({ open: true, teamId: event.team_id, eventName: event.name });
+                          }}
+                        >
+                          👥 View Team
+                        </button>
+                        {/* Add Member (Leader) or De-register (Member) */}
+                        {teamLeader[event.team_id]?.id === profileData.passId ? (
+                          <button
+                            className="add-member-toggle-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleAddMember(event.team_id);
+                            }}
+                          >
+                            {expandedEventId === event.team_id ? '✕ Cancel' : '+ Add Member'}
+                          </button>
+                        ) : (
+                          <button
+                            className="de-register-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeregister(event.team_id, event.name);
+                            }}
+                          >
+                            🚪 Leave Team
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+
+                    {/* Add Member Form */}
+                    {expandedEventId === event.team_id && (
+                      <div className="add-member-section">
+                        <div className="add-member-form-row">
+                          <input
+                            type="text"
+                            className="add-member-input"
+                            placeholder="Enter Ignus ID"
+                            value={memberIgnusId}
+                            onChange={(e) => setMemberIgnusId(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') handleAddMember(event.team_id);
+                            }}
+                            disabled={addMemberLoading}
+                          />
+                          <button
+                            className="add-member-btn"
+                            onClick={() => handleAddMember(event.team_id)}
+                            disabled={addMemberLoading}
+                          >
+                            {addMemberLoading ? 'Adding...' : 'Add'}
+                          </button>
+                        </div>
+
+                        {/* Feedback Message */}
+                        {addMemberMessage.text && (
+                          <p className={`member-message ${addMemberMessage.type}`}>
+                            {addMemberMessage.text}
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -206,8 +525,82 @@ export default function Profile() {
             )}
           </div>
         </div>
+
+        {viewTeamModal.open && (
+          <div className="modal-overlay" onClick={() => setViewTeamModal({ open: false, teamId: null, eventName: '' })}>
+            <div className="modal-content glass-card team-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <h3>Team Members</h3>
+                <button
+                  className="modal-close-btn"
+                  onClick={() => setViewTeamModal({ open: false, teamId: null, eventName: '' })}
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="modal-body">
+                <p className="modal-event-name">{viewTeamModal.eventName || 'Event'}</p>
+                <p className="modal-team-id">Team ID: <span>{viewTeamModal.teamId}</span></p>
+
+                <div className="modal-members-list">
+                  {/* Leader First */}
+                  {teamLeader[viewTeamModal.teamId] && (
+                    <div className="modal-member-item glass-card leader-item">
+                      <div className="member-info">
+                        <img
+                          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${teamLeader[viewTeamModal.teamId].name}`}
+                          alt="Leader Avatar"
+                          className="member-avatar-img"
+                        />
+                        <div className="member-details">
+                          <span className="member-name">
+                            {teamLeader[viewTeamModal.teamId].name}
+                            <span className="leader-badge">Leader</span>
+                          </span>
+                          <span className="member-id">{teamLeader[viewTeamModal.teamId].id}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {/* Other Members */}
+                  {teamMembers[viewTeamModal.teamId] && teamMembers[viewTeamModal.teamId].length > 0 ? (
+                    teamMembers[viewTeamModal.teamId].map((member, idx) => (
+                      <div key={idx} className="modal-member-item glass-card">
+                        <div className="member-info">
+                          <img
+                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${member.email || member.name || member}`}
+                            alt="Avatar"
+                            className="member-avatar-img"
+                          />
+                          <div className="member-details">
+                            <span className="member-name">{member.name || member}</span>
+                            <span className="member-id">{member.ignus_id || ""}</span>
+                          </div>
+                        </div>
+                        {/* Only show remove button if current user is the leader AND the member being removed is not the leader */}
+                        {teamLeader[viewTeamModal.teamId]?.id === profileData.passId && (member.ignus_id || member) !== profileData.passId && (
+                          <button
+                            className="remove-member-btn"
+                            onClick={() => handleRemoveMember(viewTeamModal.teamId, member.ignus_id || member)}
+                            title="Remove Member"
+                          >
+                            🗑️
+                          </button>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="empty-state">
+                      <p>No other team members yet.</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </div >
   );
 }
 

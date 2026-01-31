@@ -49,13 +49,18 @@ const EVENT_IMAGE_MAP = {
   THUNDERBEATS: clash,
   AAYAAM: aayam,
 
+  "FASHIONSHOW-ANTARANG": antarang,
+  "GROUPDANCE-NRITYANSH": nritya,
+  BANDCOMPETITION: clash,
+  "STREETPLAY-AAYAAM": aayam,
+
   // Dance Sub-events
-  STAGMOVES: stag,
-  ANYBODYCANDUET: duet,
-  RAWWAR: war,
+  SOLODANCE: stag,
+  DUETDANCE: duet,
+  STREETBATTLE: war,
 
   // Drama Sub-events
-  EKALNATYA: ekalnatya,
+  MONOACT: ekalnatya,
   STAGEPLAY: Stagplay,
 
   // Art Sub-events
@@ -75,13 +80,13 @@ const EVENT_IMAGE_MAP = {
   PHOTOSHOPBATTLE: "https://img-c.udemycdn.com/course/480x270/5346430_f677.jpg",
 
   // Music Events
-  ARIA: aria,
-  DUETTO: duetto,
-  BEATNICKS: beat,
+  SOLOSINGING: aria,
+  PAIRONSTAGE: duetto,
+  RAPBATTLE: beat,
   DJBATTLE: dj,
 
   // Literature Events
-  WORDZEE:
+  WORDGAMES:
     "https://mb.cision.com/Public/16579/2943123/8e44b9b5c4968475_800x800ar.png",
   SCRABBLE:
     "https://images.hindustantimes.com/img/2022/11/03/550x309/_380b84aa-f042-11e5-ac5f-8ebef762d494_1667457238330_1667457238330.jpg",
@@ -99,13 +104,14 @@ const EVENT_IMAGE_MAP = {
 
   // Quiz Events
   MELA: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  TLCQUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
   LONEWOLFQUIZ:
     "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
   BOLLYWOODQUIZ:
     "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
 
   // Film Events
-  "IGNUS.JPG": ignus,
+  THEMEDPHOTOGRAPHY: ignus,
   IGNIGY:
     "https://www.sparksarts.co.uk/wp-content/uploads/2022/03/Top-10-Easy-Filmmaking-Tips-for-Beginners-2-1024x683.jpg",
   SHORTMOVIEMAKING:
@@ -115,10 +121,10 @@ const EVENT_IMAGE_MAP = {
   COSPLAY: cos,
   DIGITALARENA:
     "https://dancehubtv.uk/wp-content/uploads/2020/11/header-4-1024x424.jpg",
-  DUBSMASH: dub,
+  DUBSMASHCOMPETITION: dub,
   LOLLAPALOOZA:
     "https://i.pinimg.com/736x/ac/b7/e2/acb7e24c756e765d16e46f8de451c2f9.jpg",
-  COSTUMEDESIGNING:
+  COSTUMEDESIGN:
     "https://jdinstituteoffashiontechnology.b-cdn.net/wp-content/uploads/2021/07/Costume-Designing-As-A-Profession-What-Should-You-Expect-Thumbnail.jpg",
   "MR.ANDMRS.IGNUS":
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56haMI-IROURtyA_edjuHQf5hl5N2GOGGDg&s",
@@ -241,26 +247,12 @@ function Events() {
   ];
 
   const onlineEventLinks = {
-    "Mr & Miss IGNUS":
-      "https://docs.google.com/forms/d/e/1FAIpQLScXnEU0fUd3esXfza4N1jvVoxFZ_SfWHOsewS61r7ywZURYJQ/viewform?usp=sharing",
-    "DIGITAL ART":
-      "https://docs.google.com/forms/d/e/1FAIpQLSfLbvYluONmCZ__EoUuv0Nc_1USXH5QSte-5TyGOYchBrsKeQ/viewform",
     DUBSMASH:
       "https://docs.google.com/forms/d/e/1FAIpQLSeqF1_Zmpn7JSblNgCAfmSYySp4Vf7tSJJSysR0hxgEirVRbg/viewform",
-    PHOTOGRAPHY:
-      "https://docs.google.com/forms/d/e/1FAIpQLSfzLbnGBnPWv3bkYQCug_09v_0AiKf3qch7VL-JUTVZjmgqCg/viewform",
-    "SHORT MOVIE":
-      "https://docs.google.com/forms/d/e/1FAIpQLSezdNUGZcXi9wXeXGMLNPJsSZ_4zy7ABBvevB8kk-7VWsLW2Q/viewform",
     "MEME MAKING":
       "https://docs.google.com/forms/d/e/1FAIpQLSdyfPp2n4az6gJp1AaDlfHWmF_exMeC0G0Njz6KK12ujSSx8A/viewform",
-    "PHOTOSHOP BATTLE":
-      "https://docs.google.com/forms/d/e/1FAIpQLScNJ3pMvjVLSMD6lDYATTMFtJc_Hx4sIr6Mk6aG9hVOWBDe7w/viewform",
-    "CREATIVE WRITING":
-      "https://docs.google.com/forms/d/e/1FAIpQLSc4t6YGLGDQtUKXznmAj5v8jW4iH7kqkb0FPVnak2MaK3_Lvw/viewform",
     "REEL MAKING":
       "https://docs.google.com/forms/d/e/1FAIpQLSfJ_ZPtMYeDVouqL2WHU4Sz2BLKcgtujCrgOKSzXK4wR2r8Yg/viewform",
-    "PHOTOGRAPHY at IITJ":
-      "https://docs.google.com/forms/d/e/1FAIpQLSfzLbnGBnPWv3bkYQCug_09v_0AiKf3qch7VL-JUTVZjmgqCg/viewform",
   };
 
   function openModal(eventName, category) {
@@ -601,9 +593,8 @@ function Events() {
           (tab) => (
             <button
               key={tab}
-              className={`footer-btn ${tab.toLowerCase()} ${
-                activeTab === tab ? "active" : ""
-              }`}
+              className={`footer-btn ${tab.toLowerCase()} ${activeTab === tab ? "active" : ""
+                }`}
               onClick={() => {
                 setActiveTab(tab);
                 if (tab === "CULTURAL") scrollTo(culturalRef);
@@ -634,7 +625,7 @@ function Events() {
                   <img
                     src={
                       EVENT_IMAGE_MAP[
-                        normalizeKey(selectedBackendEvent?.name)
+                      normalizeKey(selectedBackendEvent?.name)
                       ] ||
                       selectedBackendEvent?.cover ||
                       selectedCategoryImage
@@ -674,17 +665,17 @@ function Events() {
                       <strong>Date:</strong>{" "}
                       {selectedBackendEvent.date || "TBA"}
                     </p>
-
-                    <button
-                      className="modal-register-btn"
-                      onClick={handleRegister}
-                    >
-                      {!isLoggedIn()
-                        ? "LOGIN TO REGISTER"
-                        : !isProfileComplete()
-                          ? "COMPLETE PROFILE TO REGISTER"
-                          : "REGISTER"}
-                    </button>
+                    {modalCategory !== "INFORMAL" && (
+                      <button
+                        className="modal-register-btn"
+                        onClick={handleRegister}
+                      >
+                        {!isLoggedIn()
+                          ? "LOGIN TO REGISTER"
+                          : !isProfileComplete()
+                            ? "COMPLETE PROFILE TO REGISTER"
+                            : "REGISTER"}
+                      </button>)}
                   </>
                 )}
               </div>
