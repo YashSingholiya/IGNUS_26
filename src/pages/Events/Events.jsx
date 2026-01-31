@@ -50,7 +50,6 @@ const EVENT_IMAGE_MAP = {
   AAYAAM: aayam,
 
   "FASHIONSHOW-ANTARANG": antarang,
-  "NRITYANSH": nritya,
   BANDCOMPETITION: clash,
   "STREETPLAY-AAYAAM": aayam,
 
@@ -61,6 +60,7 @@ const EVENT_IMAGE_MAP = {
 
   // Drama Sub-events
   MONOACT: ekalnatya,
+  MIME: ekalnatya,
   STAGEPLAY: Stagplay,
 
   // Art Sub-events
@@ -147,6 +147,14 @@ function Events() {
     CULTURAL: "Cultural Event",
     FLAGSHIP: "Flagship Event",
     INFORMAL: null, // handled separately
+  };
+
+  // Map cultural categories to their flagship events
+  const CULTURAL_FLAGSHIP_MAP = {
+    DANCE: "NRITYANSH",
+    DRAMA: "AAYAAM",
+    FASHION: "ANTARANG",
+    MUSIC: "THUNDERBEATS", // Clash of Bands
   };
   // ---------- MODAL STATE ----------
   const [backendEvents, setBackendEvents] = useState([]);
@@ -313,15 +321,36 @@ function Events() {
 
     console.log("🎯 EVENTS TO SHOW IN MODAL:", matchedType.events);
 
-    setModalEvents(matchedType.events);
-    
+    let eventsToShow = [...matchedType.events];
+
+    // For cultural categories, add the corresponding flagship event
+    if (category === "CULTURAL") {
+      const normalizedEventName = normalizeKey(eventName);
+      const flagshipEventName = CULTURAL_FLAGSHIP_MAP[normalizedEventName];
+
+      if (flagshipEventName) {
+        // Find the flagship event type
+        const flagshipType = backendEvents.find((type) =>
+          normalize(type.reference_name) === normalize(flagshipEventName)
+        );
+
+        if (flagshipType && flagshipType.events && flagshipType.events.length > 0) {
+          // Add flagship event(s) to the beginning of the list
+          eventsToShow = [...flagshipType.events, ...eventsToShow];
+          console.log("🚀 Added flagship event:", flagshipEventName);
+        }
+      }
+    }
+
+    setModalEvents(eventsToShow);
+
     // For FLAGSHIP events, automatically select the first (and only) event
     if (category === "FLAGSHIP" && matchedType.events.length > 0) {
       setSelectedBackendEvent(matchedType.events[0]);
     } else {
       setSelectedBackendEvent(null);
     }
-    
+
     setIsModalOpen(true);
   }
 
@@ -393,7 +422,7 @@ function Events() {
         { ref: culturalRef, name: "CULTURAL" },
         { ref: informalRef, name: "INFORMAL" },
         { ref: proniteRef, name: "PRONITE" },
-        
+
         { ref: onlineRef, name: "ONLINE" },
       ];
 
@@ -418,7 +447,7 @@ function Events() {
 
   return (
     <div className="events-page">
-           {/* ================= FLAGSHIP ================= */}
+      {/* ================= FLAGSHIP ================= */}
       <div ref={flagshipRef} className="flagship">
         <div className="flagship-bg">
           <img src="/images/flagship.svg" alt="" />
@@ -562,7 +591,7 @@ function Events() {
         </div>
       </div>
 
- 
+
 
       {/* ================= ONLINE ================= */}
       <div ref={onlineRef} className="online">
