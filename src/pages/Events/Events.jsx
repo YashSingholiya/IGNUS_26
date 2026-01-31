@@ -598,7 +598,7 @@ function Events() {
 
       {/* ================= FOOTER TABS ================= */}
       <div className="events-footer">
-        {["CULTURAL", "INFORMAL", "PRONITE", "FLAGSHIP", "ONLINE"].map(
+        {["FLAGSHIP", "CULTURAL", "INFORMAL", "PRONITE", "ONLINE"].map(
           (tab) => (
             <button
               key={tab}
