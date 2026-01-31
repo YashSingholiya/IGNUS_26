@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:first baseline;
   /* Beautiful gradient background matching IGNUS theme */
   background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 25%, #1e0f3a 50%, #0f0520 75%, #0a0215 100%);
   background-size: 400% 400%;
@@ -50,6 +50,7 @@
   height: auto;
   object-fit: contain;
   display: block;
+  margin-top: 20px;
   border-radius: 12px;
   box-shadow: 0 8px 40px rgba(147, 51, 234, 0.3), 0 0 80px rgba(147, 51, 234, 0.1);
   position: relative;
