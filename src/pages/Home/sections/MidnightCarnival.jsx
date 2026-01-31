@@ -31,8 +31,8 @@ export default function MidnightCarnival() {
       {/* Visual scene - full width */}
       <div className="relative w-full">
 
-        {/* FERRIS WHEEL CONTAINER - positioned at top-right of skyline */}
-        <div className="absolute -top-[20%] right-[8%] w-[30%] md:w-[25%] opacity-40 z-0">
+        {/* FERRIS WHEEL CONTAINER - centered above skyline */}
+        <div className="absolute -top-[20%] left-3/4 -translate-x-1/2 w-[30%] md:w-[25%] opacity-40 z-0">
           {/* Rotating wheel top (circle) */}
           <div className="relative w-full" style={{ paddingBottom: '100%' }}>
             <img
@@ -49,9 +49,10 @@ export default function MidnightCarnival() {
           <img
             src={ferrisWheelBottom}
             alt="Ferris Wheel Stand"
-            className="absolute left-1/2 -translate-x-1/2 w-[40%] h-auto"
+            className="absolute -translate-x-1/2 w-[40%] h-auto"
             style={{
               top: '50%',
+              left: '48.8%',
             }}
           />
         </div>

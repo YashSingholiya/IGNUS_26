@@ -1,69 +1,112 @@
 .schedule-container {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
-  padding: 0;
+  /* Beautiful gradient background matching IGNUS theme */
+  background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 25%, #1e0f3a 50%, #0f0520 75%, #0a0215 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  padding: 80px 20px 20px 20px;
   margin: 0;
-  overflow: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Subtle radial glow effect */
+.schedule-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .schedule-image {
-  width: 100%;
-  height: 100vh;
+  max-width: 100%;
+  max-height: calc(100vh - 100px);
+  width: auto;
+  height: auto;
   object-fit: contain;
   display: block;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(147, 51, 234, 0.3), 0 0 80px rgba(147, 51, 234, 0.1);
+  position: relative;
+  z-index: 1;
 }
 
 /* Responsive adjustments */
 @media screen and (max-width: 1024px) {
   .schedule-container {
-    min-height: auto;
-    padding: 20px 0;
+    height: 100vh;
+    padding: 70px 15px 15px 15px;
   }
-  
+
   .schedule-image {
-    width: 100%;
-    height: auto;
-    max-height: none;
+    max-width: 100%;
+    max-height: calc(100vh - 85px);
     object-fit: contain;
   }
 }
 
 @media screen and (max-width: 768px) {
   .schedule-container {
-    padding: 10px 0;
+    height: 100vh;
+    padding: 60px 10px 10px 10px;
   }
-  
+
   .schedule-image {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 70px);
+    object-fit: contain;
   }
 }
 
 @media screen and (max-width: 480px) {
   .schedule-container {
-    padding: 5px 0;
+    height: 100vh;
+    padding: 55px 5px 5px 5px;
   }
-  
+
   .schedule-image {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 60px);
+    object-fit: contain;
+    border-radius: 4px;
   }
 }
 
 /* Landscape mode on mobile devices */
 @media screen and (max-width: 768px) and (orientation: landscape) {
   .schedule-container {
-    min-height: 100vh;
-    padding: 0;
-  }
-  
-  .schedule-image {
-    width: 100%;
     height: 100vh;
+    padding: 50px 10px 10px 10px;
+  }
+
+  .schedule-image {
+    max-width: 100%;
+    max-height: calc(100vh - 60px);
     object-fit: contain;
   }
 }

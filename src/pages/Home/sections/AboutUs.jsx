@@ -174,9 +174,10 @@ export default function AboutUs() {
 
         {/* Paragraph with more spacing from title */}
         <p className="text-lg md:text-xl leading-relaxed text-[#FFFFFF] font-caudex max-w-3xl mt-8">
-          IGNUS, the much anticipated annual socio-cultural fest of IIT Jodhpur, is now back, after three years.
-          IGNUS celebrates art, culture and pluralism. It provides a stage for the creative and intellectual minds
-          from across the country to showcase their incredible talent and creativity through art and culture.
+          IGNUS, the much-anticipated annual socio-cultural fest of IIT Jodhpur, is back with greater energy and grandeur than ever before.
+A celebration of art, culture, and pluralism, IGNUS brings together the brightest creative and intellectual minds from across the country.
+
+It serves as a vibrant stage where talent meets passion — a space to express, perform, and showcase extraordinary creativity through the spirit of art and culture.
         </p>
 
         {/* Merged Stats Section */}
