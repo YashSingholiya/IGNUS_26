@@ -15,6 +15,7 @@ import Navbar from "./components/navbar/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import OAuthCallback from "./pages/OAuthCallback";
 import CA from "./pages/CA/CA";
+import Schedule from "./pages/Schedule/Schedule";
 import SEO from "./SEO";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/ca" element={<CA />} />
           <Route path="/igmun" element={<Igmun />} />
+          <Route path="/schedule" element={<Schedule />} />
           <Route
             path="/profile"
             element={
