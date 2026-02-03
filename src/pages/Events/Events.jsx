@@ -36,11 +36,11 @@ const EVENT_IMAGE_MAP = {
   // Categories / Main Types
   DANCE: dance,
   MUSIC: music,
-  QUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-  ART: art,
+  QUIZZES: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  FINEARTS: art,
   LITERATURE: lit,
-  FILM: "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
-  LIFESTYLE: LifeStyle,
+  DIGITALMEDIA: "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
+  "FASHION&LIFESTYLE": LifeStyle,
   DRAMA: drama,
 
   // Flagship
@@ -61,14 +61,14 @@ const EVENT_IMAGE_MAP = {
 
   // Drama Sub-events
   MONOACT: ekalnatya,
-  MIME: ekalnatya,
+  MIME: "https://images.deccanchronicle.com/dc-Cover-o6peov88vmchmno1a3nh8f0693-20161203232050.Medi.jpeg",
   STAGEPLAY: Stagplay,
 
   // Art Sub-events
-  FUNKYFACES:
+  FACEPAINTING:
     "https://scontent.fdel27-7.fna.fbcdn.net/v/t39.30808-6/480694281_1145653750351494_9015891246071082618_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EDQkNcproQUQ7kNvwHb7giO&_nc_oc=AdnbHB7kovReB6_eX1q9Yw-0-Vp098C1xVwfaa1PbKos6k-RApZE5bolU5g5RPgdxfA&_nc_zt=23&_nc_ht=scontent.fdel27-7.fna&_nc_gid=fSuB3_rY94F8SZHrnEMVyA&oh=00_Afp6nmIpHezTBcvRKvkxnnm2hWe6NEIGGd82N9UyFSLdgQ&oe=697D7BE3",
-  ARTEES: artees,
-  CHARCOALART:
+  "T-SHIRTPAINTING": artees,
+  CHARCOALPAINTING:
     "https://www.cbcity.nsw.gov.au/m/DMbsAblx0XpRPAB5JtjMnzcyviiMDPyPlAFPgmLk7FY/resize:fill:412:412:1:1/g:fp:0.5:0.5/sm:1/dpr:2.625/L3NpdGVzL2RlZmF1bHQvZmlsZXMvMjAyNS0xMi9hZG9iZXN0b2NrXzE0NDA5NzY5MzQuanBn",
   GRAFFITIWALLS:
     "https://graffiti-artist.net/wp-content/uploads/2023/07/DSC03800.jpg",
@@ -87,16 +87,17 @@ const EVENT_IMAGE_MAP = {
   DJBATTLE: dj,
 
   // Literature Events
-  WORDGAMES:
-    "https://mb.cision.com/Public/16579/2943123/8e44b9b5c4968475_800x800ar.png",
+  STANDUPCOMEDY:
+    "https://img.freepik.com/free-vector/stand-up-comedy-logo-with-microphone_1308-95780.jpg?semt=ais_hybrid&w=740&q=80",
   SCRABBLE:
     "https://images.hindustantimes.com/img/2022/11/03/550x309/_380b84aa-f042-11e5-ac5f-8ebef762d494_1667457238330_1667457238330.jpg",
-  SLAMPOETRY:
+  "SLAMPOETRY-ENGLISH":
     "https://www.kulturfabrikkrawatte.de/wp-content/uploads/2022/04/PoetrySlamLogo-e1655074794832.jpeg",
+  "SLAMPOETRY-HINDI/URDU":
+  "https://www.kulturfabrikkrawatte.de/wp-content/uploads/2022/04/PoetrySlamLogo-e1655074794832.jpeg",
   PUNWARS: pun,
   "3VS3DEBATE":
     "https://observatory.tec.mx/wp-content/uploads/2022/08/debate-escolar.jpg",
-  STEW: stew,
   JAM: "https://static.wixstatic.com/media/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg/v1/fill/w_850,h_750,fp_0.50_0.50,lg_2,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7e8803_aa8af0dfa2314bef89cf40ddc4453ad4~mv2.jpg",
   CREATIVEWRITING:
     "https://www.edynamiclearning.com/wp-content/uploads/2019/04/Creative-Writing-I-HIGH-RES.jpg",
@@ -104,9 +105,9 @@ const EVENT_IMAGE_MAP = {
     "https://events.mosman.nsw.gov.au/sites/default/files/styles/large/public/img/cryptic_crossword_club_eventsmosman.jpg?itok=UxoULuC7",
 
   // Quiz Events
-  MELA: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
+  GENERALQUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
   TLCQUIZ: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
-  LONEWOLFQUIZ:
+  MEMEQUIZ:
     "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
   BOLLYWOODQUIZ:
     "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
@@ -115,7 +116,7 @@ const EVENT_IMAGE_MAP = {
   THEMEDPHOTOGRAPHY: ignus,
   IGNIGY:
     "https://www.sparksarts.co.uk/wp-content/uploads/2022/03/Top-10-Easy-Filmmaking-Tips-for-Beginners-2-1024x683.jpg",
-  SHORTMOVIEMAKING:
+  SHORTFILMMAKINGCOMPETITION:
     "https://miro.medium.com/v2/resize:fit:1400/1*CHNXavYcG3iSKZfd0oEwzQ.jpeg",
 
   // Lifestyle Events
@@ -127,7 +128,7 @@ const EVENT_IMAGE_MAP = {
     "https://i.pinimg.com/736x/ac/b7/e2/acb7e24c756e765d16e46f8de451c2f9.jpg",
   COSTUMEDESIGN:
     "https://jdinstituteoffashiontechnology.b-cdn.net/wp-content/uploads/2021/07/Costume-Designing-As-A-Profession-What-Should-You-Expect-Thumbnail.jpg",
-  "MR.ANDMRS.IGNUS":
+  "MR.ANDMS.IGNUS":
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT56haMI-IROURtyA_edjuHQf5hl5N2GOGGDg&s",
 };
 
