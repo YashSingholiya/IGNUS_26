@@ -742,7 +742,7 @@ function Events() {
                           : !isLoggedIn()
                             ? "LOGIN TO REGISTER"
                             : !isProfileComplete()
-                              ? "COMPLETE PROFILE TO REGISTER"
+                              ? "COMPLETE PROFILE"
                               : "REGISTER"}
                       </button>
                     )}
