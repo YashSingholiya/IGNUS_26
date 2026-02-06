@@ -202,8 +202,8 @@ function Events() {
   const InformalsArray = [
     {
       name: "PROM NIGHT",
-      venue: "TBA",
-      date: "TBA",
+      venue: "110, Computer Centre",
+      date: "6th February",
       image:
         "https://ilead.net.in/wp-content/uploads/2023/02/prom_night_2023_16.jpg",
     },
@@ -229,9 +229,9 @@ function Events() {
     },
     {
       name: "POTTERY",
-      venue: "TBA",
-      date: "TBA",
-      image: pottery,
+      venue: "Informal Ground",
+      date: "Everyday",
+      image: "https://m.media-amazon.com/images/I/61hV8lwDOsL.jpg",
     },
     {
       name: "TAROT CARD",
