@@ -3,7 +3,7 @@ import nritya from "./images/dance.webp";
 import music from "./images/music.webp";
 import art from "./images/art.webp";
 import lit from "./images/Lit.webp";
-import LifeStyle from "./images/LifeStyle.webp";
+import lifestyle from "./images/lifestyle.webp";
 import drama from "./images/drama.webp";
 import flash_drama from "./images/flash_drama_img.webp";
 import antarang from "./images/antarang.webp";
@@ -15,7 +15,7 @@ import stag from "./images/stag.webp";
 import duet from "./images/duet.webp";
 import war from "./images/war.webp";
 import ekalnatya from "./images/ekalnatya.webp";
-import Stagplay from "./images/Stagplay.webp";
+import stagplay from "./images/stagplay.webp";
 import aria from "./images/aria.webp";
 import duetto from "./images/duetto.webp";
 import beat from "./images/beat.webp";
@@ -47,7 +47,7 @@ const EVENT_IMAGE_MAP = {
   FINEARTS: art,
   LITERATURE: lit,
   DIGITALMEDIA: "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
-  "FASHION&LIFESTYLE": LifeStyle,
+  "FASHION&LIFESTYLE": lifestyle,
   DRAMA: drama,
 
   // Flagship
@@ -69,7 +69,7 @@ const EVENT_IMAGE_MAP = {
   // Drama Sub-events
   MONOACT: ekalnatya,
   MIME: "https://images.deccanchronicle.com/dc-Cover-o6peov88vmchmno1a3nh8f0693-20161203232050.Medi.jpeg",
-  STAGEPLAY: Stagplay,
+  STAGEPLAY: stagplay,
 
   // Art Sub-events
   FACEPAINTING:
