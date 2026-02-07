@@ -797,11 +797,17 @@ function Events() {
                             return;
                           }
 
+                          // ✅ ONLINE events: redirect to form link
+                          if (modalCategory === "ONLINE" && selectedBackendEvent?.link) {
+                            window.open(selectedBackendEvent.link, "_blank");
+                            return;
+                          }
+
                           // default behavior (all other events)
                           handleRegister();
                         }}
                       >
-                        {isDirectFormEvent(selectedBackendEvent?.name)
+                        {isDirectFormEvent(selectedBackendEvent?.name) || modalCategory === "ONLINE"
                           ? "REGISTER"
                           : !isLoggedIn()
                             ? "LOGIN TO REGISTER"
