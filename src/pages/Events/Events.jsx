@@ -140,7 +140,8 @@ const EVENT_IMAGE_MAP = {
 
 function Events() {
   usePageTitle("Events");
-  const normalizeKey = (str = "") => str.replace(/\s+/g, "").toUpperCase();
+  const normalizeKey = (str = "") =>
+  str.replace(/[\s&.-]/g, "").toUpperCase();
 
   const getEventDisplayName = (name) => {
     if (!name) return "";
@@ -292,7 +293,7 @@ function Events() {
     {
       name: "FLASHDRAMA",
       venue: "Online",
-      date: "8 Feb",
+      date: "18 Feb",
       image: flash_drama,
       link: "https://docs.google.com/forms/d/e/1FAIpQLSf-0qkv3vvsYqYZlcQyhB2AXbXQSwkWeEtz-80FvSyrCR4h2A/viewform?usp=send_form",
       sponsor: {
