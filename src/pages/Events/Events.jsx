@@ -27,6 +27,7 @@ import dub from "./images/dub.webp";
 import cos from "./images/cos.webp";
 import themePhoto from "./images/theme_photograph.webp";
 import photostory from "./images/photostory.webp";
+import digi from "./images/digi.webp";
 import "./Events.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +47,7 @@ const EVENT_IMAGE_MAP = {
   QUIZZES: "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
   FINEARTS: art,
   LITERATURE: lit,
-  DIGITALMEDIA: "https://rsace.edu.in/wp-content/uploads/2025/01/1d2e74e09ff27f72a1c97f462e8f79e9.png",
+  DIGITALMEDIA: digi,
   "FASHION&LIFESTYLE": lifestyle,
   DRAMA: drama,
 
