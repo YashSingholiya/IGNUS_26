@@ -120,7 +120,6 @@ const EVENT_IMAGE_MAP = {
     "https://thebges.edu.in/wp-content/uploads/2024/04/Intra-college-Quiz-competition-organized-by-RICE-Education-2.jpg",
 
   // Film Events
-  THEMEPHOTOGRAPHY: themePhoto,
   IGNIGY:
     "https://www.sparksarts.co.uk/wp-content/uploads/2022/03/Top-10-Easy-Filmmaking-Tips-for-Beginners-2-1024x683.jpg",
   SHORTFILMMAKINGCOMPETITION:
