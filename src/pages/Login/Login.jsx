@@ -478,6 +478,19 @@ export default function Auth() {
                   <span>Continue with Google</span>
                 </button>
 
+                {/* Download App Link */}
+                <a
+                  href="https://play.google.com/apps/test/RQsA_JCFpGg/ahAO29uNTKFvEPGJxFQGy8zfx9BkEB7gKYZysPuaSSdg3r-_2r4buHVn5tLfGxfub_ys_j_xQAeX-NgI3Xaoy-VKTL"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 w-full py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31zM6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/>
+                  </svg>
+                  Download our App
+                </a>
+
                 <p className="mt-6 text-center text-gray-800 text-base font-medium">
                   Don't have an account?{" "}
                   <button
