@@ -25,7 +25,7 @@ import pun from "./images/pun.webp";
 import dub from "./images/dub.webp";
 import cos from "./images/cos.webp";
 import themePhoto from "./images/theme_photograph.webp";
-import photostory from "./images/photostory.webp";
+import photostory from "./images/photostory.jpg";
 import digi from "./images/digi.webp";
 import "./Events.css";
 import { toast } from "react-toastify";
